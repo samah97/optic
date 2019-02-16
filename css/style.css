@@ -1,0 +1,73 @@
+.loginStyle{
+	background-image: url(../assets/login.jpg);
+	background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   text-align: left;
+    margin-left: 1%;
+}
+
+.fontSize{
+	font-size:12px;
+}
+
+.loginCenterLeft{
+	position:absolute;
+	top:30%;
+	left:10%;
+}
+
+.form-group{
+	margin-top:15px ;
+	margin-bottom:15px ;
+}
+select.form-control:not([size]):not([multiple]){
+	height:auto;
+}
+.result{
+	height:100px;
+	position:relative;
+}
+.result.green{
+	background-color:green;
+}
+.result.red{
+	background-color:red;
+}
+.result p{
+	color:#FFFFFF;
+	font-size:18px;
+	position:absolute;
+	top:30%;
+	left:50%;
+	transform:translateX(-50%);
+}
+
+.navbar-inverse{
+	background-color: rgba(54,84,99,0.7);
+    border-color: rgba(54,84,99,0.7);
+}
+.navbar-inverse .navbar-brand{
+	color:white;
+	font-size: x-large;
+}
+.navbar-inverse .navbar-nav>li>a{
+	color:white;
+}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+    color: #fff;
+    background-color: rgba(5,84,99,0.7);
+}
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color:#ebeeef;
+}	
