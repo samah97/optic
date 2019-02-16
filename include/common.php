@@ -4,8 +4,12 @@ include_once("config.php");
 include_once("connection.php");
 
 
-define('MAIN_URL','http://localhost/projects/optic-old/');
-define('BASE_URL','http://localhost/projects/optic-old/');
+//define('MAIN_URL','http://localhost/projects/optic-old/');
+//?????///define('BASE_URL','http://localhost/projects/optic-old/');
+
+define('MAIN_URL','http://localhost/optic/');
+define('BASE_URL','http://localhost/optic/');
+
 
 class Common{
     
