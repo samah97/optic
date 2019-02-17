@@ -1,6 +1,12 @@
 <?php
-define('MAIN_URL','http://localhost/projects/optic/');
-define('BASE_URL','http://localhost/projects/optic/');
+//FOR SAMAH
+/*define('MAIN_URL','http://localhost/projects/optic/');
+define('BASE_URL','http://localhost/projects/optic/');*/
+
+//FOR EHAB
+define('MAIN_URL','http://localhost/optic/');
+define('BASE_URL','http://localhost/optic/');
+
 define ( 'PATH', dirname ( __FILE__ ) );
 define ( 'BASE_PATH', PATH . '/' );
 
@@ -9,7 +15,6 @@ include_once("global.php");
 include_once("config.php");
 include_once("connection.php");
 include(BASE_PATH."../Model/include_dao.php");
-
 
 class Common{
     
