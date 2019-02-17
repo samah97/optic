@@ -1,22 +1,26 @@
 <?php
-require_once("../include/config.php");
+/* require_once("../include/config.php");
 require_once("../include/connection.php");
 require_once("../include/global.php");
 require_once("../dbLayer/queries.php");
+ */
+require_once("../include/common.php");
 
+$userName =  $_POST['userName'];
+$password = $_POST['userPassword'];
 
-$userName =  $_REQUEST['userName'];
-$password = md5($_REQUEST['userPassword']);
+$userObj = new UsersEXT();
+$loginResult = $userObj->login($userName,$password);
 
-
-
-if(login($userName,$password) == 1){
-    
-	header("location:../pages/report.php");	
+if($loginResult->result == 1){
+    $user = $loginResult->user;
+    $_SESSION['session'] = $user->session;
+    header("Location: ".MAIN_URL."pages/report.php");
+    exit;
 	}
 else{
-	$msg="User not found";
-	header("location:../index.php?msg=".$msg);
+	$msg=$loginResult->message;
+	header("location: ".MAIN_URL."?msg=".$msg);
 }
 
 ?>
