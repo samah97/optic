@@ -32,6 +32,7 @@ else{
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Client </a>
         <ul class="dropdown-menu">
           <li><a href="pages/NewClient.php">New</a></li>
+          <li><a href="pages/editClient.php">New V2</a></li>
           <li><a href="pages/OldClient.php">Old</a></li>
         </ul>
       </li>

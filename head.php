@@ -4,8 +4,6 @@ include_once("include/config.php");
 include_once("include/connection.php"); */
 include_once("include/common.php");
 
-
-
 error_reporting(E_ERROR | E_PARSE);
 //die();
 ?>
@@ -49,6 +47,12 @@ error_reporting(E_ERROR | E_PARSE);
 	<link rel="stylesheet" href="css/style.css">
 <!--===============================================================================================-->
     <link rel="stylesheet" href="plugins/datepicker/css/datepicker.css">
+    
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->    
+    
     <script src="plugins/datepicker/js/bootstrap-datepicker.js"></script>
 </head>
 <body>
