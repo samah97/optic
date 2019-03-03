@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>jQuery Get Selected Radio Button Value</title>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $("input[type='button']").click(function(){

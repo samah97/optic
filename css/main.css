@@ -105,7 +105,7 @@ textarea {
 }
 
 textarea:focus, input:focus {
-  border-color: transparent !important;
+  /*border-color: transparent !important;*/
 }
 
 input:focus::-webkit-input-placeholder { color:transparent; }
@@ -511,6 +511,14 @@ input.input100 {
     visibility: visible;
     opacity: 1;
   }
+}
+
+#tab_1_3 table.dataTable.no-footer{
+	border-bottom: 0px !important;
+}
+
+.no-borders{
+	
 }
 
 
