@@ -1,3 +1,12 @@
+
+
+$(document).ready(function(){
+	$('#fs_19').click(function(){
+		$('#headaches_more').toggleClass('hidden');
+	});
+});
+
+
 function showTypeForm(){
 	var select = $('#lenseType');
 	var value = select.val();
@@ -12,8 +21,7 @@ function showTypeForm(){
 }
 
 function validateForm(){
-	if(document.getElementById("firstName").value == null || document.getElementById("firstName").value == "" 
-		|| document.getElementById("lastName").value == null || document.getElementById("lastName").value == ""
+	if(document.getElementById("fullName").value == null || document.getElementById("fullName").value == "" 
 		|| document.getElementById("phone").value == null || document.getElementById("phone").value == ""
 		|| document.getElementById("dob").value == null || document.getElementById("dob").value == ""
 		|| document.getElementById("dateAttendance").value == null || document.getElementById("dateAttendance").value == ""

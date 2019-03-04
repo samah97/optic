@@ -49,7 +49,3 @@ else{
 
 </div>
 
-<?php
-//include_once("report.php");
-include_once("../footer.php");
-?>
