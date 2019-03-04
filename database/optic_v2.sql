@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `ambiance`
 --
 
-CREATE TABLE `ambiance` (
+CREATE OR REPLACE TABLE `ambiance` (
   `ambiance_id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -39,7 +39,7 @@ CREATE TABLE `ambiance` (
 -- Table structure for table `antecedent_disease`
 --
 
-CREATE TABLE `antecedent_disease` (
+CREATE OR REPLACE TABLE `antecedent_disease` (
   `antecedent_disease_id` int(11) NOT NULL,
   `disease_id` int(11) NOT NULL,
   `visual_antecedent_id` int(11) NOT NULL
@@ -51,7 +51,7 @@ CREATE TABLE `antecedent_disease` (
 -- Table structure for table `consulation_fs`
 --
 
-CREATE TABLE `consulation_fs` (
+CREATE OR REPLACE TABLE `consulation_fs` (
   `consulation_fs_id` int(11) NOT NULL,
   `reason_consultation_id` int(11) NOT NULL,
   `function_sign_id` int(11) NOT NULL
@@ -63,7 +63,7 @@ CREATE TABLE `consulation_fs` (
 -- Table structure for table `consultation_vp`
 --
 
-CREATE TABLE `consultation_vp` (
+CREATE OR REPLACE TABLE `consultation_vp` (
   `consultation_vp_id` int(11) NOT NULL,
   `reason_consultation_id` int(11) DEFAULT NULL,
   `visual_problem_id` int(11) DEFAULT NULL
@@ -75,7 +75,7 @@ CREATE TABLE `consultation_vp` (
 -- Table structure for table `control`
 --
 
-CREATE TABLE `control` (
+CREATE OR REPLACE TABLE `control` (
   `control_id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -95,7 +95,7 @@ INSERT INTO `control` (`control_id`, `title`) VALUES
 -- Table structure for table `disease`
 --
 
-CREATE TABLE `disease` (
+CREATE OR REPLACE TABLE `disease` (
   `disease_id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -120,7 +120,7 @@ INSERT INTO `disease` (`disease_id`, `title`) VALUES
 -- Table structure for table `functional_sign`
 --
 
-CREATE TABLE `functional_sign` (
+CREATE OR REPLACE TABLE `functional_sign` (
   `functional_sign_id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -156,7 +156,7 @@ INSERT INTO `functional_sign` (`functional_sign_id`, `title`) VALUES
 -- Table structure for table `medication_intake`
 --
 
-CREATE TABLE `medication_intake` (
+CREATE OR REPLACE TABLE `medication_intake` (
   `medication_intake_id` int(11) NOT NULL,
   `title` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -176,7 +176,7 @@ INSERT INTO `medication_intake` (`medication_intake_id`, `title`) VALUES
 -- Table structure for table `patient_info`
 --
 
-CREATE TABLE `patient_info` (
+CREATE OR REPLACE TABLE `patient_info` (
   `patient_info_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `dob` date DEFAULT NULL,
@@ -194,7 +194,7 @@ CREATE TABLE `patient_info` (
 -- Table structure for table `reason_consultation`
 --
 
-CREATE TABLE `reason_consultation` (
+CREATE OR REPLACE TABLE `reason_consultation` (
   `reason_consultation_id` int(11) NOT NULL,
   `visit_id` int(11) DEFAULT NULL,
   `date_appearance` date DEFAULT NULL,
@@ -215,7 +215,7 @@ CREATE TABLE `reason_consultation` (
 -- Table structure for table `refraction_history`
 --
 
-CREATE TABLE `refraction_history` (
+CREATE OR REPLACE TABLE `refraction_history` (
   `refraction_history_id` int(11) NOT NULL,
   `visit_id` int(11) NOT NULL,
   `date_last_exam` date DEFAULT NULL,
@@ -232,7 +232,7 @@ CREATE TABLE `refraction_history` (
 -- Table structure for table `ref_contact`
 --
 
-CREATE TABLE `ref_contact` (
+CREATE OR REPLACE TABLE `ref_contact` (
   `ref_eyeglasses_id` int(11) NOT NULL,
   `refraction_history_id` int(11) DEFAULT NULL,
   `sphere_od` varchar(15) DEFAULT NULL,
@@ -254,7 +254,7 @@ CREATE TABLE `ref_contact` (
 -- Table structure for table `ref_eyeglasses`
 --
 
-CREATE TABLE `ref_eyeglasses` (
+CREATE OR REPLACE TABLE `ref_eyeglasses` (
   `ref_eyeglasses_id` int(11) NOT NULL,
   `refraction_history_id` int(11) DEFAULT NULL,
   `sphere_od` varchar(15) DEFAULT NULL,
@@ -278,7 +278,7 @@ CREATE TABLE `ref_eyeglasses` (
 -- Table structure for table `type_correction`
 --
 
-CREATE TABLE `type_correction` (
+CREATE OR REPLACE TABLE `type_correction` (
   `type_correction_id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -297,7 +297,7 @@ INSERT INTO `type_correction` (`type_correction_id`, `title`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE OR REPLACE TABLE `users` (
   `userId` int(11) NOT NULL,
   `firstname` varchar(50) COLLATE utf8_bin NOT NULL,
   `lastname` varchar(50) COLLATE utf8_bin NOT NULL,
@@ -319,7 +319,7 @@ INSERT INTO `users` (`userId`, `firstname`, `lastname`, `userName`, `password`, 
 -- Table structure for table `visual_antecedent`
 --
 
-CREATE TABLE `visual_antecedent` (
+CREATE OR REPLACE TABLE `visual_antecedent` (
   `visual_antecedent_id` int(11) NOT NULL,
   `visit_id` int(11) NOT NULL,
   `ocular_pathologies` varchar(255) DEFAULT NULL,
@@ -338,7 +338,7 @@ CREATE TABLE `visual_antecedent` (
 -- Table structure for table `visual_need`
 --
 
-CREATE TABLE `visual_need` (
+CREATE OR REPLACE TABLE `visual_need` (
   `visual_need_id` int(11) NOT NULL,
   `visit_id` int(11) DEFAULT NULL,
   `is_far` int(1) DEFAULT NULL,
@@ -363,7 +363,7 @@ CREATE TABLE `visual_need` (
 -- Table structure for table `visual_problem`
 --
 
-CREATE TABLE `visual_problem` (
+CREATE OR REPLACE TABLE `visual_problem` (
   `visual_problem_id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -391,7 +391,7 @@ INSERT INTO `visual_problem` (`visual_problem_id`, `title`) VALUES
 -- Table structure for table `wear_type`
 --
 
-CREATE TABLE `wear_type` (
+CREATE OR REPLACE TABLE `wear_type` (
   `wear_type_id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -411,7 +411,7 @@ INSERT INTO `wear_type` (`wear_type_id`, `title`) VALUES
 -- Table structure for table `work_station`
 --
 
-CREATE TABLE `work_station` (
+CREATE OR REPLACE TABLE `work_station` (
   `work_station_id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

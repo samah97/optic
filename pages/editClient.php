@@ -9,7 +9,7 @@ $typeOfCorrectionObj = new TypeCorrectionEXT();
 $wearTypeObj = new WearTypeEXT();
 $workStationObj = new WorkStationEXT();
 $diseaseObj = new DiseaseEXT();
-
+$medicationIntake = new MedicationIntakeEXT();
 // ----------------------------------End of Objects Declaration-------------------------------------//
 
 $visualProblems = $visualProblemsObj->getAllRecords();
@@ -19,6 +19,7 @@ $typeOfCorrection = $typeOfCorrectionObj->getAllRecords();
 $wearType = $wearTypeObj->getAllRecords();
 $workStation = $workStationObj->getAllRecords();
 $disease = $diseaseObj->getAllRecords();
+
 
 ?>
 

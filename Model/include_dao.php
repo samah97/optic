@@ -106,5 +106,10 @@
 	require_once('class/mysql/ext/UsersMySqlExtDAO.class.php');
 	require_once('class/Functions/UsersEXT.class.php');
 	
+	require_once('class/dao/MedicationIntakeDAO.class.php');
+	require_once('class/dto/MedicationIntake.class.php');
+	require_once('class/mysql/MedicationIntakeMySqlDAO.class.php');
+	require_once('class/mysql/ext/MedicationIntakeMySqlExtDAO.class.php');
+	require_once('class/Functions/MedicationIntakeEXT.class.php');
 
 ?>
