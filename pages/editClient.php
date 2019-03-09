@@ -9,6 +9,7 @@ $typeOfCorrectionObj = new TypeCorrectionEXT();
 $wearTypeObj = new WearTypeEXT();
 $workStationObj = new WorkStationEXT();
 $diseaseObj = new DiseaseEXT();
+$medicationIntake = new med
 
 // ----------------------------------End of Objects Declaration-------------------------------------//
 
@@ -895,7 +896,6 @@ $disease = $diseaseObj->getAllRecords();
 									 name="extraProffesionalActivities" id="extraProffesionalActivities"></textarea>
 									</fieldset>
 								</div>
-							</div>
 							<div class="tab-pane fade" id="tab_1_5">
 							<div class="col-md-12">
 									<div class="form-group">
@@ -998,20 +998,148 @@ $disease = $diseaseObj->getAllRecords();
 											</div>
 										</div>
 								</div>
-		
-							<div class="clearfix margin-bottom-20"></div>
-
-						</div>
-
+													<div class="clearfix margin-bottom-20"></div>
+								
 					</div>
+					
+					<div class="tab-pane fade" id="tab_1_6">
+            		<table class="table table-striped table-hover table-bordered"
+									id="keratometry_table">
+									<thead>
+										<tr>
+											<th class="no-borders">Keratometry</th>
+											<th>1st meridian (m.m.)</th>
+											<th>Axis</th>
+											<th>2nd meridian (m.m.)</th>
+											<th>Axis</th>
+											<th>Anterior Astigmatism</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><b>OD</b></td>
+											<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+											<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+											<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+											<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+											<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+										</tr>
+										<tr>
+											<td><b>OS</b></td>
+											<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+											<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+											<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+											<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+											<td><input type="text" class="form-control input-small"
+												value="1234"></td>		
+										</tr>
+									</tbody>
+								</table>
+								<div class="col-md-12">
+								<h4><label>Distance</label></h4>
+								</div>
+								<div class="col-md-3">
+										<div class="form-group">
+											<div class="mt-checkbox-list" style='padding: 0px'>
+												<label class="mt-checkbox"> Near <input
+													type="checkbox" id="disstance_near"
+													value="near"
+													name="near" /> <span></span>
+												</label>
+											</div>
+										</div>
+									</div>	
+									
+								<div class="col-md-3">
+										<div class="form-group">
+											<div class="mt-checkbox-list" style='padding: 0px'>
+												<label class="mt-checkbox"> 33 <input
+													type="checkbox" id="disstance_33"
+													value="33"
+													name="33" /> <span></span>
+												</label>
+											</div>
+										</div>
+									</div>	
+									
+								<div class="col-md-3">
+										<div class="form-group">
+											<div class="mt-checkbox-list" style='padding: 0px'>
+												<label class="mt-checkbox"> 50 <input
+													type="checkbox" id="disstance_50"
+													value="55"
+													name="55" /> <span></span>
+												</label>
+											</div>
+										</div>
+									</div>	
+									
+								<div class="col-md-3">
+										<div class="form-group">
+											<div class="mt-checkbox-list" style='padding: 0px'>
+												<label class="mt-checkbox"> 70 <input
+													type="checkbox" id="disstance_70"
+													value="70"
+													name="70" /> <span></span>
+												</label>
+											</div>
+										</div>
+									</div>	
+									
+								<div class="col-md-3">
+										<div class="form-group">
+											<div class="mt-checkbox-list" style='padding: 0px'>
+												<label class="mt-checkbox"> working distance <input
+													type="checkbox" id="disstance_working"
+													value="workingDistance"
+													name="workingDistance" /> <span></span>
+												</label>
+											</div>
+										</div>
+									</div>	
+								<table class="table table-striped table-hover table-bordered"
+									id="measurement_table">
+									<thead>
+										<tr>
+											<th colspan="2" class="no-borders">V.A measurement</th>
+											<th>Far</th>
+											<th>Bincular - Faar</th>
+											<th>Bincular - Near</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td rowspan=2><b>Unaided V.A</b></td>
+											<td><b>OD</b></td>
+											<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+											<td rowspan="2"><input id="bicularFarUNaided" type="text" class="form-control input-small"
+												value="1234"></td>	
+											<td rowspan="2"><input id="bicularNearUnaided" type="text" class="form-control input-small"
+												value="1234"></td>	
+										</tr>
+										<tr>
+											
+												
+										</tr>
+									</tbody>
+								</table>								
+            		</div>
 					<div class="col-md-12">
 						<button class="btn btn-success pull-right"
 							style='margin-top: 20px;' type="submit">Submit</button>
 					</div>
-
 				</div>
 		
-		</div>
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
 		<!-- <script
 	src="<?php echo BASE_URL ?>plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js"
