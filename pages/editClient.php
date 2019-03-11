@@ -9,8 +9,7 @@ $typeOfCorrectionObj = new TypeCorrectionEXT();
 $wearTypeObj = new WearTypeEXT();
 $workStationObj = new WorkStationEXT();
 $diseaseObj = new DiseaseEXT();
-$medicationIntake = new med
-
+$medicationIntake = new MedicationIntakeEXT();
 // ----------------------------------End of Objects Declaration-------------------------------------//
 
 $visualProblems = $visualProblemsObj->getAllRecords();
@@ -896,6 +895,7 @@ $disease = $diseaseObj->getAllRecords();
 									 name="extraProffesionalActivities" id="extraProffesionalActivities"></textarea>
 									</fieldset>
 								</div>
+							</div>
 							<div class="tab-pane fade" id="tab_1_5">
 							<div class="col-md-12">
 									<div class="form-group">
