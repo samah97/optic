@@ -9,7 +9,8 @@ $typeOfCorrectionObj = new TypeCorrectionEXT();
 $wearTypeObj = new WearTypeEXT();
 $workStationObj = new WorkStationEXT();
 $diseaseObj = new DiseaseEXT();
-$medicationIntake = new MedicationIntakeEXT();
+$medicationIntakeObj = new MedicationIntakeEXT();
+$coverTestObj = new coverTestEXT();
 // ----------------------------------End of Objects Declaration-------------------------------------//
 
 $visualProblems = $visualProblemsObj->getAllRecords();
@@ -19,7 +20,8 @@ $typeOfCorrection = $typeOfCorrectionObj->getAllRecords();
 $wearType = $wearTypeObj->getAllRecords();
 $workStation = $workStationObj->getAllRecords();
 $disease = $diseaseObj->getAllRecords();
-
+$medicationIntake = $medicationIntakeObj->getAllRecords();
+$coverTest = $coverTestObj->getAllRecords();
 ?>
 
 <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -895,7 +897,6 @@ $disease = $diseaseObj->getAllRecords();
 									 name="extraProffesionalActivities" id="extraProffesionalActivities"></textarea>
 									</fieldset>
 								</div>
-							</div>
 							<div class="tab-pane fade" id="tab_1_5">
 							<div class="col-md-12">
 									<div class="form-group">
@@ -969,14 +970,14 @@ $disease = $diseaseObj->getAllRecords();
         ?>
         <h3>Medication Intake</h3>								
 									<?php
-		foreach ($disease as $row) {
+		foreach ($medicationIntake as $row) {
             ?>
 				    <div class="col-md-3">
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
 											<label class="mt-checkbox"> <?php echo $row->title ?> <input
-												type="checkbox" id="medicationIntake_<?php echo $row->diseaseId ?>"
-												value="<?php echo $row->diseaseId ?>" name="medicationIntake[]" />
+												type="checkbox" id="medicationIntake_<?php echo $row->medicationIntakeId ?>"
+												value="<?php echo $row->medicationIntakeId ?>" name="medicationIntake[]" />
 												<span></span>
 											</label>
 										</div>
@@ -1105,7 +1106,6 @@ $disease = $diseaseObj->getAllRecords();
 												</label>
 											</div>
 										</div>
-									</div>	
 								<table class="table table-striped table-hover table-bordered"
 									id="measurement_table">
 									<thead>
@@ -1128,11 +1128,102 @@ $disease = $diseaseObj->getAllRecords();
 												value="1234"></td>	
 										</tr>
 										<tr>
-											
-												
+											<td>OS</td>
+											<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+											<td></td>	
+											<td></td>	
+										</tr>
+										<tr>
+										<td rowspan=2>Aided V.A</td>
+										<td>OD</td>
+										<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+										<td rowspan="2"><input id="bicularFarUNaided" type="text" class="form-control input-small"
+												value="1234"></td>	
+											<td rowspan="2"><input id="bicularNearUnaided" type="text" class="form-control input-small"
+												value="1234"></td>	
+										</tr>
+										<tr>
+										<td>OS</td>
+										<td><input type="text" class="form-control input-small"
+												value="1234"></td>
+										<td></td>
+										<td></td>		
 										</tr>
 									</tbody>
 								</table>								
+        			</div>
+        			<div class="col-md-12">
+        			<div class="col-md-3">Unilateral and alternate cover test</div>
+        			<?php 		foreach ($coverTestObj as $row) {?>
+        			    <div class="col-md-3">
+									<div class="form-group">
+										<div class="mt-checkbox-list" style='padding: 0px'>
+											<label class="mt-checkbox"> <?php echo $row->title ?> <input
+												type="checkbox" id="coverTestObj_<?php echo $row->coverTestObjId ?>"
+												value="<?php echo $row->coverTestObjId ?>" name="coverTestObj[]" />
+												<span></span>
+											</label>
+										</div>
+									</div>
+								</div>
+					<?php }?>
+        			</div>	
+					<div class="col-md-12">
+					<div class="col-md-3">
+					<label>Unilateral and alternate cover test</label>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<div class="mt-checkbox-list" style='padding: 0px'>
+								<label class="mt-checkbox">Bris Distance<input
+									type="checkbox" id="brisDistance"
+									value="brisDistance"
+									name="brisDistance"/> 	<span></span>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<div class="mt-checkbox-list" style='padding: 0px'>
+								<label class="mt-checkbox">Recoverment<input
+									type="checkbox" id="recoverment"
+									value="recoverment"
+									name="recoverment"/>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<div class="mt-checkbox-list" style='padding: 0px'>
+								<label class="mt-checkbox">X / Y = 
+								</label>
+								<input id="xOverY" type="text" name="xOverY" class="form-control input-small"
+												value="xOverY">
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="col-md-12">
+        			<div class="col-md-3">
+        			<label>Ocular motility</label>
+        			</div>
+        			<div class="col-md-3">
+						<div class="form-group">
+							<div class="mt-checkbox-list" style='padding: 0px'>
+								<label class="mt-checkbox">normal otherwise click on affected <input
+									type="checkbox" id="normal"
+									value="normal"
+									name="normal"/>
+								</label>
+							</div>
+						</div>
+					</div>	
+					
+        			</div>
             		</div>
 					<div class="col-md-12">
 						<button class="btn btn-success pull-right"
