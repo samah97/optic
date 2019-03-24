@@ -54,7 +54,7 @@ error_reporting(E_ERROR | E_PARSE);
 <link rel="stylesheet" href="plugins/datepicker/css/datepicker.css">
 
 
-
+<script src="js/scripts.js"></script>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link
 	href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all"

@@ -10,7 +10,8 @@ $wearTypeObj = new WearTypeEXT();
 $workStationObj = new WorkStationEXT();
 $diseaseObj = new DiseaseEXT();
 $medicationIntakeObj = new MedicationIntakeEXT();
-$coverTestObj = new coverTestEXT();
+$coverTestObj = new CoverTestEXT();
+$occularMotilityObj = new OcularMotilityEXT();
 // ----------------------------------End of Objects Declaration-------------------------------------//
 
 $visualProblems = $visualProblemsObj->getAllRecords();
@@ -22,6 +23,7 @@ $workStation = $workStationObj->getAllRecords();
 $disease = $diseaseObj->getAllRecords();
 $medicationIntake = $medicationIntakeObj->getAllRecords();
 $coverTest = $coverTestObj->getAllRecords();
+$occularMotility = $occularMotilityObj->getAllRecords();
 ?>
 
 <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -41,7 +43,7 @@ $coverTest = $coverTestObj->getAllRecords();
 			<form id="newClient" name="newClient"
 				action="action/insertClient.php?fromPage=newClient" method="POST"
 				onSubmit="if(!validateForm()){return false;}">
-				<div class="portlet light bordered">
+				<div class="portlet light bordered" style="overflow: hidden;">
 					<div class="portlet-title">
 						<div class="caption">
 							<i class="icon-social-dribbble font-purple-soft"></i> <span
@@ -127,9 +129,9 @@ $coverTest = $coverTestObj->getAllRecords();
 									<div class="form-group radio col-md-6">
 										<label for="gender" class="col-md-3 control-label">Gender :</label>
 										<br> <br> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<label><input
-											type="radio" name="gender" id="gender" value="male"
+											type="radio" name="gender" id="male" value="male"
 											<?php echo $checkedMale?>>Male</label>&nbsp;&nbsp;&nbsp; <label><input
-											type="radio" name="gender" id="gender" value="female"
+											type="radio" name="gender" id="female" value="female"
 											<?php echo $checkedFemale ?>>Female</label>
 									</div>
 
@@ -533,34 +535,34 @@ $coverTest = $coverTestObj->getAllRecords();
 										<tr>
 											<td><b>OD</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td rowspan="2"><textarea class="form-control input-small"
 													style='height: 85px; resize: none'">123</textarea></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 										</tr>
 									</tbody>
 								</table>
@@ -580,21 +582,21 @@ $coverTest = $coverTestObj->getAllRecords();
 										<tr>
 											<td><b>OD</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 										</tr>
 									</tbody>
 								</table>
@@ -1020,28 +1022,28 @@ $coverTest = $coverTestObj->getAllRecords();
 										<tr>
 											<td><b>OD</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>		
+												value=""></td>		
 										</tr>
 									</tbody>
 								</table>
@@ -1106,6 +1108,7 @@ $coverTest = $coverTestObj->getAllRecords();
 												</label>
 											</div>
 										</div>
+								</div>		
 								<table class="table table-striped table-hover table-bordered"
 									id="measurement_table">
 									<thead>
@@ -1121,58 +1124,59 @@ $coverTest = $coverTestObj->getAllRecords();
 											<td rowspan=2><b>Unaided V.A</b></td>
 											<td><b>OD</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td rowspan="2"><input id="bicularFarUNaided" type="text" class="form-control input-small"
-												value="1234"></td>	
+												value=""></td>	
 											<td rowspan="2"><input id="bicularNearUnaided" type="text" class="form-control input-small"
-												value="1234"></td>	
+												value=""></td>	
 										</tr>
 										<tr>
 											<td>OS</td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
-											<td></td>	
-											<td></td>	
+												value=""></td>
 										</tr>
 										<tr>
 										<td rowspan=2>Aided V.A</td>
 										<td>OD</td>
 										<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 										<td rowspan="2"><input id="bicularFarUNaided" type="text" class="form-control input-small"
-												value="1234"></td>	
+												value=""></td>	
 											<td rowspan="2"><input id="bicularNearUnaided" type="text" class="form-control input-small"
-												value="1234"></td>	
+												value=""></td>	
 										</tr>
 										<tr>
 										<td>OS</td>
 										<td><input type="text" class="form-control input-small"
-												value="1234"></td>
-										<td></td>
-										<td></td>		
+												value=""></td>
 										</tr>
 									</tbody>
 								</table>								
-        			</div>
         			<div class="col-md-12">
         			<div class="col-md-3">Unilateral and alternate cover test</div>
-        			<?php 		foreach ($coverTestObj as $row) {?>
-        			    <div class="col-md-3">
+        			<div class="col-md-9">
+        			<?php 
+        			foreach ($coverTest as $row) {
+        			   ?>
+        			   <div class="col-md-3">
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
 											<label class="mt-checkbox"> <?php echo $row->title ?> <input
-												type="checkbox" id="coverTestObj_<?php echo $row->coverTestObjId ?>"
-												value="<?php echo $row->coverTestObjId ?>" name="coverTestObj[]" />
+												type="checkbox" id="coverTestObj_<?php echo $row->coverTestId ?>"
+												value="<?php echo $row->coverTestId ?>" name="coverTestId[]" />
 												<span></span>
 											</label>
 										</div>
 									</div>
-								</div>
+						</div>
 					<?php }?>
         			</div>	
+        			</div>
 					<div class="col-md-12">
 					<div class="col-md-3">
-					<label>Unilateral and alternate cover test</label>
+					<div class="form-group">
+					<label>Punctum Proximum od convergence</label>
+					</div>
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
@@ -1191,25 +1195,23 @@ $coverTest = $coverTestObj->getAllRecords();
 								<label class="mt-checkbox">Recoverment<input
 									type="checkbox" id="recoverment"
 									value="recoverment"
-									name="recoverment"/>
+									name="recoverment"/> <span></span>
 								</label>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3">
-						<div class="form-group">
-							<div class="mt-checkbox-list" style='padding: 0px'>
-								<label class="mt-checkbox">X / Y = 
-								</label>
-								<input id="xOverY" type="text" name="xOverY" class="form-control input-small"
-												value="xOverY">
-							</div>
+        			<label>Ocular motility</label>
+        						<div class="form-group">
+							<input type="text" id="xOverY" class="form-control input-small" value="xOverY"></td>
 						</div>
 					</div>
 					</div>
 					<div class="col-md-12">
         			<div class="col-md-3">
+        			<div class="form-group">
         			<label>Ocular motility</label>
+        			</div>
         			</div>
         			<div class="col-md-3">
 						<div class="form-group">
@@ -1217,13 +1219,139 @@ $coverTest = $coverTestObj->getAllRecords();
 								<label class="mt-checkbox">normal otherwise click on affected <input
 									type="checkbox" id="normal"
 									value="normal"
-									name="normal"/>
+									name="normal"/><span></span>
 								</label>
 							</div>
 						</div>
-					</div>	
-					
+					</div>
+					</div>
+					<div class="col-md-12" style="background-color: lightgrey;">
+					<div class="col-md-6">	
+        			<table>
+        			<tr>
+        			<?php 
+        			$realPath="../eye/";
+        			$imagesPath = BASE_URL."eye/";
+        			$curPosition = $occularMotility[0]->position;
+        			$i=0;
+        			foreach ($occularMotility as $row) {
+        			    $i=="9"?$i=0:$i=$i;
+        			    if($i==3 || $i==6){
+        			       ?>
+        			        </tr>
+        			        <tr>
+        			    <?php }
+        			    if($row->position != $curPosition){
+        			        $curPosition = $row->position;
+        			        ?>
+        			        </tr>
+        			        </table>
+        			        </div>
+        			        <div class="col-md-6">
+        			        <table>
+        			        <tr>
+        			        <?php 
+        			    }
+        			?>
+        			 <td>
+        			 <div class="nopad text-center">
+                        <label class="image-checkbox" id="affectedPart_<?php echo $row->ocularMotilityId?>">
+                          <img class="img-responsive"  src="<?php echo $imagesPath.$row->image?>" onclick="checkAffected('eye_<?php echo $row->ocularMotilityId?>','affectedPart_<?php echo $row->ocularMotilityId?>')"/>
+                          <input type="hidden"  id="eye_<?php echo $row->ocularMotilityId?>"
+                           name="image[]" value="eye_<?php echo $row->ocularMotilityId?>" />
+                          <i class="fa fa-check hidden"></i>
+                        </label>
+                      </div>
+                    </td>  
+					<?php
+					$i++; 
+        			}?>
+        			</tr>
+        			</table>
         			</div>
+        			</div>
+        			<div class="col-md-12">
+									<div class="form-group">
+											<label for="stereoacuity" class="col-md-3 control-label">Stereoacuity Wirt test</label>
+											<div class="col-md-7">
+												<div class="input-icon right">
+													<input name="stereoacuity" type="text"
+														class="form-control rounded-form place-holder-color"
+														id="stereoacuity" value="">
+												</div>
+											</div>
+										<label for="stereoacuity" class="col-md-1 control-label">arcsecond</label>
+										</div>
+					</div>	
+					<div class="col-md-12">
+					<h3>Pupillary reflexs</h3>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-3"><label>Photomotor</label></div>
+						<div class="form-group">
+							<div class="mt-checkbox-list col-md-3" style='padding: 0px'>
+								<label class="mt-checkbox">Normal, if not, Describe<input
+									type="checkbox" id="photomotor"
+									value="photomotor"
+									name="photomotor"/> <span></span>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-3">
+						<div class="input-icon right">
+							<input name="photomotorDescription" type="text"
+								class="form-control rounded-form place-holder-color"
+								id="photomotorDescription" value="" placeholder="Description">
+						</div>
+						</div>
+					</div>	
+					<div class="col-md-12">
+						<div class="col-md-3"><label>Consenual</label></div>
+						<div class="form-group">
+							<div class="mt-checkbox-list col-md-3" style='padding: 0px'>
+								<label class="mt-checkbox">Normal, if not, Describe<input
+									type="checkbox" id="consenual"
+									value="consenual"
+									name="consenual"/> <span></span>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-3">
+						<div class="input-icon right">
+							<input name="consenualDescription" type="text"
+								class="form-control rounded-form place-holder-color"
+								id="consenualDescription" value="" placeholder="Description">
+						</div>
+						</div>
+					</div>	
+					<div class="col-md-12">
+						<div class="col-md-3"><label>Accommodative</label></div>
+						<div class="form-group">
+							<div class="mt-checkbox-list col-md-3" style='padding: 0px'>
+								<label class="mt-checkbox">Normal, if not, Describe<input
+									type="checkbox" id="accommodative"
+									value="accommodative"
+									name="accommodative"/> <span></span>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-3">
+						<div class="input-icon right">
+							<input name="accommodativeDescription" type="text"
+								class="form-control rounded-form place-holder-color"
+								id="accommodativeDescription" value="" placeholder="Description">
+						</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+					<fieldset>
+					<legend>Deduction</legend>
+					<textarea
+					class="form-control rounded-form place-holder-color"
+					rows="5" name="deduction" id="deduction"></textarea>
+					</fieldset>
+					</div>	
+        			</div>	
             		</div>
 					<div class="col-md-12">
 						<button class="btn btn-success pull-right"
