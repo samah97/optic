@@ -9,7 +9,9 @@ $typeOfCorrectionObj = new TypeCorrectionEXT();
 $wearTypeObj = new WearTypeEXT();
 $workStationObj = new WorkStationEXT();
 $diseaseObj = new DiseaseEXT();
-$medicationIntake = new MedicationIntakeEXT();
+$medicationIntakeObj = new MedicationIntakeEXT();
+$coverTestObj = new CoverTestEXT();
+$occularMotilityObj = new OcularMotilityEXT();
 // ----------------------------------End of Objects Declaration-------------------------------------//
 
 $visualProblems = $visualProblemsObj->getAllRecords();
@@ -19,8 +21,9 @@ $typeOfCorrection = $typeOfCorrectionObj->getAllRecords();
 $wearType = $wearTypeObj->getAllRecords();
 $workStation = $workStationObj->getAllRecords();
 $disease = $diseaseObj->getAllRecords();
-
-
+$medicationIntake = $medicationIntakeObj->getAllRecords();
+$coverTest = $coverTestObj->getAllRecords();
+$occularMotility = $occularMotilityObj->getAllRecords();
 ?>
 
 <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -40,7 +43,7 @@ $disease = $diseaseObj->getAllRecords();
 			<form id="newClient" name="newClient"
 				action="action/insertClient.php?fromPage=newClient" method="POST"
 				onSubmit="if(!validateForm()){return false;}">
-				<div class="portlet light bordered">
+				<div class="portlet light bordered" style="overflow: hidden;">
 					<div class="portlet-title">
 						<div class="caption">
 							<i class="icon-social-dribbble font-purple-soft"></i> <span
@@ -126,9 +129,9 @@ $disease = $diseaseObj->getAllRecords();
 									<div class="form-group radio col-md-6">
 										<label for="gender" class="col-md-3 control-label">Gender :</label>
 										<br> <br> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<label><input
-											type="radio" name="gender" id="gender" value="male"
+											type="radio" name="gender" id="male" value="male"
 											<?php echo $checkedMale?>>Male</label>&nbsp;&nbsp;&nbsp; <label><input
-											type="radio" name="gender" id="gender" value="female"
+											type="radio" name="gender" id="female" value="female"
 											<?php echo $checkedFemale ?>>Female</label>
 									</div>
 
@@ -532,34 +535,34 @@ $disease = $diseaseObj->getAllRecords();
 										<tr>
 											<td><b>OD</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td rowspan="2"><textarea class="form-control input-small"
 													style='height: 85px; resize: none'">123</textarea></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 										</tr>
 									</tbody>
 								</table>
@@ -579,21 +582,21 @@ $disease = $diseaseObj->getAllRecords();
 										<tr>
 											<td><b>OD</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 											<td><input type="text" class="form-control input-small"
-												value="1234"></td>
+												value=""></td>
 										</tr>
 									</tbody>
 								</table>
@@ -896,7 +899,6 @@ $disease = $diseaseObj->getAllRecords();
 									 name="extraProffesionalActivities" id="extraProffesionalActivities"></textarea>
 									</fieldset>
 								</div>
-							</div>
 							<div class="tab-pane fade" id="tab_1_5">
 							<div class="col-md-12">
 									<div class="form-group">
@@ -970,14 +972,14 @@ $disease = $diseaseObj->getAllRecords();
         ?>
         <h3>Medication Intake</h3>								
 									<?php
-		foreach ($disease as $row) {
+		foreach ($medicationIntake as $row) {
             ?>
 				    <div class="col-md-3">
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
 											<label class="mt-checkbox"> <?php echo $row->title ?> <input
-												type="checkbox" id="medicationIntake_<?php echo $row->diseaseId ?>"
-												value="<?php echo $row->diseaseId ?>" name="medicationIntake[]" />
+												type="checkbox" id="medicationIntake_<?php echo $row->medicationIntakeId ?>"
+												value="<?php echo $row->medicationIntakeId ?>" name="medicationIntake[]" />
 												<span></span>
 											</label>
 										</div>
@@ -999,20 +1001,364 @@ $disease = $diseaseObj->getAllRecords();
 											</div>
 										</div>
 								</div>
-		
-							<div class="clearfix margin-bottom-20"></div>
-
-						</div>
-
+													<div class="clearfix margin-bottom-20"></div>
+								
 					</div>
+					
+					<div class="tab-pane fade" id="tab_1_6">
+            		<table class="table table-striped table-hover table-bordered"
+									id="keratometry_table">
+									<thead>
+										<tr>
+											<th class="no-borders">Keratometry</th>
+											<th>1st meridian (m.m.)</th>
+											<th>Axis</th>
+											<th>2nd meridian (m.m.)</th>
+											<th>Axis</th>
+											<th>Anterior Astigmatism</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><b>OD</b></td>
+											<td><input type="text" class="form-control input-small"
+												value=""></td>
+											<td><input type="text" class="form-control input-small"
+												value=""></td>
+											<td><input type="text" class="form-control input-small"
+												value=""></td>
+											<td><input type="text" class="form-control input-small"
+												value=""></td>
+											<td><input type="text" class="form-control input-small"
+												value=""></td>
+										</tr>
+										<tr>
+											<td><b>OS</b></td>
+											<td><input type="text" class="form-control input-small"
+												value=""></td>
+											<td><input type="text" class="form-control input-small"
+												value=""></td>
+											<td><input type="text" class="form-control input-small"
+												value=""></td>
+											<td><input type="text" class="form-control input-small"
+												value=""></td>
+											<td><input type="text" class="form-control input-small"
+												value=""></td>		
+										</tr>
+									</tbody>
+								</table>
+								<div class="col-md-12">
+								<h4><label>Distance</label></h4>
+								</div>
+								<div class="col-md-3">
+										<div class="form-group">
+											<div class="mt-checkbox-list" style='padding: 0px'>
+												<label class="mt-checkbox"> Near <input
+													type="checkbox" id="disstance_near"
+													value="near"
+													name="near" /> <span></span>
+												</label>
+											</div>
+										</div>
+									</div>	
+									
+								<div class="col-md-3">
+										<div class="form-group">
+											<div class="mt-checkbox-list" style='padding: 0px'>
+												<label class="mt-checkbox"> 33 <input
+													type="checkbox" id="disstance_33"
+													value="33"
+													name="33" /> <span></span>
+												</label>
+											</div>
+										</div>
+									</div>	
+									
+								<div class="col-md-3">
+										<div class="form-group">
+											<div class="mt-checkbox-list" style='padding: 0px'>
+												<label class="mt-checkbox"> 50 <input
+													type="checkbox" id="disstance_50"
+													value="55"
+													name="55" /> <span></span>
+												</label>
+											</div>
+										</div>
+									</div>	
+									
+								<div class="col-md-3">
+										<div class="form-group">
+											<div class="mt-checkbox-list" style='padding: 0px'>
+												<label class="mt-checkbox"> 70 <input
+													type="checkbox" id="disstance_70"
+													value="70"
+													name="70" /> <span></span>
+												</label>
+											</div>
+										</div>
+									</div>	
+									
+								<div class="col-md-3">
+										<div class="form-group">
+											<div class="mt-checkbox-list" style='padding: 0px'>
+												<label class="mt-checkbox"> working distance <input
+													type="checkbox" id="disstance_working"
+													value="workingDistance"
+													name="workingDistance" /> <span></span>
+												</label>
+											</div>
+										</div>
+								</div>		
+								<table class="table table-striped table-hover table-bordered"
+									id="measurement_table">
+									<thead>
+										<tr>
+											<th colspan="2" class="no-borders">V.A measurement</th>
+											<th>Far</th>
+											<th>Bincular - Faar</th>
+											<th>Bincular - Near</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td rowspan=2><b>Unaided V.A</b></td>
+											<td><b>OD</b></td>
+											<td><input type="text" class="form-control input-small"
+												value=""></td>
+											<td rowspan="2"><input id="bicularFarUNaided" type="text" class="form-control input-small"
+												value=""></td>	
+											<td rowspan="2"><input id="bicularNearUnaided" type="text" class="form-control input-small"
+												value=""></td>	
+										</tr>
+										<tr>
+											<td>OS</td>
+											<td><input type="text" class="form-control input-small"
+												value=""></td>
+										</tr>
+										<tr>
+										<td rowspan=2>Aided V.A</td>
+										<td>OD</td>
+										<td><input type="text" class="form-control input-small"
+												value=""></td>
+										<td rowspan="2"><input id="bicularFarUNaided" type="text" class="form-control input-small"
+												value=""></td>	
+											<td rowspan="2"><input id="bicularNearUnaided" type="text" class="form-control input-small"
+												value=""></td>	
+										</tr>
+										<tr>
+										<td>OS</td>
+										<td><input type="text" class="form-control input-small"
+												value=""></td>
+										</tr>
+									</tbody>
+								</table>								
+        			<div class="col-md-12">
+        			<div class="col-md-3">Unilateral and alternate cover test</div>
+        			<div class="col-md-9">
+        			<?php 
+        			foreach ($coverTest as $row) {
+        			   ?>
+        			   <div class="col-md-3">
+									<div class="form-group">
+										<div class="mt-checkbox-list" style='padding: 0px'>
+											<label class="mt-checkbox"> <?php echo $row->title ?> <input
+												type="checkbox" id="coverTestObj_<?php echo $row->coverTestId ?>"
+												value="<?php echo $row->coverTestId ?>" name="coverTestId[]" />
+												<span></span>
+											</label>
+										</div>
+									</div>
+						</div>
+					<?php }?>
+        			</div>	
+        			</div>
+					<div class="col-md-12">
+					<div class="col-md-3">
+					<div class="form-group">
+					<label>Punctum Proximum od convergence</label>
+					</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<div class="mt-checkbox-list" style='padding: 0px'>
+								<label class="mt-checkbox">Bris Distance<input
+									type="checkbox" id="brisDistance"
+									value="brisDistance"
+									name="brisDistance"/> 	<span></span>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<div class="mt-checkbox-list" style='padding: 0px'>
+								<label class="mt-checkbox">Recoverment<input
+									type="checkbox" id="recoverment"
+									value="recoverment"
+									name="recoverment"/> <span></span>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+        			<label>Ocular motility</label>
+        						<div class="form-group">
+							<input type="text" id="xOverY" class="form-control input-small" value="xOverY"></td>
+						</div>
+					</div>
+					</div>
+					<div class="col-md-12">
+        			<div class="col-md-3">
+        			<div class="form-group">
+        			<label>Ocular motility</label>
+        			</div>
+        			</div>
+        			<div class="col-md-3">
+						<div class="form-group">
+							<div class="mt-checkbox-list" style='padding: 0px'>
+								<label class="mt-checkbox">normal otherwise click on affected <input
+									type="checkbox" id="normal"
+									value="normal"
+									name="normal"/><span></span>
+								</label>
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="col-md-12" style="background-color: lightgrey;">
+					<div class="col-md-6">	
+        			<table>
+        			<tr>
+        			<?php 
+        			$realPath="../eye/";
+        			$imagesPath = BASE_URL."eye/";
+        			$curPosition = $occularMotility[0]->position;
+        			$i=0;
+        			foreach ($occularMotility as $row) {
+        			    $i=="9"?$i=0:$i=$i;
+        			    if($i==3 || $i==6){
+        			       ?>
+        			        </tr>
+        			        <tr>
+        			    <?php }
+        			    if($row->position != $curPosition){
+        			        $curPosition = $row->position;
+        			        ?>
+        			        </tr>
+        			        </table>
+        			        </div>
+        			        <div class="col-md-6">
+        			        <table>
+        			        <tr>
+        			        <?php 
+        			    }
+        			?>
+        			 <td>
+        			 <div class="nopad text-center">
+                        <label class="image-checkbox" id="affectedPart_<?php echo $row->ocularMotilityId?>">
+                          <img class="img-responsive"  src="<?php echo $imagesPath.$row->image?>" onclick="checkAffected('eye_<?php echo $row->ocularMotilityId?>','affectedPart_<?php echo $row->ocularMotilityId?>')"/>
+                          <input type="hidden"  id="eye_<?php echo $row->ocularMotilityId?>"
+                           name="image[]" value="eye_<?php echo $row->ocularMotilityId?>" />
+                          <i class="fa fa-check hidden"></i>
+                        </label>
+                      </div>
+                    </td>  
+					<?php
+					$i++; 
+        			}?>
+        			</tr>
+        			</table>
+        			</div>
+        			</div>
+        			<div class="col-md-12">
+									<div class="form-group">
+											<label for="stereoacuity" class="col-md-3 control-label">Stereoacuity Wirt test</label>
+											<div class="col-md-7">
+												<div class="input-icon right">
+													<input name="stereoacuity" type="text"
+														class="form-control rounded-form place-holder-color"
+														id="stereoacuity" value="">
+												</div>
+											</div>
+										<label for="stereoacuity" class="col-md-1 control-label">arcsecond</label>
+										</div>
+					</div>	
+					<div class="col-md-12">
+					<h3>Pupillary reflexs</h3>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-3"><label>Photomotor</label></div>
+						<div class="form-group">
+							<div class="mt-checkbox-list col-md-3" style='padding: 0px'>
+								<label class="mt-checkbox">Normal, if not, Describe<input
+									type="checkbox" id="photomotor"
+									value="photomotor"
+									name="photomotor"/> <span></span>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-3">
+						<div class="input-icon right">
+							<input name="photomotorDescription" type="text"
+								class="form-control rounded-form place-holder-color"
+								id="photomotorDescription" value="" placeholder="Description">
+						</div>
+						</div>
+					</div>	
+					<div class="col-md-12">
+						<div class="col-md-3"><label>Consenual</label></div>
+						<div class="form-group">
+							<div class="mt-checkbox-list col-md-3" style='padding: 0px'>
+								<label class="mt-checkbox">Normal, if not, Describe<input
+									type="checkbox" id="consenual"
+									value="consenual"
+									name="consenual"/> <span></span>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-3">
+						<div class="input-icon right">
+							<input name="consenualDescription" type="text"
+								class="form-control rounded-form place-holder-color"
+								id="consenualDescription" value="" placeholder="Description">
+						</div>
+						</div>
+					</div>	
+					<div class="col-md-12">
+						<div class="col-md-3"><label>Accommodative</label></div>
+						<div class="form-group">
+							<div class="mt-checkbox-list col-md-3" style='padding: 0px'>
+								<label class="mt-checkbox">Normal, if not, Describe<input
+									type="checkbox" id="accommodative"
+									value="accommodative"
+									name="accommodative"/> <span></span>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-3">
+						<div class="input-icon right">
+							<input name="accommodativeDescription" type="text"
+								class="form-control rounded-form place-holder-color"
+								id="accommodativeDescription" value="" placeholder="Description">
+						</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+					<fieldset>
+					<legend>Deduction</legend>
+					<textarea
+					class="form-control rounded-form place-holder-color"
+					rows="5" name="deduction" id="deduction"></textarea>
+					</fieldset>
+					</div>	
+        			</div>	
+            		</div>
 					<div class="col-md-12">
 						<button class="btn btn-success pull-right"
 							style='margin-top: 20px;' type="submit">Submit</button>
 					</div>
-
 				</div>
 		
-		</div>
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
 		<!-- <script
 	src="<?php echo BASE_URL ?>plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js"
