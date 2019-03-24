@@ -9,7 +9,7 @@
 	require_once('class/core/ArrayList.class.php');
 	require_once('class/dao/DAOFactory.class.php');
 	require_once('class/Functions/Database/Database.php');
- 	
+	
 	require_once('class/dao/AmbianceDAO.class.php');
 	require_once('class/dto/Ambiance.class.php');
 	require_once('class/mysql/AmbianceMySqlDAO.class.php');
@@ -162,5 +162,14 @@
 	require_once('class/mysql/VaMeasurementMySqlDAO.class.php');
 	require_once('class/mysql/ext/VaMeasurementMySqlExtDAO.class.php');
 	require_once('class/Functions/VaMeasurementEXT.class.php');
+	
+	require_once('class/dao/VisitDAO.class.php');
+	require_once('class/dto/Visit.class.php');
+	require_once('class/mysql/VisitMySqlDAO.class.php');
+	require_once('class/mysql/ext/VisitMySqlExtDAO.class.php');
+	require_once('class/Functions/VisitEXT.class.php');
+	
+	require_once('class/Functions/Validation.php');
+	require_once('class/gump/gump.class.php');
 	
 ?>

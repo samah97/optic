@@ -9,6 +9,8 @@
 		
 		var $typeCorrectionId;
 		var $title;
-		
+        const Eyeglass = 1;
+        
+        const Contact_Lenses = 2;
 	}
 ?>
