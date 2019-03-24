@@ -7,6 +7,13 @@
  */
 class RefEyeglassesMySqlExtDAO extends RefEyeglassesMySqlDAO{
 
-	
+	public function getRecord($pdo,$data,$strWhere){
+	    try{
+	    $query = "SELECT * FROM ref_eyeglasses WHERE $strWhere";
+	    $array = $pdo->select($query,$data);
+	    }catch (PDOException $e){
+	        return null;
+	    }
+	}
 }
 ?>

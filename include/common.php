@@ -3,6 +3,8 @@
 /*define('MAIN_URL','http://localhost/projects/optic/');
 define('BASE_URL','http://localhost/projects/optic/');*/
 
+error_reporting(0);
+
 //FOR EHAB
 define('MAIN_URL','http://localhost/projects/optic/');
 define('BASE_URL','http://localhost/projects/optic/');
