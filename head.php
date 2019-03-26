@@ -53,6 +53,9 @@ error_reporting(E_ERROR | E_PARSE);
 <!--===============================================================================================-->
 <link rel="stylesheet" href="plugins/datepicker/css/datepicker.css">
 
+<!--  JQUERY PLUGIN  -->
+<script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<!--  JQUERY PLUGIN  -->
 
 <script src="js/scripts.js"></script>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -85,8 +88,6 @@ error_reporting(E_ERROR | E_PARSE);
 	type="text/css" />
 <!-- END THEME LAYOUT STYLES -->
 
-<!--  JQUERY PLUGIN  -->
-<script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<!--  JQUERY PLUGIN  -->
+
 </head>
 <body>
