@@ -1,3 +1,12 @@
+
+
+$(document).ready(function(){
+	$('#fs_19').click(function(){
+		$('#headaches_more').toggleClass('hidden');
+	});
+});
+
+
 function showTypeForm(){
 	var select = $('#lenseType');
 	var value = select.val();
@@ -12,8 +21,7 @@ function showTypeForm(){
 }
 
 function validateForm(){
-	if(document.getElementById("firstName").value == null || document.getElementById("firstName").value == "" 
-		|| document.getElementById("lastName").value == null || document.getElementById("lastName").value == ""
+	if(document.getElementById("fullName").value == null || document.getElementById("fullName").value == "" 
 		|| document.getElementById("phone").value == null || document.getElementById("phone").value == ""
 		|| document.getElementById("dob").value == null || document.getElementById("dob").value == ""
 		|| document.getElementById("dateAttendance").value == null || document.getElementById("dateAttendance").value == ""
@@ -58,6 +66,35 @@ $('.filterme').keypress(function(eve) {
   });
 });
 
+//image gallery
+//init the state from the input
+$(".image-checkbox").each(function () {
+if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
+ $(this).addClass('image-checkbox-checked');
+}
+else {
+ $(this).removeClass('image-checkbox-checked');
+}
+});
+
+//sync the state to the input
+$(".image-checkbox").on("click", function (e) {
+$(this).toggleClass('image-checkbox-checked');
+var $checkbox = $(this).find('input[type="checkbox"]');
+$checkbox.prop("checked",!$checkbox.prop("checked"))
+
+e.preventDefault();
+});
 
 
-
+function checkAffected(clickedPart,labelAffected){
+	var clicked= clickedPart;
+	if($('#'+clicked).prop( "checked" )){
+		$('#'+clickedPart).attr('checked',false); 	
+		$('#'+labelAffected).removeClass( "affectedPart" );
+	}
+	else{
+	$('#'+clickedPart).attr('checked',true); 
+	$('#'+labelAffected).addClass( "affectedPart" );
+	}
+}

@@ -1,5 +1,4 @@
 <?php
-
 include_once("head.php");
 if(Common::CheckValidSession()){
     header("Location: ".MAIN_URL."pages/report.php");
