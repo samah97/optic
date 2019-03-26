@@ -29,7 +29,6 @@ class RefContactEXT extends RefContactMySqlDAO{
                     $msg = "Something went wrong";
                 }
             } else { //INSERT
-                
                 $refContactId = $refContactOj->insertPDO($pdo, $data);
                 if(!$refContactId){
                     $result = false;
@@ -61,8 +60,13 @@ class RefContactEXT extends RefContactMySqlDAO{
             'sphereOd'    => 'required|numeric',
             'sphereOs'    => 'required|numeric',
             'cylinderOd'       => 'numeric',
-            'cylinderOs'       => 'numeric'
+            'cylinderOs'       => 'numeric',
+            'wearTypeId'       => 'integer',
+            'brand'       => 'alpha_numeric',
+            'dk'       => 'alpha_numeric',
+            'reasonIsPrerred'       => 'alpha_numeric',
         ));
+       
         
         $validated_data = $gump->run($data);
         

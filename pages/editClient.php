@@ -25,7 +25,9 @@ $medicationIntake = $medicationIntakeObj->getAllRecords();
 $coverTest = $coverTestObj->getAllRecords();
 $occularMotility = $occularMotilityObj->getAllRecords();
 ?>
-
+<script>
+var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
+</script>
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <link href="assets/global/plugins/datatables/datatables.min.css"
 	rel="stylesheet" type="text/css" />
@@ -39,10 +41,14 @@ $occularMotility = $occularMotilityObj->getAllRecords();
 		<!-- <div class="col-md-12">
 			<h3 class="text-center">New Client</h3>
 		</div> -->
+		
+		
+		
+		<!-- onSubmit="if(!validateForm()){return false;}" -->
 		<div class="col-md-12">
 			<form id="newClient" name="newClient"
 				action="action/insertClient.php?fromPage=newClient" method="POST"
-				onSubmit="if(!validateForm()){return false;}">
+				>
 				<div class="portlet light bordered" style="overflow: hidden;">
 					<div class="portlet-title">
 						<div class="caption">
@@ -1355,7 +1361,7 @@ $occularMotility = $occularMotilityObj->getAllRecords();
             		</div>
 					<div class="col-md-12">
 						<button class="btn btn-success pull-right"
-							style='margin-top: 20px;' type="submit">Submit</button>
+							style='margin-top: 20px;' type="submit">Save</button>
 					</div>
 				</div>
 		
@@ -1365,14 +1371,12 @@ $occularMotility = $occularMotilityObj->getAllRecords();
 	type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 
+		<script src="js/patient-page.js"></script>
 		<!-- BEGIN PAGE LEVEL SCRIPTS -->
-		<script src="assets/pages/scripts/table-datatables-editable.min.js"
+<!-- 		<script src="assets/pages/scripts/table-datatables-editable.min.js"
 			type="text/javascript"></script>
-		<!-- END PAGE LEVEL SCRIPTS -->
+ -->		<!-- END PAGE LEVEL SCRIPTS -->
 
-		<script>
-
-</script>
 <?php
 // include_once("report.php");
 include_once ("../footer.php");

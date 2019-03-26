@@ -9,7 +9,6 @@ class RefractionHistoryEXT extends RefractionHistoryMySqlDAO{
     
     public function submitData($data = null,$pdo = null)
     {
-        
         $refractionHisObj = new RefractionHistoryMySqlExtDAO();
         $validateData = $this->validateData($data);
         $result = true;
@@ -42,10 +41,16 @@ class RefractionHistoryEXT extends RefractionHistoryMySqlDAO{
             
             if($result && $refractionHistoryId > 0){
                 if(in_array(TypeCorrection::Eyeglass, $data->typeCorrection)){
-                    $refEyeglassObj = new RefEyeglassesEXT();   
+                    $refEyeglassData = $data->refEyeglasses;
+                    $refEyeglassData->refractionHistoryId = $refractionHistoryId;
+                    $refEyeglassObj = new RefEyeglassesEXT();
+                    $refEyeglass = $refEyeglassObj->submitData($refEyeglassData,$pdo);
                 }
                 if(in_array(TypeCorrection::Eyeglass, $data->typeCorrection)){
+                    $refContactData = $data->refContact;
+                    $refContactData->refractionHistoryId = $refractionHistoryId;
                     $refContactObj = new RefContactEXT();
+                    $refContact = $refContactObj->submitData($refContactData,$pdo);
                 }
             }
         }else{

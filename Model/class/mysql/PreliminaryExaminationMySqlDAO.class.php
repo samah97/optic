@@ -175,7 +175,7 @@ class PreliminaryExaminationMySqlDAO implements PreliminaryExaminationDAO{
 		'preliminary_examination_id'=>$preliminaryExamination->preliminaryExaminationId,
 		'visit_id'=>$preliminaryExamination->visitId,
 		'harmon_distance_id'=>$preliminaryExamination->harmonDistanceId,
-		'convergence_bris_distancte'=>$preliminaryExamination->convergenceBrisDistancte,
+		'convergence_bris_distance'=>$preliminaryExamination->convergenceBrisDistance,
 		'convergence_recoverement'=>$preliminaryExamination->convergenceRecoverement,
 		'convergence_xy'=>$preliminaryExamination->convergenceXy,
 		'stereoacuity_wirt_test'=>$preliminaryExamination->stereoacuityWirtTest,
@@ -298,7 +298,7 @@ class PreliminaryExaminationMySqlDAO implements PreliminaryExaminationDAO{
 		$preliminaryExamination->preliminaryExaminationId = $row['preliminary_examination_id'];
 		$preliminaryExamination->visitId = $row['visit_id'];
 		$preliminaryExamination->harmonDistanceId = $row['harmon_distance_id'];
-		$preliminaryExamination->convergenceBrisDistancte = $row['convergence_bris_distancte'];
+		$preliminaryExamination->convergenceBrisDistance = $row['convergence_bris_distance'];
 		$preliminaryExamination->convergenceRecoverement = $row['convergence_recoverement'];
 		$preliminaryExamination->convergenceXy = $row['convergence_xy'];
 		$preliminaryExamination->stereoacuityWirtTest = $row['stereoacuity_wirt_test'];

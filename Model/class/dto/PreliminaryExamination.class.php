@@ -10,7 +10,7 @@
 		var $preliminaryExaminationId;
 		var $visitId;
 		var $harmonDistanceId;
-		var $convergenceBrisDistancte;
+		var $convergenceBrisDistance;
 		var $convergenceRecoverement;
 		var $convergenceXy;
 		var $stereoacuityWirtTest;

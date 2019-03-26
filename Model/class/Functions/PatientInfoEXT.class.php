@@ -53,18 +53,33 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
             
             if($visitResponse['result']){
                 $consultationData->visitId = $visitResponse['visitId'];
-                
                 //Insert Consultation Data
                 $reasonConsultationObj = new ReasonConsultationEXT();
                 $reasonConsultationResponse = $reasonConsultationObj->submitData($consultationData,$pdo);
                 //End Consultation Data
                 
                 if($reasonConsultationResponse['result']){
+                    $refractionData->visitId = $visitId;
                     $refractionHistoryObj = new RefractionHistoryEXT();
                     $refractionHistoryResponse =$refractionHistoryObj->submitData($refractionData,$pdo);
                     
                     if($refractionHistoryResponse['result']){
+                        $visualNeedsData->visitId = $visitId;
+                        $visualNeedsObj = new VisualNeedEXT();
+                        $visualNeedResponse = $visualNeedsObj->submitData($visualNeedsData,$pdo);
                         
+                        if($visualNeedResponse['result']){
+                            $visualAntecedentsData->visitId = $visitId;
+                            $visualAntecedentObj = new VisualAntecedentEXT();
+                            $visualAntecedentResponse = $visualAntecedentObj->submitData($visualAntecedentsData,$pdo);
+                            
+                            if($visualAntecedentResponse['result']){
+                                $preliminaryExaminationObj = new PreliminaryExaminationEXT();
+                                
+                                
+                                
+                            }
+                        }
                     }
                 }
             }else{
