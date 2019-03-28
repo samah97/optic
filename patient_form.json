@@ -1,0 +1,121 @@
+{
+  "patientData": {
+    "name": "samah dasd",
+    "date": "21/07/1997",
+    "address": "Deirkoche Lebanon",
+    "phone": "03721112",
+    "genderId": 1,
+    "referred": "asdas",
+    "hobbies": "asdasd"
+  },
+  "visitData": {
+  	"deduction":"Deduction Text Goes Here"
+  },
+  "consultationData": {
+    "dateAppearance": "22-03-2019",
+    "charactersticsAppearance": "test",
+    "timeAppearance": "11:11",
+    "frequencyTroubles": "asdasd",
+    "activityContext": "asdasd",
+    "associatedSymptoms": "asdas",
+    "chronicity": "asdasd",
+    "evolution": "asdasd",
+    "factorsRelief": "asdasd",
+    "compensationWormType": "asdasd",
+    "visualProblems":[1,3,2,12],
+    "functionSigns":[2,3,20]
+  },
+  "refractionData": {
+  	"dateOflastExam": "22/03/2019",
+  	"correctionTypeId": 12,
+  	"satisfaction": "text satis",
+  	"wearingFrequence":"text wearing",
+  	"reasonCorrection":"reason txt",
+  	"examDetails":"examDetails",
+  	"typeCorrection":[1,2],
+  	"refEyeglasses":{
+  		"sphereOd":12,
+  		"sphereOs":321,
+  		"cylinderOd":21,
+  		"cylinderOs":32,
+  		"axisOd":21,
+  		"axisOs":31,
+  		"addition":"txt addition",
+  		"pdOd":12,
+  		"pdOs":31,
+  		"prismOd":"text Prism od",
+  		"prismOs":"text Prism os",
+  		"baseOd":"txt base Od",
+  		"baseOs":"txt base Os"
+  	},
+  	"refContact":{
+  		"sphereOd":12,
+  		"sphereOs":321,
+  		"cylinderOd":21,
+  		"cylinderOs":32,
+  		"wearTypeId":12,
+  		"brand":"txt Brand",
+  		"dk":"text DK",
+  		"reasonIsPrerred":"text Reason"
+  	}
+  },
+  
+  "visualNeedsData":{
+	"isFar":1,
+	"isNear":1,
+	"isPartially":0,
+	"isFully":1,
+	"taskDuration":"12:21:12",
+	"workDistance":"sad",
+	"workStationId":32,
+	"lighting":"sasd",
+	"isNeedColor":0,
+	"ambianceId":12,
+	"ambianceOther":"ssss",
+	"isTraumaRisk":1,
+	"description":"sasd",
+	"extraProfessionActivity":"sadsa"
+  },
+  
+  "visualAntecedentsData":{
+	"ocularPathologies":"txt3",
+	"ocularSurgeries":"asd",
+	"traumatism":"sas123",
+	"medicationIntakeId":31,
+	"medicationIntakeOther":"other 123 txt",
+	"familialRefractive":"sasd",
+	"herecityDiseases":"txt Disease",
+	"taskDuration":"12 hrs"
+  },
+  "preliminaryExaminationData":{
+  	"harmonDistanceId":321,
+  	"convergenceBrisDistance": "sa",
+  	"convegenceRecoverement":"txtDD",
+  	"convergenceXy":"saXY",
+  	"stereoWirtTest":"sasd",
+  	"ocularMotility":"asd",
+  	"keratomeryData": {
+  		"firstMerOd":"23",
+  		"firstAxisOd":"21",
+  		"secondMerOd":"21",
+  		"secondAxisOd":"21",
+  		"anteriorAstigmationOd":"21",
+  		"firstMerOs":"21",
+  		"firstAxisOs":"21",
+  		"secondMerOs":"21",
+  		"secondAxisOs":"21",
+  		"anteriorAstigmationOs":"21"
+  	},
+  	"pupillaryReflexsData": [
+  		{
+  		"pupillaryReflexsId":321,
+  		"text":"text 1"
+  		},
+  		{
+  		"pupillaryReflexsId":331,
+  		"text":"text 2"
+  		}
+  	],
+  	"preOcularMotilityData":[3,1,2,5]
+	}
+}

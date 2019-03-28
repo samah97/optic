@@ -14,7 +14,7 @@ class VisualAntecedentEXT extends VisualAntecedentMySqlDAO{
         $result = true;
         
         if ($validateData['result']) {
-            $data = $validateData['data'];
+            $data = (object)$validateData['data'];
             
             if (isset($data->visualAntecedentId)) { //UPDATE
                 $visualAntecedentId = $data->visualAntecedentId;
@@ -44,10 +44,10 @@ class VisualAntecedentEXT extends VisualAntecedentMySqlDAO{
             $errors = $validateData['errors'];
         }
         
-        $response = new stdClass();
+        $response = array();
         $response['result'] = $result;
         if($result){
-            $msg = "Refraction History Added";
+            $msg = "Visual Antecedent Added";
             $response['message'] = $msg;
             $response['visualAntecedentId'] = $visualAntecedentId;
         }else{
@@ -69,9 +69,9 @@ class VisualAntecedentEXT extends VisualAntecedentMySqlDAO{
             'ocularSurgeries' => 'alpha_numeric',
             'traumatism' => 'alpha_numeric',
             'medicationIntakeId' => 'integer',
-            'medicationIntakeOther' => 'alpha_numeric',
-            'familialRefractive' => 'alpha_numeric',
-            'herecityDiseases' => 'alpha_numeric',
+            'medicationIntakeOther' => 'alpha_space',
+            'familialRefractive' => 'alpha_space',
+            'herecityDiseases' => 'alpha_space',
         ));
         
         $gump->filter_rules(array(

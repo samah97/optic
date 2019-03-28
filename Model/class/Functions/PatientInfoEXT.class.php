@@ -11,11 +11,8 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
 
     public function submitAllData()
     {
-        
-        //print_r(openssl_get_cipher_methods());die();
         $test = Common::cryptoo('samah', 'e');
         $test2 = Common::cryptoo($test, 'd');
-
         
         $post = file_get_contents('php://input');
         $post = json_decode($post);
@@ -30,7 +27,7 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
         $refractionData = $post->refractionData;
         $visualNeedsData = $post->visualNeedsData;
         $visualAntecedentsData = $post->visualAntecedentsData;
-        $examinationData = $post->examinationData;
+        $preliminaryExaminationData = $post->preliminaryExaminationData;
 
         $pdo = Database::getConnection();
         $pdo->beginTransaction();
@@ -52,7 +49,8 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
             //End Visit Data
             
             if($visitResponse['result']){
-                $consultationData->visitId = $visitResponse['visitId'];
+                $visitId = $visitResponse['visitId'];
+                $consultationData->visitId = $visitId;
                 //Insert Consultation Data
                 $reasonConsultationObj = new ReasonConsultationEXT();
                 $reasonConsultationResponse = $reasonConsultationObj->submitData($consultationData,$pdo);
@@ -74,30 +72,70 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
                             $visualAntecedentResponse = $visualAntecedentObj->submitData($visualAntecedentsData,$pdo);
                             
                             if($visualAntecedentResponse['result']){
+                                $preliminaryExaminationData->visitId = $visitId;
                                 $preliminaryExaminationObj = new PreliminaryExaminationEXT();
+                                $preliminaryExaminationResponse = $preliminaryExaminationObj->submitData($preliminaryExaminationData,$pdo);
                                 
-                                
-                                
+                                if($preliminaryExaminationResponse['result']){
+                                    $result = true;
+                                    $msg = "Patient Visit Successfully Added";
+                                }else{
+                                    $result = false;
+                                    $errors = $preliminaryExaminationResponse['errors'];
+                                }
+                            }else{
+                                $result = false;
+                                $errors = $visualAntecedentResponse['errors'];
                             }
+                        }else{
+                            $result = false;
+                            $errors = $visualNeedResponse['errors'];
                         }
+                    }else{
+                        $result = false;
+                        $errors = $refractionHistoryResponse['errors'];
                     }
+                }else{
+                    $result = false;
+                    $errors = $reasonConsultationResponse['errors'];
                 }
             }else{
                 $result = false;
                 $errors = $visitResponse['errors'];
             }
-
+        }else{
+            $result = false;
+            $errors = $patientDataResponse['errors'];
         }
+        
+        
+        if($result){
+            $pdo->commit();
+            $response = array(
+                "result"=>"success",
+                "visitId"=>$visitId,
+                "message" => "Data has been saved successfully"
+            );
+        }else{
+            $pdo->rollBack();
+            $response = array(
+                "result"=>"Fail",
+                "errors" => $errors
+            );
+        }
+        
+        return json_encode($response);
     }
 
     public function submitPatientData($patientData = null,$pdo = null)
     {
         $patientInfoObj = new PatientInfoMySqlExtDAO();
+        
         $validateData = $this->validateData($patientData);
         
         $result = true;
         if ($validateData['result']) {    
-            $patientData = $validateData['data'];
+            $patientData = (object)$validateData['data'];
             
             if (isset($patientData->patientId)) { //UPDATE
                 $patientId = $patientData->patientId;

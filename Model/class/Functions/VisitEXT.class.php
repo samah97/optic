@@ -15,7 +15,7 @@ class VisitEXT extends VisitMySqlDAO{
         $result = true;
         if ($validateData['result']) {
             
-            $data = $validateData;
+            $data = (object)$validateData['data'];
             
             if (isset($data->visitId)) { //UPDATE
                 $visitId = $data->visitId;
@@ -35,7 +35,8 @@ class VisitEXT extends VisitMySqlDAO{
                 }
             } else { //INSERT
                 
-                $checkFirstVisit = $visitObj->getCountVisit($data->patientInfoId);
+                $checkFirstVisit = $visitObj->getCountVisit($pdo,$data->patientInfoId);
+                
                 if($checkFirstVisit->count == 0){
                     $data->isFirstVisit = true;
                 }
@@ -66,8 +67,6 @@ class VisitEXT extends VisitMySqlDAO{
         
         $data= $gump->sanitize($data);
         
-        //'phone'       => 'required|regex,/[+]*(961(3|5|1|7|70|71|81)|(03|05|01|07|70|71|81))\d{6}/',
-        
         $gump->validation_rules(array(
             'deduction'       => 'alpha_space',
             'patientInfoId'      => 'required|integer',
@@ -79,13 +78,13 @@ class VisitEXT extends VisitMySqlDAO{
         
         $validated_data = $gump->run($data);
         
-        $returnObj = new stdClass();
+        $returnObj = array();
         if($validated_data){
-            $returnObj->data = $validated_data;
-            $returnObj->result = true;
+            $returnObj['data'] = $validated_data;
+            $returnObj['result'] = true;
         }else{
-            $returnObj->result = false;
-            $returnObj->errors = $gump->get_errors_array();
+            $returnObj['result'] = false;
+            $returnObj['errors'] = $gump->get_errors_array();
         }
         
         return $returnObj;
