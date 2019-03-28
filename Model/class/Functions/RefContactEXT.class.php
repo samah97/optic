@@ -15,36 +15,22 @@ class RefContactEXT extends RefContactMySqlDAO{
         
         $result = true;
         if ($validateData['result']) {
-            $data = $validateData['data'];
+            $data = (object)$validateData['data'];
             
-            $dataWhere = array("refractionHistoryId"=>$data->refractionHistoryId);
-            $strWhere = " refraction_history_id = :refractionHistoryId";
-            $existRefEyeglasses = $refContactOj->getRecord($pdo, $dataWhere, $strWhere);
-            
-            if ($existRefEyeglasses->refractionHistoryId > 0) { //UPDATE
-                $refContactId = $existRefEyeglasses->refContactId;
-                $update = $refContactOj->updatePDO($pdo, $data);
-                if(!$update){
-                    $result = false;
-                    $msg = "Something went wrong";
-                }
-            } else { //INSERT
-                $refContactId = $refContactOj->insertPDO($pdo, $data);
-                if(!$refContactId){
-                    $result = false;
-                    $msg = "Something went wrong";
-                }
+            $refContactId = $refContactOj->insertPDO($pdo, $data);
+            if(!$refContactId){
+                $result = false;
+                $msg = "Something went wrong";
             }
         }else{
             $result = false;
-            $msg = $validateData->get_errors_array();
         }
         
         $response['result'] = $result;
         if($result){
             $response['refContactId'] = $refContactId;
         }else{
-            $response['errors'] = $msg;
+            $response['errors'] = $validateData['errors'];
         }
         
         return $response;
@@ -62,9 +48,9 @@ class RefContactEXT extends RefContactMySqlDAO{
             'cylinderOd'       => 'numeric',
             'cylinderOs'       => 'numeric',
             'wearTypeId'       => 'integer',
-            'brand'       => 'alpha_numeric',
-            'dk'       => 'alpha_numeric',
-            'reasonIsPrerred'       => 'alpha_numeric',
+            'brand'       => 'alpha_space',
+            'dk'       => 'alpha_space',
+            'reasonIsPrerred'       => 'alpha_space',
         ));
        
         

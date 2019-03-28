@@ -14,7 +14,7 @@ class RefractionHistoryEXT extends RefractionHistoryMySqlDAO{
         $result = true;
         
         if ($validateData['result']) {
-            $data = $validateData['data'];
+            $data = (object)$validateData['data'];
             
             if (isset($data->refractionHistoryId)) { //UPDATE
                 $refractionHistoryId = $data->refractionHistoryId;
@@ -28,11 +28,12 @@ class RefractionHistoryEXT extends RefractionHistoryMySqlDAO{
                         }
                     } else {
                         $result = false;
-                        $msg = "Invalid Reason Consultation";
+                        $msg = "Invalid Refraction History";
                     }
                 }
             } else { //INSERT
                 $refractionHistoryId = $refractionHisObj->insertPDO($pdo, $data);
+                
                 if(!$refractionHistoryId){
                     $result = false;
                     $msg = "Something went wrong";
@@ -40,17 +41,32 @@ class RefractionHistoryEXT extends RefractionHistoryMySqlDAO{
             }
             
             if($result && $refractionHistoryId > 0){
+                
+                $refEyeglassObj = new RefEyeglassesEXT();
+                $refContactObj = new RefContactEXT();
+                
+                $deleteWhere = "refraction_history_id = ".$refractionHistoryId;
+                
+                $deleteEyeglass = $refEyeglassObj->deletePDO($pdo, $deleteWhere);
+                $deleteContact = $refContactObj->deletePDO($pdo, $deleteWhere);
+                
                 if(in_array(TypeCorrection::Eyeglass, $data->typeCorrection)){
                     $refEyeglassData = $data->refEyeglasses;
                     $refEyeglassData->refractionHistoryId = $refractionHistoryId;
-                    $refEyeglassObj = new RefEyeglassesEXT();
                     $refEyeglass = $refEyeglassObj->submitData($refEyeglassData,$pdo);
+                    if(!$refEyeglass['result']){
+                        $result = false;
+                        $errors = $refEyeglass['errors'];
+                    }
                 }
-                if(in_array(TypeCorrection::Eyeglass, $data->typeCorrection)){
+                if(in_array(TypeCorrection::Contact_Lenses, $data->typeCorrection)){
                     $refContactData = $data->refContact;
                     $refContactData->refractionHistoryId = $refractionHistoryId;
-                    $refContactObj = new RefContactEXT();
                     $refContact = $refContactObj->submitData($refContactData,$pdo);
+                    if(!$refContact['result']){
+                        $result = false;
+                        $errors = $refContact['errors'];
+                    }
                 }
             }
         }else{
@@ -58,7 +74,7 @@ class RefractionHistoryEXT extends RefractionHistoryMySqlDAO{
             $errors = $validateData['errors'];
         }
         
-        $response = new stdClass();
+        $response = array();
         $response['result'] = $result;
         if($result){
             $msg = "Refraction History Added";

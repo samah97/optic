@@ -9,12 +9,14 @@ class PreliminaryExaminationEXT extends PreliminaryExaminationMySqlDAO{
 
     public function submitData($data = null,$pdo = null)
     {
+        
         $preliminaryObj = new PreliminaryExaminationMySqlExtDAO();
         $validateData = $this->validateData($data);
+
         $result = true;
         
         if ($validateData['result']) {
-            $data = $validateData['data'];
+            $data = (object)$validateData['data'];
             
             if (isset($data->preliminaryExaminationId)) { //UPDATE
                 $preliminaryExaminationId = $data->preliminaryExaminationId;
@@ -39,12 +41,54 @@ class PreliminaryExaminationEXT extends PreliminaryExaminationMySqlDAO{
                 }
             }
             
+            if($result && $preliminaryExaminationId> 0){
+                $keratomeryData = $data->keratomeryData;
+                $keratomeryData->preliminaryExaminationId = $preliminaryExaminationId;
+
+                $keratomeryObj = new KeratomeryEXT();
+                $keratomery = $keratomeryObj->submitData($keratomeryData,$pdo);
+                
+                if($keratomery['result']){
+                    $pupillaryReflexsData = $data->pupillaryReflexsData;
+                    $pupillaryReflexsObj = new PupillaryReflexsEXT();
+                    
+                    //Delete Existing
+                    $deleteAll = $pupillaryReflexsObj->deletePDO($pdo, "preliminary_examination_id = ".$preliminaryExaminationId,PHP_INT_MAX);
+                    
+                    foreach($pupillaryReflexsData as $rowData){
+                        $rowData->preliminaryExaminationId = $preliminaryExaminationId;
+                        $pupillaryReflexResponse = $pupillaryReflexsObj->submitData($rowData,$pdo);
+                        if(! $pupillaryReflexResponse['result']){
+                            $result = false;
+                            $errors = $pupillaryReflexResponse['errors'];
+                            break;
+                        }
+                    }
+                    
+                    
+                    if($result){
+                        
+                        $preOcularMotilityData = $data->preOcularMotilityData;
+                        $preOcularMotilityObj = new PreOcularMotilityEXT();
+                        
+                        //Delete Existing
+                        $deleteAll = $preOcularMotilityObj->deletePDO($pdo, "preliminary_examination_id = ".$preliminaryExaminationId,PHP_INT_MAX);
+                        foreach($preOcularMotilityData as $rowData){
+                            $preOcularMotility = new PreOcularMotility();
+                            $preOcularMotility->preliminaryExaminationId = $preliminaryExaminationId;
+                            $preOcularMotility->ocularMotilityId = $rowData;
+                            $preOcularMotilityId = $preOcularMotilityObj->insertPDO($pdo, $preOcularMotility);
+                        }
+                    }
+                }
+            }
+            
         }else{
             $result = false;
             $errors = $validateData['errors'];
         }
         
-        $response = new stdClass();
+        $response = array();
         $response['result'] = $result;
         if($result){
             $msg = "Preliminary Examination Added";
@@ -66,11 +110,11 @@ class PreliminaryExaminationEXT extends PreliminaryExaminationMySqlDAO{
         
         $gump->validation_rules(array(
             'harmonDistanceId' => 'integer',
-            'convergenceBrisDistance' => 'alpha_numeric',
-            'convegenceRecoverement' => 'alpha_numeric',
-            'convergenceXy' => 'alpha_numeric',
-            'stereoWirtTest' => 'alpha_numeric',
-            'ocularMotility' => 'alpha_numeric',
+            'convergenceBrisDistance' => 'alpha_space',
+            'convegenceRecoverement' => 'alpha_space',
+            'convergenceXy' => 'alpha_space',
+            'stereoWirtTest' => 'alpha_space',
+            'ocularMotility' => 'alpha_space',
         ));
         
         $gump->filter_rules(array(

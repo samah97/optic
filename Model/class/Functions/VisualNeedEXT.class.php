@@ -13,8 +13,8 @@ class VisualNeedEXT extends VisualNeedMySqlDAO{
         $result = true;
         
         if ($validateData['result']) {
-            $data = $validateData['data'];
-            
+            $data = (object)$validateData['data'];
+
             if (isset($data->visualNeedId)) { //UPDATE
                 $visualNeedId = $data->visualNeedId;
                 if ($visualNeedId > 0) {
@@ -32,6 +32,7 @@ class VisualNeedEXT extends VisualNeedMySqlDAO{
                 }
             } else { //INSERT
                 $visualNeedId = $visualNeedObj->insertPDO($pdo, $data);
+                
                 if(!$visualNeedId){
                     $result = false;
                     $msg = "Something went wrong";
@@ -43,7 +44,7 @@ class VisualNeedEXT extends VisualNeedMySqlDAO{
             $errors = $validateData['errors'];
         }
         
-        $response = new stdClass();
+        $response = array();
         $response['result'] = $result;
         if($result){
             $msg = "Visual Need Added";
@@ -68,7 +69,6 @@ class VisualNeedEXT extends VisualNeedMySqlDAO{
             'isNear' => 'boolean',
             'isPartially' => 'boolean',
             'isFully' => 'boolean',
-            'taskDuration' => 'alpha_numeric',
             'workDistance' => 'alpha_numeric',
             'workStationId' => 'integer',
             'lighting' => 'alpha_numeric',

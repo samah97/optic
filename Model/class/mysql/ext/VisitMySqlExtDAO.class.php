@@ -7,7 +7,7 @@
  */
 class VisitMySqlExtDAO extends VisitMySqlDAO{
 
-	public function getCountVisit($patientInfoId){
+	public function getCountVisit($pdo,$patientInfoId){
 	    try{
 	        
 	        $data = array("id"=>$patientInfoId);
