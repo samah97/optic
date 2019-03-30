@@ -47,6 +47,8 @@ class RefContactEXT extends RefContactMySqlDAO{
             'sphereOs'    => 'required|numeric',
             'cylinderOd'       => 'numeric',
             'cylinderOs'       => 'numeric',
+            'axisOd'        => 'numeric',
+            'axisOs'        => 'numeric',
             'wearTypeId'       => 'integer',
             'brand'       => 'alpha_space',
             'dk'       => 'alpha_space',
