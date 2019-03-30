@@ -120,6 +120,8 @@ function getVisualAntecedentsData() {
 		var inputId = $(this).attr('name');
 		visualAntecedentsData[inputId] = getInputValue(tabId, $(this));
 	});
+
+	
 	return visualAntecedentsData;
 }
 
@@ -127,10 +129,30 @@ function getPreliminaryExamintaionData() {
 	var preliminaryExamintaionData = new Object();
 	var tabId = 'tab_1_6';
 
-	$('#' + tabId + ' *').filter(':input').each(function() {
+	$('#' + tabId + ' .section_6 *').filter(':input').each(function() {
 		var inputId = $(this).attr('name');
 		preliminaryExamintaionData[inputId] = getInputValue(tabId, $(this));
 	});
+	
+	var keratomeryObj = new Object();
+	$('#' + tabId + ' #keratometry_table *').filter(':input').each(function() {
+		var inputId = $(this).attr('name');
+		inputId =  inputId.replace("keratometry_","");
+		keratomeryObj[inputId] = getInputValue(tabId, $(this));
+	});
+	
+	var pupillaryReflexArr = [] 
+	$('#' + tabId + ' .reflex_row').each(function() {
+		var reflex = $(this).attr('reflex');
+		var reflexObj = new Object();	
+		reflexObj.pupillaryReflexId = $(this).find('reflex_'+reflex).val();	
+		reflexObj.text = $(this).find('reflex_description_'+reflex).val();	
+		pupillaryReflexArr.push(reflexObj)
+	});
+	
+	preliminaryExamintaionData.keratomeryData = keratomeryObj;
+	preliminaryExamintaionData.pupillaryReflexsData =pupillaryReflexArr; 
+	
 	return preliminaryExamintaionData;
 }
 

@@ -85,7 +85,8 @@
 	"medicationIntakeOther":"other 123 txt",
 	"familialRefractive":"sasd",
 	"herecityDiseases":"txt Disease",
-	"taskDuration":"12 hrs"
+	"taskDuration":"12 hrs",
+	"antecedentDisease": [1,2,3,12]
   },
   "preliminaryExaminationData":{
   	"harmonDistanceId":321,
