@@ -175,7 +175,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="hobbies" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="hobbies" value="" placeholder="Hobbies">
+														id="hobbies" placeholder="Hobbies">
 												</div>
 											</div>
 										</div>
@@ -186,8 +186,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 							</div>
 							<div class="tab-pane fade" id="tab_1_2">
 								<br>
-								<fieldset>
+								<fieldset >
 									<legend>Visual Problems</legend>
+									<div id="section_vp">
 							<?php
     foreach ($visualProblems as $row) {
         ?>
@@ -205,9 +206,11 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 							    <?php
     }
     ?>
+    </div>
 							</fieldset>
-								<fieldset>
+								<fieldset id="section_fs">
 									<legend>Functional Signs</legend>
+									<div id="section_fs">
    						 <?php
         
         foreach ($functionalSigns as $row) {
@@ -240,9 +243,11 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											</div>
 										</div>
 									</div>
+								</div>
 								</fieldset>
-								<fieldset>
+								<fieldset >
 									<legend>Control</legend>
+									<div id="section_control">
 							<?php
     foreach ($control as $row) {
         ?>
@@ -259,6 +264,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 							    <?php
     }
     ?>
+    </div>
+    <div id="section_3_2">
 							<div class="col-md-12">
 										<div class="form-group">
 											<label for="address" class="col-md-2 control-label">Date Of
@@ -417,6 +424,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											</div>
 										</div>
 									</div>
+								</div>	
 								</fieldset>
 							</div>
 							<div class="tab-pane fade" id="tab_1_3">
