@@ -70,6 +70,71 @@ function getConsultationData() {
 	return currentData;
 }
 
+function getRefractionHistoryData() {
+	var refractionHistoryData = new Object();
+	var tabId = 'tab_1_3';
+
+	$('#' + tabId + ' .section_3_main *').filter(':input').each(function() {
+		var inputId = $(this).attr('name');
+		refractionHistoryData[inputId] = getInputValue(tabId, $(this));
+	});
+	
+	if($('#tc_1').is(':checked')){
+		var eyeglassObj = new Object();
+		$('#' + tabId + ' table#refEyeglasses *').filter(':input').each(function() {
+			var inputId = $(this).attr('name');
+			inputId.replace('eye','');
+			eyeglassObj[inputId] = getInputValue(tabId, $(this));
+		});
+		refractionHistoryData["refEyeglasses"] = eyeglassObj;
+	}
+	
+	if($('#tc_2').is(':checked')){
+		var contactObj = new Object();
+		$('#' + tabId + ' table#refContact *').filter(':input').each(function() {
+			var inputId = $(this).attr('name');
+			contactObj[inputId] = getInputValue(tabId, $(this));
+		});
+		refractionHistoryData["refContact"] = contactObj;
+	}
+	return refractionHistoryData;
+}
+
+function getVisualNeedsData() {
+	var visualNeedsData = new Object();
+	var tabId = 'tab_1_4';
+
+	$('#' + tabId + ' *').filter(':input').each(function() {
+		var inputId = $(this).attr('name');
+		visualNeedsData[inputId] = getInputValue(tabId, $(this));
+	});
+	
+	return visualNeedsData;
+}
+
+function getVisualAntecedentsData() {
+	var visualAntecedentsData = new Object();
+	var tabId = 'tab_1_5';
+
+	$('#' + tabId + ' *').filter(':input').each(function() {
+		var inputId = $(this).attr('name');
+		visualAntecedentsData[inputId] = getInputValue(tabId, $(this));
+	});
+	return visualAntecedentsData;
+}
+
+function getPreliminaryExamintaionData() {
+	var preliminaryExamintaionData = new Object();
+	var tabId = 'tab_1_6';
+
+	$('#' + tabId + ' *').filter(':input').each(function() {
+		var inputId = $(this).attr('name');
+		preliminaryExamintaionData[inputId] = getInputValue(tabId, $(this));
+	});
+	return preliminaryExamintaionData;
+}
+
+
 function getAllRequest() {
 
 	var formDataObj = new Object();

@@ -76,13 +76,13 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 								<div class="container">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="fullName" class="col-md-3 control-label">Full
+											<label for="name" class="col-md-3 control-label">Full
 												Name</label>
 											<div class="col-md-8">
 												<div class="input-icon right">
-													<input name="fullName" type="text"
+													<input name="name" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="fullName" value="" placeholder="full Name"
+														id="name" value="" placeholder="full Name"
 														onchange="onChange('req_first_name')">
 												</div>
 											</div>
@@ -175,7 +175,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="hobbies" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="hobbies" placeholder="Hobbies">
+														id="hobbies" value="" placeholder="Hobbies">
 												</div>
 											</div>
 										</div>
@@ -186,7 +186,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 							</div>
 							<div class="tab-pane fade" id="tab_1_2">
 								<br>
-								<fieldset >
+								<fieldset>
 									<legend>Visual Problems</legend>
 									<div id="section_vp">
 							<?php
@@ -206,11 +206,11 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 							    <?php
     }
     ?>
-    </div>
+    						</div>
 							</fieldset>
-								<fieldset id="section_fs">
+								<fieldset>
 									<legend>Functional Signs</legend>
-									<div id="section_fs">
+   						 <div id="section_fs">
    						 <?php
         
         foreach ($functionalSigns as $row) {
@@ -243,11 +243,11 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											</div>
 										</div>
 									</div>
-								</div>
+									</div>
 								</fieldset>
-								<fieldset >
+								<fieldset>
 									<legend>Control</legend>
-									<div id="section_control">
+							<div id="section_control">
 							<?php
     foreach ($control as $row) {
         ?>
@@ -263,8 +263,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>	
 							    <?php
     }
-    ?>
-    </div>
+    ?></div>
     <div id="section_3_2">
 							<div class="col-md-12">
 										<div class="form-group">
@@ -424,10 +423,11 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											</div>
 										</div>
 									</div>
-								</div>	
+							</div>
 								</fieldset>
 							</div>
 							<div class="tab-pane fade" id="tab_1_3">
+								<div class="section_3_main">
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="address" class="col-md-2 control-label">Date Of
@@ -473,7 +473,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<label for="satisfaction" class="col-md-2">Satisfaction</label>
 										<div class="col-md-10">
 											<div class="input-group">
-												<input type="password" class="form-control"
+												<input type="text" class="form-control"
 													name="satisfaction" id="satisfaction"
 													placeholder="Satisfaction"> <span class="input-group-addon">
 													% </span>
@@ -530,9 +530,10 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										</div>
 									</div>
 								</div>
+								</div>
 								<h4>Eyeglasses</h4>
 								<table class="table table-striped table-hover table-bordered"
-									id="sample_editable_1">
+									name="refEyeglasses" id="refEyeglasses">
 									<thead>
 										<tr>
 											<th class="no-borders"></th>
@@ -549,41 +550,41 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<tr>
 											<td><b>OD</b></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="eyesphereOd" id="eyesphereOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="eyecylinderOd" id="eyecylinderOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="eyeaxisOd" id="eyeaxisOd"></td>
 											<td rowspan="2"><textarea class="form-control input-small"
-													style='height: 85px; resize: none'">123</textarea></td>
+													style='height: 85px; resize: none'" id="eyeaddition"></textarea></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="eyepdOd" id="eyepdOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="eyeprismOd" id="eyeprismOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="eyebaseOd" id="eyebaseOd"></td>
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="eyesphereOs" id="eyesphereOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="eyecylinderOs" id="eyecylinderOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="eyeaxisOs" id="eyeaxisOs" ></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value=""  name="eyepdOs" id="eyepdOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value=""  name="eyeprismOs" id="eyeprismOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value=""  name="eyebaseOs" id="eyebaseOs"></td>
 										</tr>
 									</tbody>
 								</table>
 
 								<h4>Contact Lenses</h4>
 								<table class="table table-striped table-hover table-bordered"
-									id="sample_editable_2">
+									name="refContact" id="refContact">
 									<thead>
 										<tr>
 											<th class="no-borders"></th>
@@ -596,24 +597,25 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<tr>
 											<td><b>OD</b></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="contactsphereOd" id="contactsphereOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="contactcylinderOd" id="contactcylinderOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="contactaxisOd" id="contactaxisOd"></td>
 
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="contactsphereOs" id="contactsphereOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="contactcylinderOs" id="contactcylinderOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""></td>
+												value="" name="contactaxisOs" id="contactaxisOs"></td>
 										</tr>
 									</tbody>
 								</table>
+								<div class="section_3_main">
 								<div class="col-md-3">
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
@@ -657,7 +659,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="brand" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="brand" value="" placeholder=Brand">
+														id="brand" value="" placeholder="Brand">
 												</div>
 											</div>
 										</div>
@@ -671,7 +673,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="DK" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="DK" value="" placeholder=DK">
+														id="DK" value="" placeholder="DK">
 												</div>
 											</div>
 										</div>
@@ -689,6 +691,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												</div>
 											</div>
 										</div>
+								</div>
 								</div>
 </div>
 								<div class="tab-pane fade" id="tab_1_4">
@@ -1035,28 +1038,28 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									<tbody>
 										<tr>
 											<td><b>OD</b></td>
-											<td><input type="text" class="form-control input-small"
+											<td><input type="text" name="keratometryFirstMerdianOd" id="keratometryFirstMerdianOd" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" class="form-control input-small"
+											<td><input type="text" name="keratometryFirstAxisOd" id="keratometryFirstAxisOd" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" class="form-control input-small"
+											<td><input type="text" name="keratometrySecondMerdianOd" id="keratometrySecondMerdianOd"  class="form-control input-small"
 												value=""></td>
-											<td><input type="text" class="form-control input-small"
+											<td><input type="text"name="keratometrySecondAxisOd" id="keratometrySecondAxisOd" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" class="form-control input-small"
+											<td><input type="text" name="keratometryAnteriorAstigmatismOd" id="keratometryAnteriorAstigmatismOd" class="form-control input-small"
 												value=""></td>
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
-											<td><input type="text" class="form-control input-small"
+											<td><input type="text" name="keratometryFirstMerdianOs" id="keratometryFirstMerdianOs" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" class="form-control input-small"
+											<td><input type="text" name="keratometryFirstAxisOs" id="keratometryFirstAxisOs" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" class="form-control input-small"
+											<td><input type="text" name="keratometrySecondMerdianOs" id="keratometrySecondMerdianOs" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" class="form-control input-small"
+											<td><input type="text" name="keratometrySecondAxisOs" id="keratometrySecondAxisOs" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" class="form-control input-small"
+											<td><input type="text" name="keratometryAnteriorAstigmatismOs" id="keratometryAnteriorAstigmatismOs" class="form-control input-small"
 												value=""></td>		
 										</tr>
 									</tbody>
@@ -1068,7 +1071,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<div class="form-group">
 											<div class="mt-checkbox-list" style='padding: 0px'>
 												<label class="mt-checkbox"> Near <input
-													type="checkbox" id="disstance_near"
+													type="checkbox" id="distance_near"
 													value="near"
 													name="near" /> <span></span>
 												</label>
@@ -1080,7 +1083,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<div class="form-group">
 											<div class="mt-checkbox-list" style='padding: 0px'>
 												<label class="mt-checkbox"> 33 <input
-													type="checkbox" id="disstance_33"
+													type="checkbox" id="distance_33"
 													value="33"
 													name="33" /> <span></span>
 												</label>
@@ -1092,7 +1095,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<div class="form-group">
 											<div class="mt-checkbox-list" style='padding: 0px'>
 												<label class="mt-checkbox"> 50 <input
-													type="checkbox" id="disstance_50"
+													type="checkbox" id="distance_50"
 													value="55"
 													name="55" /> <span></span>
 												</label>
@@ -1104,7 +1107,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<div class="form-group">
 											<div class="mt-checkbox-list" style='padding: 0px'>
 												<label class="mt-checkbox"> 70 <input
-													type="checkbox" id="disstance_70"
+													type="checkbox" id="distance_70"
 													value="70"
 													name="70" /> <span></span>
 												</label>
@@ -1116,7 +1119,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<div class="form-group">
 											<div class="mt-checkbox-list" style='padding: 0px'>
 												<label class="mt-checkbox"> working distance <input
-													type="checkbox" id="disstance_working"
+													type="checkbox" id="distance_working"
 													value="workingDistance"
 													name="workingDistance" /> <span></span>
 												</label>
@@ -1129,7 +1132,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<tr>
 											<th colspan="2" class="no-borders">V.A measurement</th>
 											<th>Far</th>
-											<th>Bincular - Faar</th>
+											<th>Bincular - Far</th>
 											<th>Bincular - Near</th>
 										</tr>
 									</thead>
@@ -1137,31 +1140,31 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<tr>
 											<td rowspan=2><b>Unaided V.A</b></td>
 											<td><b>OD</b></td>
-											<td><input type="text" class="form-control input-small"
+											<td><input type="text" name="FarUNaidedOd" id="FarUNaidedOd" class="form-control input-small"
 												value=""></td>
-											<td rowspan="2"><input id="bicularFarUNaided" type="text" class="form-control input-small"
+											<td rowspan="2"><input name="bicularFarUNaided" id="bicularFarUNaided" type="text" class="form-control input-small"
 												value=""></td>	
-											<td rowspan="2"><input id="bicularNearUnaided" type="text" class="form-control input-small"
+											<td rowspan="2"><input name="bicularNearUnaided" id="bicularNearUnaided" type="text" class="form-control input-small"
 												value=""></td>	
 										</tr>
 										<tr>
 											<td>OS</td>
-											<td><input type="text" class="form-control input-small"
+											<td><input type="text" name="FarUNaidedOs" id="FarUNaidedOs" class="form-control input-small"
 												value=""></td>
 										</tr>
 										<tr>
 										<td rowspan=2>Aided V.A</td>
 										<td>OD</td>
-										<td><input type="text" class="form-control input-small"
+										<td><input type="text" name="farAidedOd" id="farAidedOd" class="form-control input-small"
 												value=""></td>
-										<td rowspan="2"><input id="bicularFarUNaided" type="text" class="form-control input-small"
+										<td rowspan="2"><input id="bicularFarAided" type="text" class="form-control input-small"
 												value=""></td>	
-											<td rowspan="2"><input id="bicularNearUnaided" type="text" class="form-control input-small"
+											<td rowspan="2"><input id="bicularNearAided" type="text" class="form-control input-small"
 												value=""></td>	
 										</tr>
 										<tr>
 										<td>OS</td>
-										<td><input type="text" class="form-control input-small"
+										<td><input type="text" name="farAidedOs" id="farAidedOs" class="form-control input-small"
 												value=""></td>
 										</tr>
 									</tbody>
