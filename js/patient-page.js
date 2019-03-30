@@ -8,7 +8,6 @@ function initDefaults() {
 
 function initEventsHandlers() {
 	$('#newClient').submit(function(e) {
-		console.log('hereeee');
 		e.preventDefault();
 		submitForm($(this));
 	});
@@ -41,12 +40,33 @@ function getPersonalInfoData() {
 
 function getConsultationData() {
 	var currentData = new Object();
-	var tabId = 'tab_1_1';
+	var tabId = 'tab_1_2';
 
-	$('#' + tabId + ' *').filter(':input').each(function() {
+	$('#' + tabId + ' div#section_3_2 *').filter(':input').each(function() {
 		var inputId = $(this).attr('name');
 		currentData[inputId] = getInputValue(tabId, $(this));
 	});
+
+	var visualProblems = [];
+	$('#' + tabId + ' div#section_vp input:checked').each(function() {
+		visualProblems.push($(this).val());
+	});
+	currentData["visualProblems"] = visualProblems;
+	
+	var functionalSigns = [];
+	$('#' + tabId + ' div#section_fs input:checked').each(function() {
+		functionalSigns.push($(this).val());
+	});
+	currentData["functionalSigns"] = functionalSigns;
+	
+	var control = [];
+	$('#' + tabId + ' div#section_control input:checked').each(function() {
+		control.push($(this).val());
+	});
+	currentData["functionalSigns"] = functionalSigns;
+	
+	
+	
 	return currentData;
 }
 
