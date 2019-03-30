@@ -11,9 +11,6 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
 
     public function submitAllData()
     {
-        $test = Common::cryptoo('samah', 'e');
-        $test2 = Common::cryptoo($test, 'd');
-        
         $post = file_get_contents('php://input');
         $post = json_decode($post);
         

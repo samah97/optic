@@ -12,6 +12,8 @@ $diseaseObj = new DiseaseEXT();
 $medicationIntakeObj = new MedicationIntakeEXT();
 $coverTestObj = new CoverTestEXT();
 $occularMotilityObj = new OcularMotilityEXT();
+$pupillaryReflexsObj = new PupillaryReflexsEXT();
+$harmonDistanceObj = new HarmonDistanceEXT();
 // ----------------------------------End of Objects Declaration-------------------------------------//
 
 $visualProblems = $visualProblemsObj->getAllRecords();
@@ -24,6 +26,8 @@ $disease = $diseaseObj->getAllRecords();
 $medicationIntake = $medicationIntakeObj->getAllRecords();
 $coverTest = $coverTestObj->getAllRecords();
 $occularMotility = $occularMotilityObj->getAllRecords();
+$pupillaryReflexs = $pupillaryReflexsObj->getAllRecords();
+$harmonDistance = $harmonDistanceObj->getAllRecords();
 ?>
 <script>
 var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
@@ -706,10 +710,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									 <div class="col-md-3">
 										<div class="form-group">
 											<div class="mt-checkbox-list" style='padding: 0px'>
-												<label class="mt-checkbox"> Far <input
-													type="checkbox" id="far"
-													value="far"
-													name="far" /> <span></span>
+												<label for="isFar" class="mt-checkbox"> Far <input
+													type="checkbox" id="isFar"
+													name="isFar" /> <span></span>
 												</label>
 											</div>
 										</div>
@@ -717,10 +720,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									 <div class="col-md-3">
 										<div class="form-group">
 											<div class="mt-checkbox-list" style='padding: 0px'>
-												<label class="mt-checkbox"> Near <input
-													type="checkbox" id="near"
-													value="near"
-													name="near" /> <span></span>
+												<label for="isNear" class="mt-checkbox"> Near <input
+													type="checkbox" id="isNear"
+													name="isNear" /> <span></span>
 												</label>
 											</div>
 										</div>
@@ -735,10 +737,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									 <div class="col-md-3">
 										<div class="form-group">
 											<div class="mt-checkbox-list" style='padding: 0px'>
-												<label class="mt-checkbox"> Partially <input
-													type="checkbox" id="partially"
-													value="partially"
-													name="partially" /> <span></span>
+												<label for="isPartially" class="mt-checkbox"> Partially <input
+													type="checkbox" id="isPartially"
+													name="isPartially" /> <span></span>
 												</label>
 											</div>
 										</div>
@@ -746,10 +747,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									 <div class="col-md-3">
 										<div class="form-group">
 											<div class="mt-checkbox-list" style='padding: 0px'>
-												<label class="mt-checkbox"> Fully <input
-													type="checkbox" id="fully"
-													value="fully"
-													name="fully" /> <span></span>
+												<label for="isFully" class="mt-checkbox"> Fully <input
+													type="checkbox" id="isFully"
+													name="isFully" /> <span></span>
 												</label>
 											</div>
 										</div>
@@ -760,9 +760,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											<label for="Visual task duration" class="col-md-3 control-label">Visual task duration</label>
 											<div class="col-md-8">
 												<div class="input-icon right">
-													<input name="visualTaskDuration" type="text"
+													<input name="taskDuration" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="visualTaskDuration" value="" placeholder="Visual Task Duration"
+														id="taskDuration" value="" placeholder="Visual Task Duration"
 														>
 												</div>
 											</div>
@@ -789,7 +789,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 				    <div class="col-md-3">
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
-											<label class="mt-checkbox"> <?php echo $row->title ?> <input
+											<label for="ws_<?php echo $row->workStationId ?>" class="mt-checkbox"> <?php echo $row->title ?> <input
 												type="checkbox" id="ws_<?php echo $row->workStationId ?>"
 												value="<?php echo $row->workStationId ?>" name="workStation[]" />
 												<span></span>
@@ -803,12 +803,12 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 								</div>	
 								<div class="col-md-12">
 									<div class="form-group">
-											<label for="workDistance" class="col-md-3 control-label">Lightning</label>
+											<label for="lighting" class="col-md-3 control-label">Lightning</label>
 											<div class="col-md-8">
 												<div class="input-icon right">
-													<input name="lightning" type="text"
+													<input name="lighting" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="lightning" value="" placeholder="Lightning"
+														id="lighting" value="" placeholder="Lightning"
 														>
 												</div>
 											</div>
@@ -819,89 +819,69 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
 											<label class="mt-checkbox"> Needs a good color vision <input
-												type="checkbox" id="colorVisionNeeded"
-												value="" name="colorVisionNeeded" />
+												type="checkbox" id="isNeedColor"
+												name="isNeedColor" />
 												<span></span>
 											</label>
 										</div>
 									</div>
 								</div>
+								<?php foreach($ambiance as $row){ ?>
 									<div class="col-md-3">
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
-											<label class="mt-checkbox"> Ambiance<input
-												type="checkbox" id="ambiance"
-												value="" name="ambiance" />
+											<label for="ambiance_<?php echo $row->ambianceId ?>" class="mt-checkbox"> <?php echo $row->title ?><input
+												type="checkbox" value= "<?php echo $row->ambianceId ?>" id="ambiance_<?php echo $row->ambianceId ?>"
+												name="ambianceId[]" />
 												<span></span>
 											</label>
 										</div>
 									</div>
 								</div>
-									<div class="col-md-3">
+								<?php } ?>
+								<div class="col-md-3">
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
-											<label class="mt-checkbox">Dust<input
-												type="checkbox" id="dust"
-												value="" name="dust" />
+											<label for="ambiance_other" class="mt-checkbox">Other<input
+												type="checkbox" value= "0" id="ambiance_other"
+												name="ambianceId[]" />
 												<span></span>
 											</label>
 										</div>
 									</div>
 								</div>
-									<div class="col-md-3">
+								<div class="col-md-12 hidden divAmbianceOther">
 									<div class="form-group">
-										<div class="mt-checkbox-list" style='padding: 0px'>
-											<label class="mt-checkbox">Chemical products<input
-												type="checkbox" id="chemicalProducts"
-												value="" name="chemicalProducts" />
-												<span></span>
-											</label>
-										</div>
-									</div>
-								</div>
-									<div class="col-md-3">
-									<div class="form-group">
-										<div class="mt-checkbox-list" style='padding: 0px'>
-											<label class="mt-checkbox">Stress<input
-												type="checkbox" id="stress"
-												value="" name="stress" />
-												<span></span>
-											</label>
-										</div>
-									</div>
-								</div>
-									<div class="col-md-3">
-									<div class="form-group">
-										<div class="mt-checkbox-list" style='padding: 0px'>
-											<label class="mt-checkbox">Trauma Risk<input
-												type="checkbox" id="traumaRisk"
-												value="" name="traumaRisk" />
-												<span></span>
-											</label>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-											<label for="otherVisualNeeds" class="col-md-3 control-label">Other</label>
+											<label for="ambianceOther" class="col-md-3 control-label">Other</label>
 											<div class="col-md-8">
 												<div class="input-icon right">
-													<input name="otherVisualNeeds" type="text"
+													<input name="ambianceOther" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="otherVisualNeeds" value="" placeholder="Other Visual Needs"
+														id="ambianceOther"  placeholder="Other Visual Needs"
 														>
 												</div>
 											</div>
 										</div>
 								</div>	
+									<div class="col-md-3">
+									<div class="form-group">
+										<div class="mt-checkbox-list" style='padding: 0px'>
+											<label class="mt-checkbox">Trauma Risk<input
+												type="checkbox" id="isTraumaRisk"
+												name="isTraumaRisk" />
+												<span></span>
+											</label>
+										</div>
+									</div>
+								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-											<label for="activityDescription" class="col-md-3 control-label">Discription of the activity</label>
+											<label for="description" class="col-md-3 control-label">Discription of the activity</label>
 											<div class="col-md-8">
 												<div class="input-icon right">
-													<input name="activityDescription" type="text"
+													<input name="description" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="activityDescription" value="" placeholder="Activity Description"
+														id="description"  placeholder="Activity Description"
 														>
 												</div>
 											</div>
@@ -913,7 +893,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									<textarea
 									class="form-control rounded-form place-holder-color"
 									placeholder="extraProffesionalActivities" rows="5"
-									 name="extraProffesionalActivities" id="extraProffesionalActivities"></textarea>
+									 name="extraProfessionActivity" id="extraProfessionActivity"></textarea>
 									</fieldset>
 								</div>
 							<div class="tab-pane fade" id="tab_1_5">
@@ -994,9 +974,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 				    <div class="col-md-3">
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
-											<label class="mt-checkbox"> <?php echo $row->title ?> <input
-												type="checkbox" id="medicationIntake_<?php echo $row->medicationIntakeId ?>"
-												value="<?php echo $row->medicationIntakeId ?>" name="medicationIntake[]" />
+											<label class="mt-radio"> <?php echo $row->title ?> <input
+												type="radio" id="medicationIntake_<?php echo $row->medicationIntakeId ?>"
+												value="<?php echo $row->medicationIntakeId ?>" name="medicationIntakeId" />
 												<span></span>
 											</label>
 										</div>
@@ -1005,23 +985,33 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 							    <?php
         }
         ?>
-        <div class="col-md-12">
+        				    <div class="col-md-3">
 									<div class="form-group">
-											<label for="otherDisease" class="col-md-3 control-label">Other</label>
+										<div class="mt-checkbox-list" style='padding: 0px'>
+											<label for="medicationIntake_other" class="mt-radio">Other<input
+												type="radio" id="medicationIntake_other" class="showOnToggle"
+												value="0" name="medicationIntakeId" toShow="divMedicationIntakeOther" />
+												<span></span>
+											</label>
+										</div>
+									</div>
+								</div>	
+								<div class="col-md-12 divMedicationIntakeOther hidden">
+									<div class="form-group">
+											<label for="medicationIntakeOther" class="col-md-3 control-label">Orthoptic Treatments</label>
 											<div class="col-md-8">
 												<div class="input-icon right">
-													<input name="otherDisease" type="text"
+													<input name="medicationIntakeOther" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="otherDisease" value="" placeholder="Other"
+														id="medicationIntakeOther" placeholder="Please specify"
 														>
 												</div>
 											</div>
 										</div>
-								</div>
-													<div class="clearfix margin-bottom-20"></div>
-								
-					</div>
-					
+								</div>								
+								<div class="clearfix margin-bottom-20"></div>
+				</div>
+									
 					<div class="tab-pane fade" id="tab_1_6">
             		<table class="table table-striped table-hover table-bordered"
 									id="keratometry_table">
@@ -1038,94 +1028,54 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									<tbody>
 										<tr>
 											<td><b>OD</b></td>
-											<td><input type="text" name="keratometryFirstMerdianOd" id="keratometryFirstMerdianOd" class="form-control input-small"
+											<td><input type="text" name="keratometry_firstMerdianOd" id="keratometry_firstMerdianOd" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" name="keratometryFirstAxisOd" id="keratometryFirstAxisOd" class="form-control input-small"
+											<td><input type="text" name="keratometry_firstAxisOd" id="keratometry_firstAxisOd" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" name="keratometrySecondMerdianOd" id="keratometrySecondMerdianOd"  class="form-control input-small"
+											<td><input type="text" name="keratometry_secondMerdianOd" id="keratometry_secondMerdianOd"  class="form-control input-small"
 												value=""></td>
-											<td><input type="text"name="keratometrySecondAxisOd" id="keratometrySecondAxisOd" class="form-control input-small"
+											<td><input type="text"name="keratometry_secondAxisOd" id="keratometry_secondAxisOd" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" name="keratometryAnteriorAstigmatismOd" id="keratometryAnteriorAstigmatismOd" class="form-control input-small"
+											<td><input type="text" name="keratometry_anteriorAstigmatismOd" id="keratometry_anteriorAstigmatismOd" class="form-control input-small"
 												value=""></td>
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
-											<td><input type="text" name="keratometryFirstMerdianOs" id="keratometryFirstMerdianOs" class="form-control input-small"
+											<td><input type="text" name="keratometry_firstMerdianOs" id="keratometry_firstMerdianOs" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" name="keratometryFirstAxisOs" id="keratometryFirstAxisOs" class="form-control input-small"
+											<td><input type="text" name="keratometry_firstAxisOs" id="keratometry_firstAxisOs" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" name="keratometrySecondMerdianOs" id="keratometrySecondMerdianOs" class="form-control input-small"
+											<td><input type="text" name="keratometry_secondMerdianOs" id="keratometry_secondMerdianOs" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" name="keratometrySecondAxisOs" id="keratometrySecondAxisOs" class="form-control input-small"
+											<td><input type="text" name="keratometry_secondAxisOs" id="keratometry_secondAxisOs" class="form-control input-small"
 												value=""></td>
-											<td><input type="text" name="keratometryAnteriorAstigmatismOs" id="keratometryAnteriorAstigmatismOs" class="form-control input-small"
+											<td><input type="text" name="keratometry_anteriorAstigmatismOs" id="keratometry_anteriorAstigmatismOs" class="form-control input-small"
 												value=""></td>		
 										</tr>
 									</tbody>
 								</table>
+								<div class="section_6">
 								<div class="col-md-12">
 								<h4><label>Distance</label></h4>
 								</div>
+								<!-- TODO Get From DATABASE -->
+								<?php $hasChecked = false; ?>
+								<?php foreach($harmonDistance as $row){ ?>
+								<?php $checked = $hasChecked == true?"":"checked"; ?>
+								<?php $hasChecked = true; ?>
 								<div class="col-md-3">
 										<div class="form-group">
 											<div class="mt-checkbox-list" style='padding: 0px'>
-												<label class="mt-checkbox"> Near <input
-													type="checkbox" id="distance_near"
-													value="near"
-													name="near" /> <span></span>
+												<label class="mt-radio"> <?php  echo $row->title ?> <input
+													type="radio" id="distance_<?php  echo $row->harmonDistanceId ?>"
+													value="<?php  echo $row->harmonDistanceId ?>"
+													name="harmonDistanceId" <?php echo $checked; ?> /> <span></span>
 												</label>
 											</div>
 										</div>
-									</div>	
-									
-								<div class="col-md-3">
-										<div class="form-group">
-											<div class="mt-checkbox-list" style='padding: 0px'>
-												<label class="mt-checkbox"> 33 <input
-													type="checkbox" id="distance_33"
-													value="33"
-													name="33" /> <span></span>
-												</label>
-											</div>
-										</div>
-									</div>	
-									
-								<div class="col-md-3">
-										<div class="form-group">
-											<div class="mt-checkbox-list" style='padding: 0px'>
-												<label class="mt-checkbox"> 50 <input
-													type="checkbox" id="distance_50"
-													value="55"
-													name="55" /> <span></span>
-												</label>
-											</div>
-										</div>
-									</div>	
-									
-								<div class="col-md-3">
-										<div class="form-group">
-											<div class="mt-checkbox-list" style='padding: 0px'>
-												<label class="mt-checkbox"> 70 <input
-													type="checkbox" id="distance_70"
-													value="70"
-													name="70" /> <span></span>
-												</label>
-											</div>
-										</div>
-									</div>	
-									
-								<div class="col-md-3">
-										<div class="form-group">
-											<div class="mt-checkbox-list" style='padding: 0px'>
-												<label class="mt-checkbox"> working distance <input
-													type="checkbox" id="distance_working"
-													value="workingDistance"
-													name="workingDistance" /> <span></span>
-												</label>
-											</div>
-										</div>
-								</div>		
+								</div>
+								<?php } ?>	
+								</div>
 								<table class="table table-striped table-hover table-bordered"
 									id="measurement_table">
 									<thead>
@@ -1140,38 +1090,40 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<tr>
 											<td rowspan=2><b>Unaided V.A</b></td>
 											<td><b>OD</b></td>
-											<td><input type="text" name="FarUNaidedOd" id="FarUNaidedOd" class="form-control input-small"
+											<td><input type="text" name="unaidedFarOd" id="unaidedFarOd" class="form-control input-small"
 												value=""></td>
-											<td rowspan="2"><input name="bicularFarUNaided" id="bicularFarUNaided" type="text" class="form-control input-small"
+											<td rowspan="2"><input name="unaidedBinocularFar" id="unaidedBinocularFar" type="text" class="form-control input-small"
 												value=""></td>	
-											<td rowspan="2"><input name="bicularNearUnaided" id="bicularNearUnaided" type="text" class="form-control input-small"
+											<td rowspan="2"><input name="unaidedBinocularNear" id="unaidedBinocularNear" type="text" class="form-control input-small"
 												value=""></td>	
 										</tr>
 										<tr>
 											<td>OS</td>
-											<td><input type="text" name="FarUNaidedOs" id="FarUNaidedOs" class="form-control input-small"
+											<td><input type="text" name="unaidedFarOs" id="unaidedFarOs" class="form-control input-small"
 												value=""></td>
 										</tr>
 										<tr>
 										<td rowspan=2>Aided V.A</td>
 										<td>OD</td>
-										<td><input type="text" name="farAidedOd" id="farAidedOd" class="form-control input-small"
+										<td><input type="text" name="aidedFarOd" id="aidedFarOd" class="form-control input-small"
 												value=""></td>
-										<td rowspan="2"><input id="bicularFarAided" type="text" class="form-control input-small"
+										<td rowspan="2"><input id="aidedBinocularFar" name="aidedBinocularFar" type="text" class="form-control input-small"
 												value=""></td>	
-											<td rowspan="2"><input id="bicularNearAided" type="text" class="form-control input-small"
+											<td rowspan="2"><input id="aidedBinocularNear" name="aidedBinocularNear" type="text" class="form-control input-small"
 												value=""></td>	
 										</tr>
 										<tr>
 										<td>OS</td>
-										<td><input type="text" name="farAidedOs" id="farAidedOs" class="form-control input-small"
+										<td><input type="text" name="aidedFarOs" id="aidedFarOs" class="form-control input-small"
 												value=""></td>
 										</tr>
 									</tbody>
 								</table>								
+        			<div class="section_6">
         			<div class="col-md-12">
         			<div class="col-md-3">Unilateral and alternate cover test</div>
         			<div class="col-md-9">
+        			<!-- TODO: Add in Backend  -->
         			<?php 
         			foreach ($coverTest as $row) {
         			   ?>
@@ -1179,7 +1131,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
 											<label class="mt-checkbox"> <?php echo $row->title ?> <input
-												type="checkbox" id="coverTestObj_<?php echo $row->coverTestId ?>"
+												type="checkbox" id="coverTest_<?php echo $row->coverTestId ?>"
 												value="<?php echo $row->coverTestId ?>" name="coverTestId[]" />
 												<span></span>
 											</label>
@@ -1187,7 +1139,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 						</div>
 					<?php }?>
-        			</div>	
+        			</div>
         			</div>
 					<div class="col-md-12">
 					<div class="col-md-3">
@@ -1210,18 +1162,18 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 						<div class="form-group">
 							<div class="mt-checkbox-list" style='padding: 0px'>
 								<label class="mt-checkbox">Recoverment<input
-									type="checkbox" id="recoverment"
-									value="recoverment"
-									name="recoverment"/> <span></span>
+									type="checkbox" id="convegenceRecoverement"
+									name="convegenceRecoverement"/> <span></span>
 								</label>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3">
-        			<label>Ocular motility</label>
+        			<label>X/Y</label>
         						<div class="form-group">
-							<input type="text" id="xOverY" class="form-control input-small" value="xOverY"></td>
+							<input type="text" id="convergenceXy" name="convergenceXy" class="form-control input-small" value="xOverY"></td>
 						</div>
+					</div>
 					</div>
 					</div>
 					<div class="col-md-12">
@@ -1273,9 +1225,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
         			 <td>
         			 <div class="nopad text-center">
                         <label class="image-checkbox" id="affectedPart_<?php echo $row->ocularMotilityId?>">
-                          <img class="img-responsive"  src="<?php echo $imagesPath.$row->image?>" onclick="checkAffected('eye_<?php echo $row->ocularMotilityId?>','affectedPart_<?php echo $row->ocularMotilityId?>')"/>
-                          <input type="hidden"  id="eye_<?php echo $row->ocularMotilityId?>"
-                           name="image[]" value="eye_<?php echo $row->ocularMotilityId?>" />
+                          <img class="img-responsive"  src="<?php echo $imagesPath.$row->image?>" onclick="checkAffected('preOcularMotilityData_<?php echo $row->ocularMotilityId?>','affectedPart_<?php echo $row->ocularMotilityId?>')"/>
+                          <input type="hidden"  id="preOcularMotilityData_<?php echo $row->ocularMotilityId?>"
+                           name="preOcularMotilityData[]" value="<?php echo $row->ocularMotilityId?>" />
                           <i class="fa fa-check hidden"></i>
                         </label>
                       </div>
@@ -1287,78 +1239,48 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
         			</table>
         			</div>
         			</div>
+        			<div class="section_6">
         			<div class="col-md-12">
 									<div class="form-group">
 											<label for="stereoacuity" class="col-md-3 control-label">Stereoacuity Wirt test</label>
 											<div class="col-md-7">
 												<div class="input-icon right">
-													<input name="stereoacuity" type="text"
+													<input name="stereoWirtTest" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="stereoacuity" value="">
+														id="stereoWirtTest" value="">
 												</div>
 											</div>
 										<label for="stereoacuity" class="col-md-1 control-label">arcsecond</label>
 										</div>
 					</div>	
+					</div>	
 					<div class="col-md-12">
 					<h3>Pupillary reflexs</h3>
+					<!-- TODO Get From Database -->
 					</div>
+					<div id="section_pupillary_reflexs">
+					<?php foreach($pupillaryReflexs as $row){ ?>
+					<div class="reflex_row" reflex="<?php echo $row->pupillaryReflexsId; ?>"></div>
 					<div class="col-md-12">
-						<div class="col-md-3"><label>Photomotor</label></div>
+						<div class="col-md-3"><label><?php echo $row->title ?></label></div>
 						<div class="form-group">
 							<div class="mt-checkbox-list col-md-3" style='padding: 0px'>
 								<label class="mt-checkbox">Normal, if not, Describe<input
-									type="checkbox" id="photomotor"
-									value="photomotor"
-									name="photomotor"/> <span></span>
+									type="checkbox" id="reflex_<?php echo $row->pupillaryReflexsId ?>"
+									value="<?php echo $row->pupillaryReflexsId ?>"
+									name="reflex_<?php echo $row->pupillaryReflexsId ?>"/> <span></span>
 								</label>
 							</div>
 						</div>
 						<div class="col-md-3">
 						<div class="input-icon right">
-							<input name="photomotorDescription" type="text"
+							<input name="pupillaryReflexDesc[id]" type="text"
 								class="form-control rounded-form place-holder-color"
-								id="photomotorDescription" value="" placeholder="Description">
+								id="reflex_description_<?php echo $row->pupillaryReflexsId ?>" placeholder="Description">
 						</div>
 						</div>
-					</div>	
-					<div class="col-md-12">
-						<div class="col-md-3"><label>Consenual</label></div>
-						<div class="form-group">
-							<div class="mt-checkbox-list col-md-3" style='padding: 0px'>
-								<label class="mt-checkbox">Normal, if not, Describe<input
-									type="checkbox" id="consenual"
-									value="consenual"
-									name="consenual"/> <span></span>
-								</label>
-							</div>
-						</div>
-						<div class="col-md-3">
-						<div class="input-icon right">
-							<input name="consenualDescription" type="text"
-								class="form-control rounded-form place-holder-color"
-								id="consenualDescription" value="" placeholder="Description">
-						</div>
-						</div>
-					</div>	
-					<div class="col-md-12">
-						<div class="col-md-3"><label>Accommodative</label></div>
-						<div class="form-group">
-							<div class="mt-checkbox-list col-md-3" style='padding: 0px'>
-								<label class="mt-checkbox">Normal, if not, Describe<input
-									type="checkbox" id="accommodative"
-									value="accommodative"
-									name="accommodative"/> <span></span>
-								</label>
-							</div>
-						</div>
-						<div class="col-md-3">
-						<div class="input-icon right">
-							<input name="accommodativeDescription" type="text"
-								class="form-control rounded-form place-holder-color"
-								id="accommodativeDescription" value="" placeholder="Description">
-						</div>
-						</div>
+					</div>
+					<?php } ?>	
 					</div>
 					<div class="col-md-12">
 					<fieldset>
