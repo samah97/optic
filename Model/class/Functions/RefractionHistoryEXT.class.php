@@ -9,8 +9,13 @@ class RefractionHistoryEXT extends RefractionHistoryMySqlDAO{
     
     public function submitData($data = null,$pdo = null)
     {
+        $correctionTypeIdArr = $data->correctionTypeId;
+        $correctionTypeIdArr[] = 1;
+        $data->correctionTypeId = json_encode($data->correctionTypeId);
+        
         $refractionHisObj = new RefractionHistoryMySqlExtDAO();
         $validateData = $this->validateData($data);
+        
         $result = true;
         
         if ($validateData['result']) {
@@ -50,7 +55,7 @@ class RefractionHistoryEXT extends RefractionHistoryMySqlDAO{
                 $deleteEyeglass = $refEyeglassObj->deletePDO($pdo, $deleteWhere);
                 $deleteContact = $refContactObj->deletePDO($pdo, $deleteWhere);
                 
-                if(in_array(TypeCorrection::Eyeglass, $data->typeCorrection)){
+                if(in_array(TypeCorrection::Eyeglass, $correctionTypeIdArr)){
                     $refEyeglassData = $data->refEyeglasses;
                     $refEyeglassData->refractionHistoryId = $refractionHistoryId;
                     $refEyeglass = $refEyeglassObj->submitData($refEyeglassData,$pdo);
@@ -59,7 +64,7 @@ class RefractionHistoryEXT extends RefractionHistoryMySqlDAO{
                         $errors = $refEyeglass['errors'];
                     }
                 }
-                if(in_array(TypeCorrection::Contact_Lenses, $data->typeCorrection)){
+                if(in_array(TypeCorrection::Contact_Lenses, $correctionTypeIdArr)){
                     $refContactData = $data->refContact;
                     $refContactData->refractionHistoryId = $refractionHistoryId;
                     $refContact = $refContactObj->submitData($refContactData,$pdo);
@@ -95,9 +100,9 @@ class RefractionHistoryEXT extends RefractionHistoryMySqlDAO{
         $data= $gump->sanitize($data);
         
         $gump->validation_rules(array(
-            'dateOflastExam' => 'required|date,d/m/Y',
+            'dateOflastExam' => 'required|date,Y-m-d',
             'visitId'       => 'required|integer',
-            'correctionTypeId'       => 'required|integer',
+            'correctionTypeId'       => 'required',
             'satisfaction'      => 'alpha_space',
             'wearingFrequence'      => 'alpha_space',
             'reasonCorrection'      => 'alpha_space',

@@ -6,7 +6,7 @@
  */
 include_once ("include/common.php");
 
-error_reporting(E_ERROR | E_PARSE);
+//error_reporting(E_ERROR | E_PARSE);
 // die();
 ?>
 
@@ -48,6 +48,10 @@ error_reporting(E_ERROR | E_PARSE);
 	<script src="js/scripts.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <!--===============================================================================================-->
+
+<script>
+var MAINURL = '<?php echo MAIN_URL ?>';
+</script>
 <!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 	<link rel="stylesheet" href="css/style.css">
 <!--===============================================================================================-->

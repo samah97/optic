@@ -105,6 +105,11 @@ class Common{
         return $value;
     }
     
+    public static function formatDate($date,$mainformat="Y-m-d",$format = 'j/m/Y'){
+        $date = trim($date);
+        $date = date_create_from_format($mainformat,$date);
+        return date_format($date, $format);
+    }
     
     
 }

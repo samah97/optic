@@ -51,8 +51,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 		<!-- onSubmit="if(!validateForm()){return false;}" -->
 		<div class="col-md-12">
 			<form id="newClient" name="newClient"
-				action="action/insertClient.php?fromPage=newClient" method="POST"
-				>
+				action="action/insertClient.php?fromPage=newClient" method="POST">
 				<div class="portlet light bordered" style="overflow: hidden;">
 					<div class="portlet-title">
 						<div class="caption">
@@ -139,9 +138,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									<div class="form-group radio col-md-6">
 										<label for="gender" class="col-md-3 control-label">Gender :</label>
 										<br> <br> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<label><input
-											type="radio" name="gender" id="male" value="male"
+											type="radio" name="genderId" id="male" value="1"
 											<?php echo $checkedMale?>>Male</label>&nbsp;&nbsp;&nbsp; <label><input
-											type="radio" name="gender" id="female" value="female"
+											type="radio" name="genderId" id="female"  value="2"
 											<?php echo $checkedFemale ?>>Female</label>
 									</div>
 
@@ -160,13 +159,13 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="refferedBy" class="col-md-3 control-label">Reffered
+											<label for="reffered" class="col-md-3 control-label">Reffered
 												By</label>
 											<div class="col-md-8">
 												<div class="input-icon right">
-													<input name="refferedBy" type="text"
+													<input name="reffered" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="refferedBy" value="" placeholder="Reffered By">
+														id="reffered"  placeholder="Reffered By">
 												</div>
 											</div>
 										</div>
@@ -276,10 +275,10 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											<div class="col-md-10">
 												<div class="input-icon right">
 													<div class="input-icon right">
-														<input name="dateOfAttendance" type="date"
+														<input name="dateAppearance" type="date"
 															class="form-control rounded-form place-holder-color"
-															id="DateOfAttendance" value=""
-															placeholder="Date Of Attendance">
+															id="dateAppearance" value=""
+															placeholder="Date Of Appearance">
 													</div>
 												</div>
 											</div>
@@ -287,14 +286,14 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="address" class="col-md-2 control-label">Characteristics
+											<label for="characteristicsAppearance" class="col-md-2 control-label">Characteristics
 												Of Appearance</label>
 											<div class="col-md-10">
 												<div class="input-icon right">
 													<div class="input-icon right">
-														<input name="characteristicsOfAppearance" type="text"
+														<input name="characteristicsAppearance" type="text"
 															class="form-control rounded-form place-holder-color"
-															id="characteristicsOfAppearance" value=""
+															id="characteristicsAppearance" value=""
 															placeholder="Characteristics Of Appearance">
 													</div>
 												</div>
@@ -303,14 +302,14 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="address" class="col-md-2 control-label">Time/Moment
+											<label for="timeAppearance" class="col-md-2 control-label">Time/Moment
 												Of Appearance</label>
 											<div class="col-md-10">
 												<div class="input-icon right">
 													<div class="input-icon right">
-														<input name="timeMomentOfAppearance" type="Time"
+														<input name="timeAppearance" type="Time"
 															class="form-control rounded-form place-holder-color"
-															id="timeMomentOfAppearance" value=""
+															id="timeAppearance" value=""
 															placeholder="Time/Moment Of Appearance">
 													</div>
 												</div>
@@ -319,15 +318,15 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="address" class="col-md-2 control-label">frequency
+											<label for="frequencyTroubles" class="col-md-2 control-label">frequency
 												of troubles</label>
 											<div class="col-md-10">
 												<div class="input-icon right">
 													<div class="input-icon right">
-														<input name="frequencyoftroubles" type="text"
+														<input name="frequencyTroubles" type="text"
 															class="form-control rounded-form place-holder-color"
-															id="frequencyoftroubles" value=""
-															placeholder="frequency of troubles">
+															id="frequencyTroubles" 
+															placeholder="Frequency of troubles">
 													</div>
 												</div>
 											</div>
@@ -335,7 +334,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="address" class="col-md-2 control-label">The
+											<label for="activityContext" class="col-md-2 control-label">The
 												Activity, the context: </label>
 											<div class="col-md-10">
 												<div class="input-icon right">
@@ -343,7 +342,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 														<input name="activityContext" type="text"
 															class="form-control rounded-form place-holder-color"
 															id="activityContext" value=""
-															placeholder="activityContext">
+															placeholder="Activity context">
 													</div>
 												</div>
 											</div>
@@ -351,7 +350,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="address" class="col-md-2 control-label">The
+											<label for="associatedSymptoms" class="col-md-2 control-label">The
 												associated symptoms: </label>
 											<div class="col-md-10">
 												<div class="input-icon right">
@@ -367,7 +366,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="address" class="col-md-2 control-label">The
+											<label for="chronicity" class="col-md-2 control-label">The
 												Chronicity</label>
 											<div class="col-md-10">
 												<div class="input-icon right">
@@ -382,7 +381,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="address" class="col-md-2 control-label">The
+											<label for="evolution" class="col-md-2 control-label">The
 												Evolution</label>
 											<div class="col-md-10">
 												<div class="input-icon right">
@@ -397,15 +396,15 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="address" class="col-md-2 control-label">The
+											<label for="factorsRelief" class="col-md-2 control-label">The
 												Factors of Relief</label>
 											<div class="col-md-10">
 												<div class="input-icon right">
 													<div class="input-icon right">
-														<input name="factorsOfRelief" type="text"
+														<input name="factorsRelief" type="text"
 															class="form-control rounded-form place-holder-color"
-															id="factorsOfRelief" value=""
-															placeholder="factorsOfRelief">
+															id="factorsRelief" value=""
+															placeholder="Factors Of Relief">
 													</div>
 												</div>
 											</div>
@@ -418,10 +417,10 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											<div class="col-md-10">
 												<div class="input-icon right">
 													<div class="input-icon right">
-														<input name="typeCompenstaionWorn" type="text"
+														<input name="compenstaionWormType" type="text"
 															class="form-control rounded-form place-holder-color"
-															id="typeCompenstaionWorn" value=""
-															placeholder="typeCompenstaionWorn">
+															id="compenstaionWormType" 
+															placeholder="Compenstaion Worm Type">
 													</div>
 												</div>
 											</div>
@@ -439,9 +438,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<div class="col-md-10">
 											<div class="input-icon right">
 												<div class="input-icon right">
-													<input name="dateOflastExam" type="date"
+													<input name="datelastExam" type="date"
 														class="form-control rounded-form place-holder-color"
-														id="dateOflastExam" value=""
+														id="datelastExam" 
 														placeholder="Date Of Last Exam">
 												</div>
 											</div>
@@ -450,7 +449,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="typeOfCorrection" class="col-md-4 control-label">Type
+										<label for="correctionTypeId" class="col-md-4 control-label">Type
 											of Correction:</label>
 							<?php
     foreach ($typeOfCorrection as $row) {
@@ -462,7 +461,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 														type="checkbox"
 														id="tc_<?php echo $row->typeCorrectionId ?>"
 														value="<?php echo $row->typeCorrectionId ?>"
-														name="typeOfCorrection[]" /> <span></span>
+														name="correctionTypeId[]" /> <span></span>
 													</label>
 												</div>
 											</div>
@@ -488,14 +487,14 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="wearingFrequecy" class="col-md-2 control-label">Wearing
+										<label for="wearingFrequency" class="col-md-2 control-label">Wearing
 											Frequecy</label>
 										<div class="col-md-10">
 											<div class="input-icon right">
 												<div class="input-icon right">
-													<input name="wearingFrequecy" type="text"
+													<input name="wearingFrequency" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="wearingFrequecy" value=""
+														id="wearingFrequency" value=""
 														placeholder="Wearing Frequecy">
 												</div>
 											</div>
@@ -504,14 +503,14 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="reasonforWearingCorrection"
+										<label for="reasonCorrection"
 											class="col-md-2 control-label">Reason for Wearing Correction</label>
 										<div class="col-md-10">
 											<div class="input-icon right">
 												<div class="input-icon right">
-													<input name="reasonforWearingCorrection" type="text"
+													<input name="reasonCorrection" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="reasonforWearingCorrection" value=""
+														id="reasonCorrection"
 														placeholder="reasonforWearingCorrection">
 												</div>
 											</div>
@@ -554,34 +553,34 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<tr>
 											<td><b>OD</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eyesphereOd" id="eyesphereOd"></td>
+												value="" name="eye_sphereOd" id="eye_sphereOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eyecylinderOd" id="eyecylinderOd"></td>
+												value="" name="eye_cylinderOd" id="eye_cylinderOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eyeaxisOd" id="eyeaxisOd"></td>
+												value="" name="eye_axisOd" id="eye_axisOd"></td>
 											<td rowspan="2"><textarea class="form-control input-small"
-													style='height: 85px; resize: none'" id="eyeaddition"></textarea></td>
+													style='height: 85px; resize: none'" name="eye_addition" id="eye_addition"></textarea></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eyepdOd" id="eyepdOd"></td>
+												value="" name="eye_pdOd" id="eye_pdOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eyeprismOd" id="eyeprismOd"></td>
+												value="" name="eye_prismOd" id="eye_prismOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eyebaseOd" id="eyebaseOd"></td>
+												value="" name="eye_baseOd" id="eye_baseOd"></td>
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eyesphereOs" id="eyesphereOs"></td>
+												value="" name="eye_sphereOs" id="eye_sphereOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eyecylinderOs" id="eyecylinderOs"></td>
+												value="" name="eye_cylinderOs" id="eye_cylinderOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eyeaxisOs" id="eyeaxisOs" ></td>
+												value="" name="eye_axisOs" id="eye_axisOs" ></td>
 											<td><input type="text" class="form-control input-small"
-												value=""  name="eyepdOs" id="eyepdOs"></td>
+												value=""  name="eye_pdOs" id="eye_pdOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""  name="eyeprismOs" id="eyeprismOs"></td>
+												value=""  name="eye_prismOs" id="eye_prismOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""  name="eyebaseOs" id="eyebaseOs"></td>
+												value=""  name="eye_baseOs" id="eye_baseOs"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -601,52 +600,34 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<tr>
 											<td><b>OD</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="contactsphereOd" id="contactsphereOd"></td>
+												value="" name="contact_sphereOd" id="contact_sphereOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="contactcylinderOd" id="contactcylinderOd"></td>
+												value="" name="contact_cylinderOd" id="contact_cylinderOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="contactaxisOd" id="contactaxisOd"></td>
+												value="" name="contact_axisOd" id="contact_axisOd"></td>
 
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="contactsphereOs" id="contactsphereOs"></td>
+												value="" name="contact_sphereOs" id="contact_sphereOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="contactcylinderOs" id="contactcylinderOs"></td>
+												value="" name="contact_cylinderOs" id="contact_cylinderOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="contactaxisOs" id="contactaxisOs"></td>
+												value="" name="contact_axisOs" id="contact_axisOs"></td>
 										</tr>
 									</tbody>
 								</table>
-								<div class="section_3_main">
-								<div class="col-md-3">
-									<div class="form-group">
-										<div class="mt-checkbox-list" style='padding: 0px'>
-											<label class="mt-checkbox"> Soft <input type="checkbox"
-												id="wt_soft" value="soft" name="soft" /> <span></span>
-											</label>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="form-group">
-										<div class="mt-checkbox-list" style='padding: 0px'>
-											<label class="mt-checkbox"> Hard <input type="checkbox"
-												id="wt_hard" value="hard" name="hard" /> <span></span>
-											</label>
-										</div>
-									</div>
-								</div>		
+								<div class="section_3_main">	
 								<?php
         foreach ($wearType as $row) {
             ?>
 				    <div class="col-md-3">
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
-											<label class="mt-checkbox"> <?php echo $row->title ?> <input
-												type="checkbox" id="wt_<?php echo $row->wearTypeId ?>"
-												value="<?php echo $row->wearTypeId ?>" name="wearType[]" />
+											<label class="mt-radio"> <?php echo $row->title ?> <input
+												type="radio" id="wt_<?php echo $row->wearTypeId ?>"
+												value="<?php echo $row->wearTypeId ?>" name="wearTypeId" />
 												<span></span>
 											</label>
 										</div>
@@ -698,9 +679,10 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 								</div>
 								</div>
 </div>
-								<div class="tab-pane fade" id="tab_1_4">
+								<div class="tab-pane fade" id="tab_1_4">\
 									<fieldset>
 									<legend>Proffesional Activity</legend>
+									<div class="section_4">
 									<div class="col-md-12">
 									<div class="col-md-3">
 										<div class="form-group">
@@ -773,7 +755,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											<label for="workDistance" class="col-md-3 control-label">Working Distance</label>
 											<div class="col-md-8">
 												<div class="input-icon right">
-													<input name="workDistance" type="text"
+													<input name="workDistanceId" type="text"
 														class="form-control rounded-form place-holder-color"
 														id="workDistance" value="" placeholder="Work Distance"
 														>
@@ -781,6 +763,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											</div>
 										</div>
 								</div>	
+								</div>
+								<div id="section_work_station">
 								<div class="col-md-12">
 								<label  class="col-md-3 control-label">Work Station</label>
 								<?php
@@ -800,7 +784,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 							    <?php
         }
         ?>
+        </div>
 								</div>	
+								<div class="section_4">
 								<div class="col-md-12">
 									<div class="form-group">
 											<label for="lighting" class="col-md-3 control-label">Lightning</label>
@@ -826,12 +812,14 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										</div>
 									</div>
 								</div>
+								</div>
+								<div id="section_ambiance">
 								<?php foreach($ambiance as $row){ ?>
 									<div class="col-md-3">
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
 											<label for="ambiance_<?php echo $row->ambianceId ?>" class="mt-checkbox"> <?php echo $row->title ?><input
-												type="checkbox" value= "<?php echo $row->ambianceId ?>" id="ambiance_<?php echo $row->ambianceId ?>"
+												type="checkbox" value="<?php echo $row->ambianceId ?>" id="ambiance_<?php echo $row->ambianceId ?>"
 												name="ambianceId[]" />
 												<span></span>
 											</label>
@@ -839,6 +827,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 								</div>
 								<?php } ?>
+								</div>
 								<div class="col-md-3">
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
@@ -850,6 +839,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										</div>
 									</div>
 								</div>
+								<div class="section_4">
 								<div class="col-md-12 hidden divAmbianceOther">
 									<div class="form-group">
 											<label for="ambianceOther" class="col-md-3 control-label">Other</label>
@@ -886,14 +876,17 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												</div>
 											</div>
 										</div>
-								</div>		
+								</div>	
+								</div>	
 									</fieldset>
 									<fieldset>
 									<legend>Extra Proffessional Activities</legend>
+									<div class="section_4">
 									<textarea
 									class="form-control rounded-form place-holder-color"
 									placeholder="extraProffesionalActivities" rows="5"
 									 name="extraProfessionActivity" id="extraProfessionActivity"></textarea>
+									</div>
 									</fieldset>
 								</div>
 							<div class="tab-pane fade" id="tab_1_5">
@@ -950,6 +943,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											</div>
 										</div>
 								</div>
+								<div id="section_disease"></div>
 									<?php
 		foreach ($disease as $row) {
             ?>
@@ -1058,7 +1052,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 								<div class="col-md-12">
 								<h4><label>Distance</label></h4>
 								</div>
-								<!-- TODO Get From DATABASE -->
+								
 								<?php $hasChecked = false; ?>
 								<?php foreach($harmonDistance as $row){ ?>
 								<?php $checked = $hasChecked == true?"":"checked"; ?>
@@ -1260,7 +1254,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 					</div>
 					<div id="section_pupillary_reflexs">
 					<?php foreach($pupillaryReflexs as $row){ ?>
-					<div class="reflex_row" reflex="<?php echo $row->pupillaryReflexsId; ?>"></div>
+					<div class="reflex_row" reflex="<?php echo $row->pupillaryReflexsId; ?>">
 					<div class="col-md-12">
 						<div class="col-md-3"><label><?php echo $row->title ?></label></div>
 						<div class="form-group">
@@ -1280,6 +1274,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 						</div>
 						</div>
 					</div>
+					</div>
 					<?php } ?>	
 					</div>
 					<div class="col-md-12">
@@ -1297,7 +1292,12 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 							style='margin-top: 20px;' type="submit">Save</button>
 					</div>
 				</div>
-		
+				</div>
+				</form>
+				</div>
+				</div>
+				</div>
+				
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
 		<!-- <script
 	src="<?php echo BASE_URL ?>plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js"
