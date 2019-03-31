@@ -38,6 +38,13 @@ function getPersonalInfoData() {
 	return currentData;
 }
 
+function getVisitInfoData(){
+	var currentData = new Object();
+	currentData["deduction"] = $('#deduction').val();
+	
+	return currentData;
+}
+
 function getConsultationData() {
 	var currentData = new Object();
 	var tabId = 'tab_1_2';
@@ -83,7 +90,7 @@ function getRefractionHistoryData() {
 		var eyeglassObj = new Object();
 		$('#' + tabId + ' table#refEyeglasses *').filter(':input').each(function() {
 			var inputId = $(this).attr('name');
-			inputId.replace('eye','');
+			inputId = inputId.replace('eye_','');
 			eyeglassObj[inputId] = getInputValue(tabId, $(this));
 		});
 		refractionHistoryData["refEyeglasses"] = eyeglassObj;
@@ -93,6 +100,7 @@ function getRefractionHistoryData() {
 		var contactObj = new Object();
 		$('#' + tabId + ' table#refContact *').filter(':input').each(function() {
 			var inputId = $(this).attr('name');
+			inputId = inputId.replace('contact_','');
 			contactObj[inputId] = getInputValue(tabId, $(this));
 		});
 		refractionHistoryData["refContact"] = contactObj;
@@ -104,10 +112,23 @@ function getVisualNeedsData() {
 	var visualNeedsData = new Object();
 	var tabId = 'tab_1_4';
 
-	$('#' + tabId + ' *').filter(':input').each(function() {
+	$('#' + tabId + ' .section_4 *').filter(':input').each(function() {
 		var inputId = $(this).attr('name');
 		visualNeedsData[inputId] = getInputValue(tabId, $(this));
 	});
+
+	var workStationId = [];
+	$('#' + tabId + ' #section_work_station *').filter(':input:checked').each(function() {
+		workStationId.push($(this).val());
+	});
+	visualNeedsData.workStationId = workStationId;
+	
+	
+	var ambianceId = [];
+	$('#' + tabId + ' #section_ambiance *').filter(':input:checked').each(function() {
+		ambianceId.push($(this).val());
+	});
+	visualNeedsData.ambianceId = ambianceId;
 	
 	return visualNeedsData;
 }
@@ -120,6 +141,13 @@ function getVisualAntecedentsData() {
 		var inputId = $(this).attr('name');
 		visualAntecedentsData[inputId] = getInputValue(tabId, $(this));
 	});
+
+	var disease = []	
+	$('#' + tabId + ' section_disease *').filter(':input:checked').each(function() {
+		disease.push($(this).val());
+	});
+	
+	visualAntecedentsData.push(disease);
 
 	
 	return visualAntecedentsData;
@@ -162,7 +190,12 @@ function getAllRequest() {
 	var formDataObj = new Object();
 
 	formDataObj.personalInfoData = getPersonalInfoData();
+	formDataObj.visitData = getVisitInfoData();
 	formDataObj.consultationData = getConsultationData();
+	formDataObj.refractionData = getRefractionHistoryData();
+	formDataObj.visualNeedsData = getVisualNeedsData();
+	formDataObj.visualAntecedentsData = getVisualAntecedentsData();
+	formDataObj.preliminaryExaminationData = getPreliminaryExamintaionData();
 	
 	return formDataObj;
 }
@@ -202,6 +235,20 @@ function fillData(form, data) {
 
 function submitForm(form) {
 
-	getAllRequest();
+	var formData = getAllRequest();
+	formData = JSON.stringify(formData);
+	
+	$.ajax({
+		type: 'POST',
+		url : MAINURL + 'v2/insertClient.php',
+		data: formData,
+		contentType: 'application/json',
+		success: function(response){
+			console.log(response);
+		},
+		error: function(e){
+			console.log(e);
+		}
+	});
 
 }

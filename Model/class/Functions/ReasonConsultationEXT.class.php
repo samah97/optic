@@ -10,10 +10,14 @@ class ReasonConsultationEXT extends ReasonConsultationMySqlDAO{
     public function submitData($data = null,$pdo = null)
     {
         $reasonConsultationObj = new ReasonConsultationMySqlExtDAO();
+        if(!isset($data->dateAppearance)){
+            $data->dateAppearance = $data->dateOfAttendance;
+        }
         
         $validateData = $this->validateData($data);
+        
         $result = true;
-        if ($validateData->result) {
+        if ($validateData['result']) {
             
             if (isset($data->reasonConsultationId)) { //UPDATE
                 $reasonConsultationId = $data->reasonConsultationId;
@@ -81,7 +85,7 @@ class ReasonConsultationEXT extends ReasonConsultationMySqlDAO{
             
         }else{
             $result = false;
-            $errors = $validateData->errors;
+            $errors = $validateData['errors'];
         }
         
         $response['result'] = $result;
@@ -101,7 +105,7 @@ class ReasonConsultationEXT extends ReasonConsultationMySqlDAO{
         $validation = new Validation();
         $validation->name('Date of Appearance')
         ->value($data->dateAppearance)
-        ->pattern('date_dmy')
+        ->pattern('date_ymd')
         ->required();
         $validation->name('Characteristics of Appearance')
         ->value($data->characteristicsAppearance)
@@ -137,12 +141,12 @@ class ReasonConsultationEXT extends ReasonConsultationMySqlDAO{
         ->value($data->compensationWormType)
         ->pattern('words');
         
-        $returnObj = new stdClass();
+        $returnObj = array();
         if ($validation->isSuccess()) {
-            $returnObj->result = true;
+            $returnObj['result'] = true;
         } else {
-            $returnObj->result = false;
-            $returnObj->errors = $validation->getErrors();
+            $returnObj['result'] = false;
+            $returnObj['errors'] = $validation->getErrors();
         }
         
         return $returnObj;
