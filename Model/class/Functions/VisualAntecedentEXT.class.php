@@ -24,18 +24,35 @@ class VisualAntecedentEXT extends VisualAntecedentMySqlDAO{
                         $update = $refractionHisObj->updatePDO($pdo, $data);
                         if(!$update){
                             $result = false;
-                            $msg = "Something went wrong";
+                            $errors= "Something went wrong";
                         }
                     } else {
                         $result = false;
-                        $msg = "Invalid Reason Consultation";
+                        $errors = "Invalid Reason Consultation";
                     }
                 }
             } else { //INSERT
                 $visualAntecedentId = $refractionHisObj->insertPDO($pdo, $data);
                 if(!$visualAntecedentId){
                     $result = false;
-                    $msg = "Something went wrong";
+                    $errors = "Something went wrong";
+                }
+            }
+            
+            if($result && $visualAntecedentId > 0){
+                $antecedentDiseaseObj = new AntecedentDiseaseMySqlExtDAO();
+                $deleteAll = $antecedentDiseaseObj->deletePDO($pdo, "visual_antecedent_id = ".$visualAntecedentId,PHP_INT_MAX);
+                
+                foreach ($data->disease as $row){
+                    $antecedentDisease = new AntecedentDisease();
+                    $antecedentDisease->visualAntecedentId = $visualAntecedentId;
+                    $antecedentDisease->diseaseId = $row;
+                    
+                    $insertAntDisease = $antecedentDiseaseObj->insertPDO($pdo, $antecedentDisease);
+                    if(! $insertAntDisease){
+                        $result = false;
+                        $errors = "Something went wrong";
+                    }
                 }
             }
             
@@ -65,9 +82,9 @@ class VisualAntecedentEXT extends VisualAntecedentMySqlDAO{
         $data= $gump->sanitize($data);
         
         $gump->validation_rules(array(
-            'ocularPathologies' => 'alpha_numeric',
-            'ocularSurgeries' => 'alpha_numeric',
-            'traumatism' => 'alpha_numeric',
+            'ocularPathologies' => 'alpha_space',
+            'ocularSurgeries' => 'alpha_space',
+            'traumatism' => 'alpha_space',
             'medicationIntakeId' => 'integer',
             'medicationIntakeOther' => 'alpha_space',
             'familialRefractive' => 'alpha_space',

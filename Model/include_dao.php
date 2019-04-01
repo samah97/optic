@@ -169,6 +169,18 @@
 	require_once('class/mysql/ext/VisitMySqlExtDAO.class.php');
 	require_once('class/Functions/VisitEXT.class.php');
 	
+	require_once('class/dao/PatientAmbianceDAO.class.php');
+	require_once('class/dto/PatientAmbiance.class.php');
+	require_once('class/mysql/PatientAmbianceMySqlDAO.class.php');
+	require_once('class/mysql/ext/PatientAmbianceMySqlExtDAO.class.php');
+	require_once('class/Functions/PatientAmbianceEXT.class.php');
+	require_once('class/dao/PatientWorkStationDAO.class.php');
+	require_once('class/dto/PatientWorkStation.class.php');
+	require_once('class/mysql/PatientWorkStationMySqlDAO.class.php');
+	require_once('class/mysql/ext/PatientWorkStationMySqlExtDAO.class.php');
+	require_once('class/Functions/PatientWorkStationEXT.class.php');
+	
+	
 	require_once('class/Functions/Validation.php');
 	require_once('class/gump/gump.class.php');
 	

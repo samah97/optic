@@ -11,9 +11,6 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
 
     public function submitAllData()
     {
-        $test = Common::cryptoo('samah', 'e');
-        $test2 = Common::cryptoo($test, 'd');
-        
         $post = file_get_contents('php://input');
         $post = json_decode($post);
         
@@ -21,14 +18,16 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
             $visitId = Common::cryptoo($post->visitId, 'd');
         }
         
+        
         $visitData = $post->visitData;
-        $patientData = $post->patientData;
+        $patientData = $post->personalInfoData;
         $consultationData = $post->consultationData;
         $refractionData = $post->refractionData;
         $visualNeedsData = $post->visualNeedsData;
         $visualAntecedentsData = $post->visualAntecedentsData;
         $preliminaryExaminationData = $post->preliminaryExaminationData;
-
+        print_r($preliminaryExaminationData);die();
+        
         $pdo = Database::getConnection();
         $pdo->beginTransaction();
         
@@ -61,16 +60,17 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
                     $refractionHistoryObj = new RefractionHistoryEXT();
                     $refractionHistoryResponse =$refractionHistoryObj->submitData($refractionData,$pdo);
                     
-                    if($refractionHistoryResponse['result']){
+                    if($refractionHistoryResponse['result'] || 1){
                         $visualNeedsData->visitId = $visitId;
                         $visualNeedsObj = new VisualNeedEXT();
-                        $visualNeedResponse = $visualNeedsObj->submitData($visualNeedsData,$pdo);
                         
+                        $visualNeedResponse = $visualNeedsObj->submitData($visualNeedsData,$pdo);
+
                         if($visualNeedResponse['result']){
                             $visualAntecedentsData->visitId = $visitId;
                             $visualAntecedentObj = new VisualAntecedentEXT();
                             $visualAntecedentResponse = $visualAntecedentObj->submitData($visualAntecedentsData,$pdo);
-                            
+                           
                             if($visualAntecedentResponse['result']){
                                 $preliminaryExaminationData->visitId = $visitId;
                                 $preliminaryExaminationObj = new PreliminaryExaminationEXT();
@@ -124,7 +124,7 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
             );
         }
         
-        return json_encode($response);
+        return $response;
     }
 
     public function submitPatientData($patientData = null,$pdo = null)
@@ -136,6 +136,9 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
         $result = true;
         if ($validateData['result']) {    
             $patientData = (object)$validateData['data'];
+            $patientData->dob = Common::formatDate($patientData->dob,'d/m/Y','Y-m-d');
+            
+            
             
             if (isset($patientData->patientId)) { //UPDATE
                 $patientId = $patientData->patientId;
@@ -163,7 +166,7 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
             }
         }else{
             $result = false;
-            $msg = $validateData->get_errors_array();
+            $msg = $validateData['errors'];
         }
         
         $response['result'] = $result;
@@ -180,17 +183,17 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
         $data = (array)$data;
         $gump = new GUMP();
         
-        $data= $gump->sanitize($data);
-
+        $data = $gump->sanitize($data);
+        
         //'phone'       => 'required|regex,/[+]*(961(3|5|1|7|70|71|81)|(03|05|01|07|70|71|81))\d{6}/',
         
         $gump->validation_rules(array(
             'name'    => 'required|valid_name',
-            'date'    => 'required|date,d/m/Y',
-            'address'       => 'required|alpha_space',
+            'dob'    => 'required|date,d/m/Y',
+            'address'       => 'required',
             'phone'       => 'required|regex,/[+]*[0-9]{8}/',
-            'genderId'      => 'required|integer|min_numeric,1|max_numeric,2',
-            'referred' => 'required|alpha_space'
+            'genderId'      => 'integer|min_numeric,1|max_numeric,2',
+            'referred' => 'alpha_space'
         ));
         
         $gump->filter_rules(array(

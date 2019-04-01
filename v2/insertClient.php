@@ -1,6 +1,7 @@
 <?php
+
 include_once ("../include/common.php");
 $patientInfoObj = new PatientInfoEXT();
 $insert = $patientInfoObj->submitAllData();
-echo $insert;
+echo json_encode($insert);
 ?>
