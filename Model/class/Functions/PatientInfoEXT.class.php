@@ -9,6 +9,17 @@
 class PatientInfoEXT extends PatientInfoMySqlDAO
 {
 
+    public function getAllRecords($columns= " * ",$data = array(),$strWhere = " 1 ",$order = " 1 DESC",$limit = PHP_INT_MAX,$offset = 0){
+        $pdo = Database::getConnection();
+        $Obj = new PatientInfoMySqlExtDAO();
+        return $Obj->getAllRecords($pdo,$columns,$data,$strWhere,$order,$limit,$offset);
+    }
+    
+    public function getPatientInfo($id){
+        $pdo = Database::getConnection();
+        return $this->loadPDO($pdo, $id);
+    }
+    
     public function submitAllData()
     {
         $post = file_get_contents('php://input');

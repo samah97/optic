@@ -1,19 +1,6 @@
 <?php 
 include 'menu.php';
-include '../action/filter.php';
-$checkedContact = '';
-$checkedLens = '';
-
-if($_REQUEST['lenseType'] == 1){
-    $checkedContact = 'checked';
-    $checkedLens = '';
-}elseif($_REQUEST['lenseType'] == 2){
-    $checkedContact = '';
-    $checkedLens = 'checked';
-    }
 ?>
-
-
 <div class="container">
 <div>
 <form method="get" >
@@ -49,29 +36,21 @@ if($_REQUEST['lenseType'] == 1){
 <thead>
 <tr>
 <th>Id</th>
-<th>Firstname</th>
-<th>Date of birth</th>
-<th>Address</th>
-<th>Phone</th>
-<th>Gender</th>
-<!-- <th>Date Attendence</th>
-<th>Date Reccieved</th>
-<th>Lense Type</th> -->
+<th>Visit Date</th>
 <th>Actions</th>
 </tr>
 </thead>
 <tbody>
 <?php
-
+$strWhere = " 1 ";
+if(isset($_GET['patient']) && is_integer($_GET['patient'])){
+    $strWhere .= "AND a.patient_info_id = ".$_GET['patient'];
+}
 //$row = Common::cryptoo($_REQUEST['filterQuery'], 'd');
-$data = getClientData();
-$patientInfoObj = new PatientInfoEXT();
-$columns = " a.patient_info_id, a.name, a.dob, a.phone, a.genderId";
-$response = $patientInfoObj->getAllRecords($columns);
-
+$visitObj = new VisitEXT();
+$visits = $visitObj->getAllRecords("*",array(),$strWhere);
 
 if($_REQUEST['filterQuery'] == null || $_REQUEST['filterQuery'] == ""){
-    
 
 }
 else{
@@ -80,24 +59,15 @@ else{
 // $query=$_REQUEST['filterQuery'];   
 }
 
-foreach ($response as $row){
+foreach ($visits as $row){
 ?>
 <tr>
-<td><?php echo $row->patientInfoId ; ?></td>
-<td><?php echo $row->name;?></td>
-<td><?php echo $row->dob;?></td>
-<td><?php echo $row->address;?></td>
-<td><?php echo $row->phone;?></td>
-<td><?php echo $row->genderId;?></td>
-<td style='display:none'><a href="pages/DetailsClient.php?id=<?php echo $row->patientInfoId; ?>">View Details</a></td>
-<td ><a href="pages/visits.php?patient=<?php echo $row->patientInfoId; ?>">Visits</a></td>
-<!-- 
-<?php if($row['lenseType']==1){?>
-<td >Lens</td>
-<?php }  else{?>
-<td>Contact Lens</td>
-<?php }?>
- -->
+<td><?php echo $row->visitId ; ?></td>
+<td><?php echo $row->datetime;?></td>
+<td >
+	<a href="pages/editClient.php?visit=<?php echo $row->visitId; ?>">Edit</a>
+	<a href="pages/delete_visit.php?id=<?php echo $row->visitId; ?>">Delete</a>
+</td>
 
 </tr>
 <?php }
