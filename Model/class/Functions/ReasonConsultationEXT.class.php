@@ -7,6 +7,27 @@
  */
 class ReasonConsultationEXT extends ReasonConsultationMySqlDAO{
 
+    public function getDataByVisit($visitId){
+        $pdo = Database::getConnection();
+        
+        $Obj = new ReasonConsultationMySqlExtDAO();
+        $data = $Obj->getByVisit($pdo, $visitId);
+        $id = $data->reasonConsultationId;
+        $data = $this->loadPDO($pdo, $id);
+        
+        
+        $visualProblemsObj = new VisualProblemMySqlExtDAO();
+        $data = array("reasonConsultationId"=>$id);
+        $strWhere = "reason_consultation_id = :reasonConsultationId";
+        $visualProblems = $visualProblemsObj->getAllRecords($pdo,$data,$strWhere);
+        $data->visualProblems = $visualProblems;
+        $functionalSignsObj = new FunctionalSignMySqlExtDAO();
+        $functionalSigns = $functionalSignsObj->getAllRecords($pdo,$data,$strWhere);
+        $data->functionalSigns = $functionalSigns;
+        
+        return $data;
+    }
+
     public function submitData($data = null,$pdo = null)
     {
         $reasonConsultationObj = new ReasonConsultationMySqlExtDAO();

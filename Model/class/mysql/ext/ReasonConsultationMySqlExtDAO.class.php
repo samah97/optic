@@ -7,6 +7,10 @@
  */
 class ReasonConsultationMySqlExtDAO extends ReasonConsultationMySqlDAO{
 
-	
+    public function getByVisit($pdo,$visitId){
+        $query = "SELECT * FROM reason_consultation HWERE visit_id = $visitId ";
+        $array = $pdo->select($query);
+        return $this->readRow($array[0]);
+    }
 }
 ?>

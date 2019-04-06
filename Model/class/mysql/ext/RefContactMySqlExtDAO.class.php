@@ -7,6 +7,13 @@
  */
 class RefContactMySqlExtDAO extends RefContactMySqlDAO{
 
-	
+    public function getRecord($pdo,$data,$strWhere){
+        try{
+            $query = "SELECT * FROM ref_contact WHERE $strWhere";
+            $array = $pdo->select($query,$data);
+        }catch (PDOException $e){
+            return null;
+        }
+    }
 }
 ?>

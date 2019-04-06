@@ -1,5 +1,11 @@
 <?php include 'menu.php';  ?>
 <?php
+$visitId = $_GET['visit'];
+if( ! is_numeric($visitId) ||  $visitId < 0 ){
+    $visitId = 0;
+}
+
+
 
 // ----------------------------------Objects Declaration-------------------------------------//
 $visualProblemsObj = new VisualProblemEXT();
@@ -14,6 +20,13 @@ $coverTestObj = new CoverTestEXT();
 $occularMotilityObj = new OcularMotilityEXT();
 $pupillaryReflexsObj = new PupillaryReflexsEXT();
 $harmonDistanceObj = new HarmonDistanceEXT();
+$visitObj = new VisitEXT();
+$patientInfoObj = new PatientInfoEXT();
+$reasonConsulationObj = new ReasonConsultationEXT();
+$refractionsHistoryObj = new RefractionHistoryEXT();
+$visualNeedsObj = new VisualNeedEXT();
+$visualAntecedentsObj = new VisualAntecedentEXT();
+$preliminaryExaminationObj = new PreliminaryExaminationEXT();
 // ----------------------------------End of Objects Declaration-------------------------------------//
 
 $visualProblems = $visualProblemsObj->getAllRecords();
@@ -28,9 +41,28 @@ $coverTest = $coverTestObj->getAllRecords();
 $occularMotility = $occularMotilityObj->getAllRecords();
 $pupillaryReflexs = $pupillaryReflexsObj->getAllRecords();
 $harmonDistance = $harmonDistanceObj->getAllRecords();
+
+if($visitId > 0){
+    $isEdit =  true;
+    
+    $visit = $visitObj->getVisit($visitId);
+    if($visit->visitId > 0 ){
+        $patientInfo = $patientInfoObj->getPatientInfo($visit->patientInfoId);
+        
+        $reasonConsulation = $reasonConsulationObj->getDataByVisit($visitId);
+        $refractionHistory = $refractionsHistoryObj->getDataByVisit($visitId);
+    }else{
+        header("Location: /login");
+    }
+}
+
 ?>
 <script>
-var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
+<?php if($isEdit){?>
+var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;    
+<?php } ?>
+
+
 </script>
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <link href="assets/global/plugins/datatables/datatables.min.css"
@@ -85,7 +117,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="name" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="name" value="" placeholder="full Name"
+														id="name" value="<?php echo $patientInfo->name ?>" placeholder="full Name"
 														onchange="onChange('req_first_name')">
 												</div>
 											</div>
