@@ -7,6 +7,17 @@
  */
 class VisitEXT extends VisitMySqlDAO{
 
+    public function getAllRecords($columns= " * ",$data = array(),$strWhere = " 1 ",$order = " 1 DESC",$limit = PHP_INT_MAX,$offset = 0){
+        $pdo = Database::getConnection();
+        $Obj = new VisitMySqlExtDAO();
+        return $Obj->getAllRecords($pdo,$columns,$data,$strWhere,$order,$limit,$offset);
+    }
+    
+    public function getVisit($id){
+        $pdo = Database::getConnection();
+        return $this->loadPDO($pdo, $id);
+    }
+    
     public function submitData($data = null,$pdo = null)
     {
         $visitObj = new VisitMySqlExtDAO();

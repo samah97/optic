@@ -214,7 +214,8 @@ $(document).ready(function(e) {
 	initEventsHandlers();
 
 	if (isEdit) {
-		fillData(patientForm.attr('id'), currentData);
+		DisableEnableTab('tab_1_1',true);
+		//fillData(patientForm.attr('id'), currentData);
 	}
 
 });
@@ -230,6 +231,13 @@ function fillData(form, data) {
 		} else {
 			input.val(element);
 		}
+	});
+}
+
+function DisableEnableTab(tabId, action){
+	$('#'+tabId+' :input').each(function(){
+		if(! $(this).hasClass('always-disable'))
+	    $(this).prop('disabled', action);
 	});
 }
 
