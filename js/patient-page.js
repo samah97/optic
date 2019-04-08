@@ -11,6 +11,15 @@ function initEventsHandlers() {
 		e.preventDefault();
 		submitForm($(this));
 	});
+	
+	$(".btn-next").click(function() {
+		  var nextTab = $('.nav-tabs > .active').next('li').find('a');
+		  if(nextTab.parent().is(':last-child')){
+			  $('.btn-next').hide();
+			  $('.btn-submit').show();
+		  }
+		  nextTab.trigger('click');
+	});
 }
 
 // --------------------FOR REQUESTS-------------------------------------//

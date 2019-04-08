@@ -3,7 +3,7 @@
 
 function getCheckboxData($tableName,$id,$valueName,$checkedId = null,$htmlName = "",$htmlId = "",$IdWRowId = false){
     $html = "";
-    
+
     foreach($tableName as $row){
         if($htmlId != ""){
             $htmlId = $IdWRowId?$htmlId."_".$row->$id:$htmlId;
@@ -26,7 +26,7 @@ function getCheckboxData($tableName,$id,$valueName,$checkedId = null,$htmlName =
 											<div class="mt-checkbox-list" style="padding: 0px">
 												<label class="mt-checkbox"> '.$row->$valueName.'<input
 													type="checkbox" id="'.$htmlId.'"
-													value="'.$row->$id.'
+													value="'.$row->$id.'"
 													name="'.$htmlName.'" '.$checked.'/> <span></span>
 												</label>
 											</div>
@@ -73,8 +73,12 @@ function getRadioButtonData($tableName,$id,$valueName,$checkedId = null,$htmlNam
 
 
 $visitId = $_GET['visit'];
+$patientId = $_GET['patient'];
 if( ! is_numeric($visitId) ||  $visitId < 0 ){
     $visitId = 0;
+}
+if( ! is_numeric($patientId) ||  $patientId < 0 ){
+    $patientId = 0;
 }
 
 
@@ -122,9 +126,12 @@ if($visitId > 0){
         $reasonConsulation = $reasonConsulationObj->getDataByVisit($visitId);
         
         $refractionHistory = $refractionsHistoryObj->getDataByVisit($visitId);
+        $refractionHistory->correctionTypeId = json_decode($refractionHistory->correctionTypeId);
     }else{
         header("Location: /login");
     }
+}elseif($patientId > 0){
+    $patientInfo = $patientInfoObj->getPatientInfo($patientId);
 }
 
 ?>
@@ -289,6 +296,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 
 								</div>
 								<label style="color: red"> * are required</label>
+								
 							</div>
 							<div class="tab-pane fade" id="tab_1_2">
 								<br>
@@ -559,7 +567,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<label for="correctionTypeId" class="col-md-4 control-label">Type
 											of Correction:</label>
 							<?php
-							echo getCheckboxData($typeOfCorrection, 'typeOfCorrectionId', 'title',$refractionHistory->typeOfCorrection,'typeOfCorrection[]','tc',true);
+							
+							echo getCheckboxData($typeOfCorrection, 'typeCorrectionId', 'title',$refractionHistory->correctionTypeId,'typeOfCorrection[]','tc',true);
 							
   /*  foreach ($typeOfCorrection as $row) {
         ?>
@@ -1412,8 +1421,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
         			</div>	
             		</div>
 					<div class="col-md-12">
-						<button class="btn btn-success pull-right"
-							style='margin-top: 20px;' type="submit">Save</button>
+						<button class="btn btn-success pull-right btn-next">Next</button>
+						<button class="btn btn-success  pull-right btn-submit" 
+							style='margin-top: 20px;display:none' type="submit">Save</button>
 					</div>
 				</div>
 				</div>
@@ -1433,7 +1443,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 <!-- 		<script src="assets/pages/scripts/table-datatables-editable.min.js"
 			type="text/javascript"></script>
  -->		<!-- END PAGE LEVEL SCRIPTS -->
-
+	
 <?php
 // include_once("report.php");
 include_once ("../footer.php");

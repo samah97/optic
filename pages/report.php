@@ -45,6 +45,13 @@ if($_REQUEST['lenseType'] == 1){
 </div>
 </form>
 </div>
+<div class="row">
+<div class="col-md-12">
+	<a href='pages/editClient.php'/>
+	<button class="btn btn-success" style='margin-bottom: 10px;'>Add New</button>
+	</a>
+</div>
+</div>
 <table class="table table-striped table-bordered table-hover" id="patients-table" style='background-color:white'>
 <thead>
 <tr>

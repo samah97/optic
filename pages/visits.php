@@ -1,6 +1,14 @@
 <?php 
 include 'menu.php';
 ?>
+<?php
+$strWhere = " 1 ";
+$patientId = 0;
+if(isset($_GET['patient']) && is_numeric($_GET['patient'])){
+    $patientId = $_GET['patient'];
+    $strWhere .= "AND a.patient_info_id = ".$_GET['patient'];
+}
+?>
 <div class="container">
 <div>
 <form method="get" >
@@ -32,6 +40,13 @@ include 'menu.php';
 </div>
 </form>
 </div>
+<div class="row">
+<div class="col-md-12">
+	<a href='pages/editClient.php?patient=<?php echo $patientId ?>'/>
+	<button class="btn btn-success" style='margin-bottom: 10px;'>Add Visit</button>
+	</a>
+</div>
+</div>
 <table class="table table-striped table-bordered table-hover" id="patients-table" style='background-color:white'>
 <thead>
 <tr>
@@ -42,10 +57,7 @@ include 'menu.php';
 </thead>
 <tbody>
 <?php
-$strWhere = " 1 ";
-if(isset($_GET['patient']) && is_integer($_GET['patient'])){
-    $strWhere .= "AND a.patient_info_id = ".$_GET['patient'];
-}
+
 //$row = Common::cryptoo($_REQUEST['filterQuery'], 'd');
 $visitObj = new VisitEXT();
 $visits = $visitObj->getAllRecords("*",array(),$strWhere);
