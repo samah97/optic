@@ -37,7 +37,7 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
         $visualNeedsData = $post->visualNeedsData;
         $visualAntecedentsData = $post->visualAntecedentsData;
         $preliminaryExaminationData = $post->preliminaryExaminationData;
-        print_r($preliminaryExaminationData);die();
+        
         
         $pdo = Database::getConnection();
         $pdo->beginTransaction();

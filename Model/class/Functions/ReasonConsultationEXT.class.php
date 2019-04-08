@@ -12,14 +12,18 @@ class ReasonConsultationEXT extends ReasonConsultationMySqlDAO{
         
         $Obj = new ReasonConsultationMySqlExtDAO();
         $data = $Obj->getByVisit($pdo, $visitId);
+        
         $id = $data->reasonConsultationId;
         $data = $this->loadPDO($pdo, $id);
         
         
-        $visualProblemsObj = new VisualProblemMySqlExtDAO();
-        $data = array("reasonConsultationId"=>$id);
+        
+        $consultationVpObj = new ConsultationVpMySqlExtDAO();
+        $dataCondition = array("reasonConsultationId"=>$id);
+        
         $strWhere = "reason_consultation_id = :reasonConsultationId";
-        $visualProblems = $visualProblemsObj->getAllRecords($pdo,$data,$strWhere);
+        $visualProblems = $consultationVpObj->getAllRecords($pdo,$dataCondition,$strWhere);
+        
         $data->visualProblems = $visualProblems;
         $functionalSignsObj = new FunctionalSignMySqlExtDAO();
         $functionalSigns = $functionalSignsObj->getAllRecords($pdo,$data,$strWhere);
