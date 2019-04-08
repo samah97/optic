@@ -66,7 +66,7 @@ if($_REQUEST['lenseType'] == 1){
 //$row = Common::cryptoo($_REQUEST['filterQuery'], 'd');
 $data = getClientData();
 $patientInfoObj = new PatientInfoEXT();
-$columns = " a.patient_info_id, a.name, a.dob, a.phone, a.genderId";
+$columns = " a.patient_info_id, a.name, a.dob, a.phone,a.address, a.genderId";
 $response = $patientInfoObj->getAllRecords($columns);
 
 

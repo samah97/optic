@@ -146,8 +146,7 @@ function getVisualAntecedentsData() {
 	$('#' + tabId + ' section_disease *').filter(':input:checked').each(function() {
 		disease.push($(this).val());
 	});
-	
-	visualAntecedentsData.push(disease);
+	visualAntecedentsData["disease"]=disease;
 
 	
 	return visualAntecedentsData;
