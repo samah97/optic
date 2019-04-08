@@ -1,5 +1,77 @@
 <?php include 'menu.php';  ?>
 <?php
+
+function getCheckboxData($tableName,$id,$valueName,$checkedId = null,$htmlName = "",$htmlId = "",$IdWRowId = false){
+    $html = "";
+    
+    foreach($tableName as $row){
+        if($htmlId != ""){
+            $htmlId = $IdWRowId?$htmlId."_".$row->$id:$htmlId;
+        }
+        $checked= "";
+        if($checkedId != null){
+            if(is_array($checkedId)){
+                    foreach($checkedId as $checkedRow){
+                        if($row->$id == $checkedRow->$id){
+                            $checked = "checked";
+                        }
+                    }
+            }elseif($row->$id == $checkedId){
+                $checked = "checked";
+            }
+        }
+        
+    $html .='<div class="col-md-3">
+										<div class="form-group">
+											<div class="mt-checkbox-list" style="padding: 0px">
+												<label class="mt-checkbox"> '.$row->$valueName.'<input
+													type="checkbox" id="'.$htmlId.'"
+													value="'.$row->$id.'
+													name="'.$htmlName.'" '.$checked.'/> <span></span>
+												</label>
+											</div>
+										</div>
+		</div>';        
+    }
+    return  $html;
+}
+
+function getRadioButtonData($tableName,$id,$valueName,$checkedId = null,$htmlName = "",$htmlId = "",$IdWRowId = false){
+    $html = "";
+    
+    foreach($tableName as $row){
+        if($htmlId != ""){
+            $htmlId = $IdWRowId?$htmlId."_".$row->$id:$htmlId;
+        }
+        $checked= "";
+        if($checkedId != null){
+            if(is_array($checkedId)){
+                foreach($checkedId as $checkedRow){
+                    if($row->$id == $checkedRow->$id){
+                        $checked = "checked";
+                    }
+                }
+            }elseif($row->$id == $checkedId){
+                $checked = "checked";
+            }
+        }
+        
+        $html .=' <div class="col-md-3">
+									<div class="form-group">
+										<div class="mt-checkbox-list" style="padding: 0px">
+											<label class="mt-radio">'.$row->title.'<input
+												type="radio" id="'.$htmlId.'"
+												value="'.$row->$rowId.'" name="'.$htmlName.'" />
+												<span></span>
+											</label>
+										</div>
+									</div>
+								</div>	';
+    }
+    return  $html;
+}
+
+
 $visitId = $_GET['visit'];
 if( ! is_numeric($visitId) ||  $visitId < 0 ){
     $visitId = 0;
@@ -41,15 +113,14 @@ $coverTest = $coverTestObj->getAllRecords();
 $occularMotility = $occularMotilityObj->getAllRecords();
 $pupillaryReflexs = $pupillaryReflexsObj->getAllRecords();
 $harmonDistance = $harmonDistanceObj->getAllRecords();
-
 if($visitId > 0){
     $isEdit =  true;
     
     $visit = $visitObj->getVisit($visitId);
     if($visit->visitId > 0 ){
         $patientInfo = $patientInfoObj->getPatientInfo($visit->patientInfoId);
-        
         $reasonConsulation = $reasonConsulationObj->getDataByVisit($visitId);
+        
         $refractionHistory = $refractionsHistoryObj->getDataByVisit($visitId);
     }else{
         header("Location: /login");
@@ -225,7 +296,10 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									<legend>Visual Problems</legend>
 									<div id="section_vp">
 							<?php
-    foreach ($visualProblems as $row) {
+							echo getCheckboxData($visualProblems, 'visualProblemId', 'title',$reasonConsulation->visualProblems,'visualProblems[]','vs',true);
+							
+							
+    /*foreach ($visualProblems as $row) {
         ?>
 				    <div class="col-md-3">
 										<div class="form-group">
@@ -239,7 +313,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										</div>
 									</div>	
 							    <?php
-    }
+    }*/
     ?>
     						</div>
 							</fieldset>
@@ -247,8 +321,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									<legend>Functional Signs</legend>
    						 <div id="section_fs">
    						 <?php
-        
-        foreach ($functionalSigns as $row) {
+   						 echo getCheckboxData($functionalSigns, 'functionalSignsId', 'title',$reasonConsulation->functionalSigns,'functionalSigns[]','fs',true);
+       /* foreach ($functionalSigns as $row) {
             ?>
 													    <div class="col-md-3">
 										<div class="form-group">
@@ -262,8 +336,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											</div>
 										</div>
 									</div>	
-							    <?php
-        }
+							    <?php*/
         ?>
 							<div class="hidden" id="headaches_more">
 										<div class="col-md-3">
@@ -284,7 +357,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									<legend>Control</legend>
 							<div id="section_control">
 							<?php
-    foreach ($control as $row) {
+							echo getCheckboxData($control, 'controlId', 'title',$reasonConsulation->control,'control[]','ct',true);
+							
+   /* foreach ($control as $row) {
         ?>
 									<div class="col-md-3">
 										<div class="form-group">
@@ -297,7 +372,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										</div>
 									</div>	
 							    <?php
-    }
+    }*/
     ?></div>
     <div id="section_3_2">
 							<div class="col-md-12">
@@ -484,7 +559,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<label for="correctionTypeId" class="col-md-4 control-label">Type
 											of Correction:</label>
 							<?php
-    foreach ($typeOfCorrection as $row) {
+							echo getCheckboxData($typeOfCorrection, 'typeOfCorrectionId', 'title',$refractionHistory->typeOfCorrection,'typeOfCorrection[]','tc',true);
+							
+  /*  foreach ($typeOfCorrection as $row) {
         ?>
         					 <div class="col-md-4">
 											<div class="form-group">
@@ -499,7 +576,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											</div>
 										</div>	
 							    <?php
-    }
+    }*/
     ?>
 							</div>
 								</div>
@@ -566,6 +643,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 								</div>
 								</div>
+								<div id="eyeGlassesTable">
 								<h4>Eyeglasses</h4>
 								<table class="table table-striped table-hover table-bordered"
 									name="refEyeglasses" id="refEyeglasses">
@@ -616,7 +694,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										</tr>
 									</tbody>
 								</table>
-
+								</div>
+								<div id="contactLensTable">				
 								<h4>Contact Lenses</h4>
 								<table class="table table-striped table-hover table-bordered"
 									name="refContact" id="refContact">
@@ -650,9 +729,11 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										</tr>
 									</tbody>
 								</table>
+								</div>
 								<div class="section_3_main">	
 								<?php
-        foreach ($wearType as $row) {
+								echo getRadioButtonData($wearType, 'wearTypeId','title',$refractionHistory->wearingType,'wearTypeId[]','wt',true);
+       /* foreach ($wearType as $row) {
             ?>
 				    <div class="col-md-3">
 									<div class="form-group">
@@ -666,7 +747,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 								</div>	
 							    <?php
-        }
+        }*/
         ?>
     	<div class="col-md-12">
 									<div class="form-group">
@@ -800,7 +881,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 								<div class="col-md-12">
 								<label  class="col-md-3 control-label">Work Station</label>
 								<?php
-        foreach ($workStation as $row) {
+								echo getCheckboxData($workStation, 'workStationId', 'title',$visualNeedsObj->workStation,'workStation[]','ws',true);
+								
+      /*  foreach ($workStation as $row) {
             ?>
 				    <div class="col-md-3">
 									<div class="form-group">
@@ -814,7 +897,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 								</div>	
 							    <?php
-        }
+        }*/
         ?>
         </div>
 								</div>	
@@ -846,7 +929,10 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 								</div>
 								</div>
 								<div id="section_ambiance">
-								<?php foreach($ambiance as $row){ ?>
+								
+								<?php 		
+								echo getCheckboxData($ambiance, 'ambianceId', 'title',$visualNeedsObj->ambiance,'ambiance[]','ambiance',true);
+								/*foreach($ambiance as $row){ ?>
 									<div class="col-md-3">
 									<div class="form-group">
 										<div class="mt-checkbox-list" style='padding: 0px'>
@@ -858,7 +944,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										</div>
 									</div>
 								</div>
-								<?php } ?>
+								<?php }*/ ?>
 								</div>
 								<div class="col-md-3">
 									<div class="form-group">
@@ -977,7 +1063,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 								</div>
 								<div id="section_disease"></div>
 									<?php
-		foreach ($disease as $row) {
+									echo getCheckboxData($disease, 'diseaseId', 'title',$visualAntecedentsObj->disease,'disease[]','disease',true);		
+		/*foreach ($disease as $row) {
             ?>
 				    <div class="col-md-3">
 									<div class="form-group">
@@ -991,11 +1078,13 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 								</div>	
 							    <?php
-        }
+        }*/
         ?>
         <h3>Medication Intake</h3>								
 									<?php
-		foreach ($medicationIntake as $row) {
+									echo getRadioButtonData($medicationIntake, 'medicationIntakeId', 'title',$visualAntecedentsObj->medicationIntake,'medicationIntake[]','medicationIntake',true);
+									
+		/*foreach ($medicationIntake as $row) {
             ?>
 				    <div class="col-md-3">
 									<div class="form-group">
@@ -1009,7 +1098,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									</div>
 								</div>	
 							    <?php
-        }
+        }*/
         ?>
         				    <div class="col-md-3">
 									<div class="form-group">
@@ -1151,6 +1240,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
         			<div class="col-md-9">
         			<!-- TODO: Add in Backend  -->
         			<?php 
+        			echo getCheckboxData($coverTest, 'coverTestId', 'title',$preliminaryExaminationObj->coverTest,'coverTest[]','coverTest',true);
+        			/*
         			foreach ($coverTest as $row) {
         			   ?>
         			   <div class="col-md-3">
@@ -1164,7 +1255,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										</div>
 									</div>
 						</div>
-					<?php }?>
+					<?php }*/?>
         			</div>
         			</div>
 					<div class="col-md-12">
@@ -1285,6 +1376,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 					<!-- TODO Get From Database -->
 					</div>
 					<div id="section_pupillary_reflexs">
+					
 					<?php foreach($pupillaryReflexs as $row){ ?>
 					<div class="reflex_row" reflex="<?php echo $row->pupillaryReflexsId; ?>">
 					<div class="col-md-12">
