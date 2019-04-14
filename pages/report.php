@@ -61,9 +61,6 @@ if($_REQUEST['lenseType'] == 1){
 <th>Address</th>
 <th>Phone</th>
 <th>Gender</th>
-<!-- <th>Date Attendence</th>
-<th>Date Reccieved</th>
-<th>Lense Type</th> -->
 <th>Actions</th>
 </tr>
 </thead>
@@ -86,8 +83,12 @@ else{
     
 // $query=$_REQUEST['filterQuery'];   
 }
+//foreach ($response as $row){
 
-foreach ($response as $row){
+for($i = 0;$i<count($response);$i++){
+    //print_r($row);
+    $row = $response[$i];
+    //print_r($row);
 ?>
 <tr>
 <td><?php echo $row->patientInfoId ; ?></td>
@@ -96,15 +97,8 @@ foreach ($response as $row){
 <td><?php echo $row->address;?></td>
 <td><?php echo $row->phone;?></td>
 <td><?php echo $row->genderId;?></td>
-<td style='display:none'><a href="pages/DetailsClient.php?id=<?php echo $row->patientInfoId; ?>">View Details</a></td>
 <td ><a href="pages/visits.php?patient=<?php echo $row->patientInfoId; ?>">Visits</a></td>
-<!-- 
-<?php if($row['lenseType']==1){?>
-<td >Lens</td>
-<?php }  else{?>
-<td>Contact Lens</td>
-<?php }?>
- -->
+
 
 </tr>
 <?php }
@@ -113,5 +107,16 @@ $_SESSION['clientList']=null;
 </tbody>
 </table>
 </div>
-
+<script>
+$(document).ready(function() {
+    $('#patients-table').DataTable({
+    	'columnDefs'        : [         // see https://datatables.net/reference/option/columns.searchable
+            { 
+                'searchable'    : false, 
+                'targets'       : [0,1,4,5,6,7,8,9] 
+            },
+        ]
+        });
+} );
+</script>
 <?php include_once ("../footer.php");?>
