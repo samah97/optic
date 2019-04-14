@@ -10,9 +10,11 @@ class PatientInfoMySqlExtDAO extends PatientInfoMySqlDAO{
     public function getAllRecords($pdo,$columns= " * ",$data = array(),$strWhere = " 1 ",$order = " 1 DESC",$limit = PHP_INT_MAX,$offset = 0){
 	    $query = "SELECT $columns FROM
                 patient_info a
+                LEFT OUTER JOIN gender b ON a.gender_id = b.gender_id
                 WHERE $strWhere ORDER BY $order LIMIT $limit OFFSET $offset";
                 
 	    $array = $pdo->select($query,$data);
+	    
 	    return $this->getListObj($array);
 	}
 }
