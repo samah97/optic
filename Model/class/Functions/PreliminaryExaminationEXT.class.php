@@ -6,7 +6,30 @@
  * @date: 2019-03-16 13:07
  */
 class PreliminaryExaminationEXT extends PreliminaryExaminationMySqlDAO{
-
+    public function getDataByVisit($visitId){
+        $pdo = Database::getConnection();
+        
+        $Obj = new PreliminaryExaminationMySqlExtDAO();
+        $data = $Obj->getByVisit($pdo, $visitId);
+        $id = $data->preliminaryExaminationId;
+        
+        $keratomeryObj = new KeratomeryMySqlExtDAO();
+        $prePupillaryReflexObj = new PrePupillaryReflexsMySqlExtDAO();            
+        $preOcularMotilityObj = new PreOcularMotilityMySqlExtDAO();
+        
+        $dataCondition = array("preliminaryExaminationId"=>$id);
+        $strWhere = "preliminary_examination_id = :preliminaryExaminationId";
+        
+        $keratomery = $keratomeryObj->getRecord($pdo, $dataCondition, $strWhere);
+        $data->keratomery = $keratomery;
+        $prePupillaryReflex = $prePupillaryReflexObj->getRecord($pdo,$dataCondition,$strWhere);
+        $data->prePupillaryReflex = $prePupillaryReflex;
+        $preOcularMotility = $preOcularMotilityObj->getRecord($pdo, $dataCondition, $strWhere);
+        $data->preOcularMotility = $preOcularMotility;
+        
+        
+        return $data;
+    }
     public function submitData($data = null,$pdo = null)
     {
         
@@ -50,7 +73,7 @@ class PreliminaryExaminationEXT extends PreliminaryExaminationMySqlDAO{
                 
                 if($keratomery['result']){
                     $pupillaryReflexsData = $data->pupillaryReflexsData;
-                    $pupillaryReflexsObj = new PupillaryReflexsEXT();
+                    $pupillaryReflexsObj = new PrePupillaryReflexsEXT();
                     
                     //Delete Existing
                     $deleteAll = $pupillaryReflexsObj->deletePDO($pdo, "preliminary_examination_id = ".$preliminaryExaminationId,PHP_INT_MAX);

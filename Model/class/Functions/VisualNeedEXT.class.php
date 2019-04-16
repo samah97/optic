@@ -6,6 +6,30 @@
  * @date: 2019-02-17 10:44
  */
 class VisualNeedEXT extends VisualNeedMySqlDAO{
+    
+    public function getDataByVisit($visitId){
+        $pdo = Database::getConnection();
+        
+        $Obj = new VisualNeedMySqlExtDAO();
+        $data = $Obj->getByVisit($pdo, $visitId);
+        $id = $data->visualNeedId;
+        
+        $patientWorkStationObj = new PatientWorkStationMySqlExtDAO();
+        $patientAmbianceObj = new PatientAmbianceMySqlExtDAO();
+        
+        $data = array("visualNeedId"=>$id);
+        $strWhere = "visual_need_id = :visualNeedId";
+        
+        
+        $patientWorkStation = $patientWorkStationObj->getRecord($pdo, $data, $strWhere);
+        $data->patientWorkStation = $patientWorkStation;
+        $patientAmbiance = $patientAmbianceObj->getRecord($pdo, $data, $strWhere);
+        $data->patientAmbiance = $patientAmbiance;
+        
+        return $data;
+    }
+    
+    
     public function submitData($data = null,$pdo = null)
     {
         

@@ -7,6 +7,13 @@
  */
 class PatientWorkStationMySqlExtDAO extends PatientWorkStationMySqlDAO{
 
-	
+    public function getRecord($pdo,$data,$strWhere){
+        try{
+            $query = "SELECT * FROM patient_work_station WHERE $strWhere";
+            $array = $pdo->select($query,$data);
+        }catch (PDOException $e){
+            return null;
+        }
+    }
 }
 ?>

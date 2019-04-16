@@ -7,6 +7,23 @@
  */
 class VisualAntecedentEXT extends VisualAntecedentMySqlDAO{
 
+    public function getDataByVisit($visitId){
+        $pdo = Database::getConnection();
+        
+        $Obj = new VisualAntecedentMySqlExtDAO();
+        $data = $Obj->getByVisit($pdo, $visitId);
+        $id = $data->visualAntecedentId;
+        
+        $antecedentDiseaseObj = new AntecedentDiseaseMySqlExtDAO();
+        
+        $dataCondition = array("visualAntecedentId"=>$id);
+        $strWhere = "visual_antecedent_id = :visualAntecedentId";
+        
+        $antecedentDisease = $antecedentDiseaseObj->getRecord($pdo, $dataCondition, $strWhere);
+         $data->antecedentDisease = $antecedentDisease;
+        
+        return $data;
+    }
     public function submitData($data = null,$pdo = null)
     {
         $visualAntecedentObj = new VisualAntecedentMySqlExtDAO();
