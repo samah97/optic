@@ -1,5 +1,4 @@
 <?php include 'menu.php'  ?>
-
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -96,7 +95,6 @@
 					<span style="color:red">*</span>
 				</div>
 			</div>
-			
 			<div class="col-md-6">
 					<div class="form-group">
 						<label for="SOC" class="col-md-3 control-label">SOC</label>
@@ -110,8 +108,7 @@
 						</div>
 						<span style="color:red">*</span>
 					</div>
-				</div>
-			
+			</div>
 			<div class="col-md-6">
 					<div class="form-group">
 						<label for="SOD" class="col-md-3 control-label">SOD</label>
@@ -126,7 +123,6 @@
 						<span style="color:red">*</span>
 					</div>
 				</div>
-
 				<div class="col-md-6">
 					<div class="form-group">
 						<label for="SOS" class="col-md-3 control-label">SOS</label>
@@ -141,7 +137,6 @@
 						<span style="color:red">*</span>
 					</div>
 				</div>
-
 				<div class="col-md-6">
 					<div class="form-group">
 						<label for="COD" class="col-md-3 control-label">COD</label>

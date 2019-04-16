@@ -77,7 +77,6 @@ class ReasonConsultationEXT extends ReasonConsultationMySqlDAO{
                 $deleteVP = $consulationVpObj->deletePDO($pdo, 'reason_consultation_id = '.$reasonConsultationId,PHP_INT_MAX);
                 $deleteFS = $consulationVpObj->deletePDO($pdo, 'reason_consultation_id = '.$reasonConsultationId,PHP_INT_MAX);
                 
-                
                 foreach($visualProblems as $val){
                     $consulationVp = new ConsultationVp();
                     $consulationVp->reasonConsultationId = $reasonConsultationId;

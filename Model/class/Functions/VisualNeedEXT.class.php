@@ -32,6 +32,7 @@ class VisualNeedEXT extends VisualNeedMySqlDAO{
                     }
                 }
             } else { //INSERT
+                
                 $visualNeedId = $visualNeedObj->insertPDO($pdo, $data);
                 
                 if(!$visualNeedId){
@@ -42,6 +43,7 @@ class VisualNeedEXT extends VisualNeedMySqlDAO{
             
             
             if($result && $visualNeedId > 0){
+                
                 $patientWorkStationObj = new PatientWorkStationMySqlExtDAO();
                 $patientAmbianceObj = new PatientAmbianceMySqlExtDAO();
                 $deleteWorkStation = $patientWorkStationObj->deletePDO($pdo, "visual_need_id = ".$visualNeedId,PHP_INT_MAX);
@@ -53,11 +55,12 @@ class VisualNeedEXT extends VisualNeedMySqlDAO{
                     $patientWorkStation->workStationId = $row;
                     
                     $insertWorkStation = $patientWorkStationObj->insertPDO($pdo, $patientWorkStation);
-                    if(!$insertWorkStation){
+                    
+                    /* if(!$insertWorkStation){
                         $result = false;
-                        $errors = "Something went wrong";
+                        $errors = "Something went wrong 123";
                         break;
-                    }
+                    } */
                 }
                 
                 foreach ($data->ambianceId as $row){
@@ -68,7 +71,7 @@ class VisualNeedEXT extends VisualNeedMySqlDAO{
                     $insertAmbiance = $patientAmbianceObj->insertPDO($pdo, $patientAmbiance);
                     if(! $insertAmbiance){
                         $result = false;
-                        $errors = "Something went wrong";
+                        $errors = "Something went wrong 321";
                         break;
                     }
                 }
@@ -109,7 +112,6 @@ class VisualNeedEXT extends VisualNeedMySqlDAO{
             'isPartially' => 'boolean',
             'isFully' => 'boolean',
             'workDistance' => 'alpha_space',
-            'workStationId' => 'integer',
             'lighting' => 'alpha_space',
             'isNeedColor' => 'boolean',
             'ambianceId' => 'integer',

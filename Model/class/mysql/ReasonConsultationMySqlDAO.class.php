@@ -62,7 +62,7 @@ class ReasonConsultationMySqlDAO implements ReasonConsultationDAO{
 		
 		$sqlQuery->setNumber($reasonConsultation->visitId);
 		$sqlQuery->set($reasonConsultation->dateAppearance);
-		$sqlQuery->set($reasonConsultation->charactersticsAppearance);
+		$sqlQuery->set($reasonConsultation->characteristicsAppearance);
 		$sqlQuery->set($reasonConsultation->timeAppearance);
 		$sqlQuery->set($reasonConsultation->frequencyTroubles);
 		$sqlQuery->set($reasonConsultation->activityContext);
@@ -88,7 +88,7 @@ class ReasonConsultationMySqlDAO implements ReasonConsultationDAO{
 		
 		$sqlQuery->setNumber($reasonConsultation->visitId);
 		$sqlQuery->set($reasonConsultation->dateAppearance);
-		$sqlQuery->set($reasonConsultation->charactersticsAppearance);
+		$sqlQuery->set($reasonConsultation->characteristicsAppearance);
 		$sqlQuery->set($reasonConsultation->timeAppearance);
 		$sqlQuery->set($reasonConsultation->frequencyTroubles);
 		$sqlQuery->set($reasonConsultation->activityContext);
@@ -139,6 +139,7 @@ class ReasonConsultationMySqlDAO implements ReasonConsultationDAO{
 	public function insertPDO($pdo, $reason_consultation)
 	{
 	    try {
+	        
 	        $data = $this->object_to_array($reason_consultation);
 	        return $pdo->insert('reason_consultation', $data);
 	    } catch (\PDOException $e) {
@@ -183,7 +184,7 @@ class ReasonConsultationMySqlDAO implements ReasonConsultationDAO{
 		'reason_consultation_id'=>$reasonConsultation->reasonConsultationId,
 		'visit_id'=>$reasonConsultation->visitId,
 		'date_appearance'=>$reasonConsultation->dateAppearance,
-		'characterstics_appearance'=>$reasonConsultation->charactersticsAppearance,
+		'characterstics_appearance'=>$reasonConsultation->characteristicsAppearance,
 		'time_appearance'=>$reasonConsultation->timeAppearance,
 		'frequency_troubles'=>$reasonConsultation->frequencyTroubles,
 		'activity_context'=>$reasonConsultation->activityContext,
@@ -366,7 +367,7 @@ class ReasonConsultationMySqlDAO implements ReasonConsultationDAO{
 		$reasonConsultation->reasonConsultationId = $row['reason_consultation_id'];
 		$reasonConsultation->visitId = $row['visit_id'];
 		$reasonConsultation->dateAppearance = $row['date_appearance'];
-		$reasonConsultation->charactersticsAppearance = $row['characterstics_appearance'];
+		$reasonConsultation->characteristicsAppearance = $row['characteristics_appearance'];
 		$reasonConsultation->timeAppearance = $row['time_appearance'];
 		$reasonConsultation->frequencyTroubles = $row['frequency_troubles'];
 		$reasonConsultation->activityContext = $row['activity_context'];

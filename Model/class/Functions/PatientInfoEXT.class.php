@@ -76,12 +76,12 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
                         $visualNeedsObj = new VisualNeedEXT();
                         
                         $visualNeedResponse = $visualNeedsObj->submitData($visualNeedsData,$pdo);
-
+                        
                         if($visualNeedResponse['result']){
                             $visualAntecedentsData->visitId = $visitId;
                             $visualAntecedentObj = new VisualAntecedentEXT();
                             $visualAntecedentResponse = $visualAntecedentObj->submitData($visualAntecedentsData,$pdo);
-                           
+                            
                             if($visualAntecedentResponse['result']){
                                 $preliminaryExaminationData->visitId = $visitId;
                                 $preliminaryExaminationObj = new PreliminaryExaminationEXT();
@@ -191,6 +191,7 @@ class PatientInfoEXT extends PatientInfoMySqlDAO
     }
 
     private function validateData($data){
+        $data->referred = $data->reffered;
         $data = (array)$data;
         $gump = new GUMP();
         

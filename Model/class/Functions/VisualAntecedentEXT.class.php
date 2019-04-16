@@ -9,19 +9,20 @@ class VisualAntecedentEXT extends VisualAntecedentMySqlDAO{
 
     public function submitData($data = null,$pdo = null)
     {
-        $refractionHisObj = new RefractionHistoryMySqlExtDAO();
+        $visualAntecedentObj = new VisualAntecedentMySqlExtDAO();
         $validateData = $this->validateData($data);
-        $result = true;
         
+        $result = true;
+         
         if ($validateData['result']) {
             $data = (object)$validateData['data'];
             
             if (isset($data->visualAntecedentId)) { //UPDATE
                 $visualAntecedentId = $data->visualAntecedentId;
                 if ($visualAntecedentId > 0) {
-                    $existReasonConsultation = $refractionHisObj->loadPDO($pdo, $visualAntecedentId);
+                    $existReasonConsultation = $visualAntecedentObj->loadPDO($pdo, $visualAntecedentId);
                     if ($existReasonConsultation->visualAntecedentId > 0) {
-                        $update = $refractionHisObj->updatePDO($pdo, $data);
+                        $update = $visualAntecedentObj->updatePDO($pdo, $data);
                         if(!$update){
                             $result = false;
                             $errors= "Something went wrong";
@@ -32,7 +33,7 @@ class VisualAntecedentEXT extends VisualAntecedentMySqlDAO{
                     }
                 }
             } else { //INSERT
-                $visualAntecedentId = $refractionHisObj->insertPDO($pdo, $data);
+                $visualAntecedentId = $visualAntecedentObj->insertPDO($pdo, $data);
                 if(!$visualAntecedentId){
                     $result = false;
                     $errors = "Something went wrong";
