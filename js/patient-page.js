@@ -223,7 +223,7 @@ $(document).ready(function(e) {
 
 	if (isEdit) {
 		DisableEnableTab('tab_1_1',true);
-		//fillData(patientForm.attr('id'), currentData);
+		 fillData(patientForm.attr('id'), currentData);
 	}
 
 });

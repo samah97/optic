@@ -12,7 +12,7 @@ class PreliminaryExaminationEXT extends PreliminaryExaminationMySqlDAO{
         
         $preliminaryObj = new PreliminaryExaminationMySqlExtDAO();
         $validateData = $this->validateData($data);
-        print_r($data);
+        
         $result = true;
         
         if ($validateData['result']) {

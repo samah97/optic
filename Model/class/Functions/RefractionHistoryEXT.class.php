@@ -123,7 +123,7 @@ class RefractionHistoryEXT extends RefractionHistoryMySqlDAO{
         $data= $gump->sanitize($data);
         
         $gump->validation_rules(array(
-            'dateOflastExam' => 'required|date,Y-m-d',
+            'dateLastExam' => 'required|date,Y-m-d',
             'visitId'       => 'required|integer',
             'correctionTypeId'       => 'required',
             'satisfaction'      => 'alpha_space',
