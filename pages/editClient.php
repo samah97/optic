@@ -134,11 +134,10 @@ if($visitId > 0){
     $patientInfo = $patientInfoObj->getPatientInfo($patientId);
 }
 
+
 ?>
 <script>
-<?php if($isEdit){?>
 var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;    
-<?php } ?>
 
 
 </script>
@@ -273,9 +272,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												By</label>
 											<div class="col-md-8">
 												<div class="input-icon right">
-													<input name="reffered" type="text"
+													<input name="referred" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="reffered"  placeholder="Reffered By">
+														id="referred"  placeholder="Reffered By">
 												</div>
 											</div>
 										</div>
@@ -532,9 +531,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											<div class="col-md-10">
 												<div class="input-icon right">
 													<div class="input-icon right">
-														<input name="compenstaionWormType" type="text"
+														<input name="compensationWormType" type="text"
 															class="form-control rounded-form place-holder-color"
-															id="compenstaionWormType" 
+															id="compensationWormType" 
 															placeholder="Compenstaion Worm Type">
 													</div>
 												</div>
@@ -553,9 +552,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<div class="col-md-10">
 											<div class="input-icon right">
 												<div class="input-icon right">
-													<input name="datelastExam" type="date"
+													<input name="dateLastExam" type="date"
 														class="form-control rounded-form place-holder-color"
-														id="datelastExam" 
+														id="dateLastExam" 
 														placeholder="Date Of Last Exam">
 												</div>
 											</div>
@@ -877,7 +876,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											<label for="workDistance" class="col-md-3 control-label">Working Distance</label>
 											<div class="col-md-8">
 												<div class="input-icon right">
-													<input name="workDistanceId" type="text"
+													<input name="workDistance" type="text"
 														class="form-control rounded-form place-holder-color"
 														id="workDistance" value="" placeholder="Work Distance"
 														>
@@ -1011,8 +1010,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 									<div class="section_4">
 									<textarea
 									class="form-control rounded-form place-holder-color"
-									placeholder="extraProffesionalActivities" rows="5"
-									 name="extraProfessionActivity" id="extraProfessionActivity"></textarea>
+									placeholder="extraProffesionActivity" rows="5"
+									 name="extraProffessionActivity" id="extraProffessionActivity"></textarea>
 									</div>
 									</fieldset>
 								</div>
