@@ -127,6 +127,11 @@ if($visitId > 0){
         
         $refractionHistory = $refractionsHistoryObj->getDataByVisit($visitId);
         $refractionHistory->correctionTypeId = json_decode($refractionHistory->correctionTypeId);
+        
+        $visualNeed = $visualNeedsObj->getDataByVisit($visitId);
+        $visualAntecedent = $visualAntecedentsObj->getDataByVisit($visitId);
+        $preliminaryExamination = $preliminaryExaminationObj->getDataByVisit($visitId);
+        
     }else{
         header("Location: /login");
     }

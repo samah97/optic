@@ -7,6 +7,13 @@
  */
 class PreOcularMotilityMySqlExtDAO extends PreOcularMotilityMySqlDAO{
 
-	
+    public function getRecord($pdo,$data,$strWhere){
+        try{
+            $query = "SELECT * FROM pre_ocular_motility WHERE $strWhere";
+            $array = $pdo->select($query,$data);
+        }catch (PDOException $e){
+            return null;
+        }
+    }
 }
 ?>

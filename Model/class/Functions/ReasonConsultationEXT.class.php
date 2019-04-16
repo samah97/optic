@@ -14,7 +14,7 @@ class ReasonConsultationEXT extends ReasonConsultationMySqlDAO{
         $data = $Obj->getByVisit($pdo, $visitId);
         
         $id = $data->reasonConsultationId;
-        $data = $this->loadPDO($pdo, $id);
+        //$data = $this->loadPDO($pdo, $id);
         
         
         

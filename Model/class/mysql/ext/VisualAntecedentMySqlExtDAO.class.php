@@ -7,6 +7,10 @@
  */
 class VisualAntecedentMySqlExtDAO extends VisualAntecedentMySqlDAO{
 
-	
+    public function getByVisit($pdo,$visitId){
+        $query = "SELECT * FROM visual_antecedent HWERE visit_id = $visitId ";
+        $array = $pdo->select($query);
+        return $this->readRow($array[0]);
+    }
 }
 ?>

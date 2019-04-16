@@ -7,6 +7,13 @@
  */
 class PrePupillaryReflexsMySqlExtDAO extends PrePupillaryReflexsMySqlDAO{
 
-	
+    public function getRecord($pdo,$data,$strWhere){
+        try{
+            $query = "SELECT * FROM pre_pupilary_reflexs WHERE $strWhere";
+            $array = $pdo->select($query,$data);
+        }catch (PDOException $e){
+            return null;
+        }
+    }
 }
 ?>

@@ -7,6 +7,10 @@
  */
 class PreliminaryExaminationMySqlExtDAO extends PreliminaryExaminationMySqlDAO{
 
-	
+    public function getByVisit($pdo,$visitId){
+        $query = "SELECT * FROM preliminary_examination HWERE visit_id = $visitId ";
+        $array = $pdo->select($query);
+        return $this->readRow($array[0]);
+    }
 }
 ?>
