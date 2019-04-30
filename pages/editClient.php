@@ -127,6 +127,11 @@ if($visitId > 0){
         
         $refractionHistory = $refractionsHistoryObj->getDataByVisit($visitId);
         $refractionHistory->correctionTypeId = json_decode($refractionHistory->correctionTypeId);
+        
+        $visualNeed = $visualNeedsObj->getDataByVisit($visitId);
+        $visualAntecedent = $visualAntecedentsObj->getDataByVisit($visitId);
+        $preliminaryExamination = $preliminaryExaminationObj->getDataByVisit($visitId);
+        
     }else{
         header("Location: /login");
     }
@@ -194,7 +199,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="name" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="name" value="<?php echo $patientInfo->name ?>" placeholder="full Name"
+														id="name" value="<?= $patientInfo->name ?>" placeholder="full Name"
 														onchange="onChange('req_first_name')">
 												</div>
 											</div>
@@ -208,7 +213,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="dob" type="text"
 														class="form-control rounded-form place-holder-color datepicker"
-														id="dob" value="" placeholder="Date of Birth"
+														id="dob" value="<?= Common::formatDate($patientInfo->dob) ?>" placeholder="Date of Birth"
 														onchange="onChange('dob')">
 												</div>
 											</div>
@@ -223,7 +228,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<textarea
 														class="form-control rounded-form place-holder-color"
 														placeholder="Address" rows="5"
-														onchange="onChange('address')" name="address" id="address"></textarea>
+														onchange="onChange('address')" name="address" id="address"><?= $patientInfo->address ?></textarea>
 												</div>
 											</div>
 											<span style="color: red">*</span>
@@ -236,21 +241,21 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="phone" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="phone" value="" placeholder="Phone"
+														id="phone" value="<?= $patientInfo->phone ?>" placeholder="Phone"
 														onchange="onChange('phone')">
 												</div>
 											</div>
 											<span style="color: red">*</span>
 										</div>
 									</div>
-
+								
 									<div class="form-group radio col-md-6">
 										<label for="gender" class="col-md-3 control-label">Gender :</label>
 										<br> <br> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<label><input
 											type="radio" name="genderId" id="male" value="1"
-											<?php echo $checkedMale?>>Male</label>&nbsp;&nbsp;&nbsp; <label><input
+											<?= $patientInfo->genderId == 1?"checked":"" ?>>Male</label>&nbsp;&nbsp;&nbsp; <label><input
 											type="radio" name="genderId" id="female"  value="2"
-											<?php echo $checkedFemale ?>>Female</label>
+											<?= $patientInfo->genderId == 2?"checked":""  ?>>Female</label>
 									</div>
 
 									<div class="col-md-6">
@@ -260,7 +265,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="occupation" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="occupation" value="" placeholder="Occupation">
+														id="occupation" value="<?= $patientInfo->occupation ?>" placeholder="Occupation">
 												</div>
 											</div>
 										</div>
@@ -274,6 +279,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="referred" type="text"
 														class="form-control rounded-form place-holder-color"
+														value="<?= $patientInfo->referred ?>"
 														id="referred"  placeholder="Reffered By">
 												</div>
 											</div>
@@ -287,6 +293,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="hobbies" type="text"
 														class="form-control rounded-form place-holder-color"
+														value="<?= $patientInfo->hobbies ?>"
 														id="hobbies" value="" placeholder="Hobbies">
 												</div>
 											</div>
@@ -391,13 +398,14 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<div class="input-icon right">
 														<input name="dateAppearance" type="date"
 															class="form-control rounded-form place-holder-color"
-															id="dateAppearance" value=""
+															id="dateAppearance" value="<?= $reasonConsulation->dateAppearance?>"
 															placeholder="Date Of Appearance">
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+									
 									<div class="col-md-12">
 										<div class="form-group">
 											<label for="characteristicsAppearance" class="col-md-2 control-label">Characteristics
@@ -407,7 +415,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<div class="input-icon right">
 														<input name="characteristicsAppearance" type="text"
 															class="form-control rounded-form place-holder-color"
-															id="characteristicsAppearance" value=""
+															id="characteristicsAppearance" value="<?= $reasonConsulation->characteristicsAppearance ?>"
 															placeholder="Characteristics Of Appearance">
 													</div>
 												</div>
@@ -423,7 +431,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<div class="input-icon right">
 														<input name="timeAppearance" type="Time"
 															class="form-control rounded-form place-holder-color"
-															id="timeAppearance" value=""
+															id="timeAppearance" value="<?= $reasonConsulation->timeAppearance ?>"
 															placeholder="Time/Moment Of Appearance">
 													</div>
 												</div>
@@ -440,6 +448,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 														<input name="frequencyTroubles" type="text"
 															class="form-control rounded-form place-holder-color"
 															id="frequencyTroubles" 
+															value="<?= $reasonConsulation->frequencyTroubles ?>"
 															placeholder="Frequency of troubles">
 													</div>
 												</div>
@@ -455,7 +464,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<div class="input-icon right">
 														<input name="activityContext" type="text"
 															class="form-control rounded-form place-holder-color"
-															id="activityContext" value=""
+															id="activityContext"
+															value="<?= $reasonConsulation->activityContext ?>"
 															placeholder="Activity context">
 													</div>
 												</div>
@@ -471,7 +481,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<div class="input-icon right">
 														<input name="associatedSymptoms" type="text"
 															class="form-control rounded-form place-holder-color"
-															id="associatedSymptoms" value=""
+															id="associatedSymptoms"
+															value="<?= $reasonConsulation->associatedSymptoms ?>"
 															placeholder="Associated Symptoms">
 													</div>
 												</div>
@@ -487,7 +498,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<div class="input-icon right">
 														<input name="chronicity" type="text"
 															class="form-control rounded-form place-holder-color"
-															id="chronicity" value="" placeholder="Chronicity">
+															id="chronicity"
+															value="<?= $reasonConsulation->chronicity ?>"
+															placeholder="Chronicity">
 													</div>
 												</div>
 											</div>
@@ -502,7 +515,9 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<div class="input-icon right">
 														<input name="evolution" type="text"
 															class="form-control rounded-form place-holder-color"
-															id="evolution" value="" placeholder="Evolution">
+															id="evolution"
+															value="<?= $reasonConsulation->evolution ?>"
+															placeholder="Evolution">
 													</div>
 												</div>
 											</div>
@@ -517,7 +532,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<div class="input-icon right">
 														<input name="factorsRelief" type="text"
 															class="form-control rounded-form place-holder-color"
-															id="factorsRelief" value=""
+															id="factorsRelief"
+															value="<?= $reasonConsulation->factorsRelief ?>"
 															placeholder="Factors Of Relief">
 													</div>
 												</div>
@@ -533,7 +549,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<div class="input-icon right">
 														<input name="compensationWormType" type="text"
 															class="form-control rounded-form place-holder-color"
-															id="compensationWormType" 
+															id="compensationWormType"
+															value="<?= $reasonConsulation->compensationWormType ?>" 
 															placeholder="Compenstaion Worm Type">
 													</div>
 												</div>
@@ -554,7 +571,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="dateLastExam" type="date"
 														class="form-control rounded-form place-holder-color"
-														id="dateLastExam" 
+														id="dateLastExam"
+														value="<?= $refractionHistory->dateLastExam ?>" 
 														placeholder="Date Of Last Exam">
 												</div>
 											</div>
@@ -595,6 +613,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 											<div class="input-group">
 												<input type="text" class="form-control"
 													name="satisfaction" id="satisfaction"
+													value="<?= $refractionHistory->satisfaction ?>"
 													placeholder="Satisfaction"> <span class="input-group-addon">
 													% </span>
 											</div>
@@ -611,7 +630,8 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="wearingFrequency" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="wearingFrequency" value=""
+														id="wearingFrequency"
+														value="<?= $refractionHistory->wearingFrequency ?>"
 														placeholder="Wearing Frequecy">
 												</div>
 											</div>
@@ -628,6 +648,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<input name="reasonCorrection" type="text"
 														class="form-control rounded-form place-holder-color"
 														id="reasonCorrection"
+														value="<?= $refractionHistory->reasonCorrection ?>"
 														placeholder="reasonforWearingCorrection">
 												</div>
 											</div>
@@ -644,7 +665,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<textarea
 														class="form-control rounded-form place-holder-color"
 														placeholder="Exam Details" rows="5" name="examDetails"
-														id="examDetails"></textarea>
+														id="examDetails"><?= $refractionHistory->examDetails ?></textarea>
 												</div>
 											</div>
 										</div>
@@ -671,34 +692,34 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<tr>
 											<td><b>OD</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eye_sphereOd" id="eye_sphereOd"></td>
+												value="<?= $refractionHistory->refEyeglass->sphereOd ?>" name="eye_sphereOd" id="eye_sphereOd"></td>
 											<td><input type="text" class="form-control input-small"
 												value="" name="eye_cylinderOd" id="eye_cylinderOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eye_axisOd" id="eye_axisOd"></td>
+												value="<?= $refractionHistory->refEyeglass->axisOd ?>" name="eye_axisOd" id="eye_axisOd"></td>
 											<td rowspan="2"><textarea class="form-control input-small"
-													style='height: 85px; resize: none'" name="eye_addition" id="eye_addition"></textarea></td>
+													style='height: 85px; resize: none'" name="eye_addition" id="eye_addition"><?= $refractionHistory->refEyeglass->addition ?></textarea></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eye_pdOd" id="eye_pdOd"></td>
+												value="<?= $refractionHistory->refEyeglass->pdOd ?>" name="eye_pdOd" id="eye_pdOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eye_prismOd" id="eye_prismOd"></td>
+												value="<?= $refractionHistory->refEyeglass->prismOd ?>" name="eye_prismOd" id="eye_prismOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eye_baseOd" id="eye_baseOd"></td>
+												value="<?= $refractionHistory->refEyeglass->baseOd ?>" name="eye_baseOd" id="eye_baseOd"></td>
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eye_sphereOs" id="eye_sphereOs"></td>
+												value="<?= $refractionHistory->refEyeglass->sphereOs ?>" name="eye_sphereOs" id="eye_sphereOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eye_cylinderOs" id="eye_cylinderOs"></td>
+												value="<?= $refractionHistory->refEyeglass->cylinderOs ?>" name="eye_cylinderOs" id="eye_cylinderOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="eye_axisOs" id="eye_axisOs" ></td>
+												value="<?= $refractionHistory->refEyeglass->axisOs ?>" name="eye_axisOs" id="eye_axisOs" ></td>
 											<td><input type="text" class="form-control input-small"
-												value=""  name="eye_pdOs" id="eye_pdOs"></td>
+												value="<?= $refractionHistory->refEyeglass->pdOs ?>"  name="eye_pdOs" id="eye_pdOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""  name="eye_prismOs" id="eye_prismOs"></td>
+												value="<?= $refractionHistory->refEyeglass->prismOs ?>"  name="eye_prismOs" id="eye_prismOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value=""  name="eye_baseOs" id="eye_baseOs"></td>
+												value="<?= $refractionHistory->refEyeglass->baseOs ?>"  name="eye_baseOs" id="eye_baseOs"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -719,21 +740,21 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 										<tr>
 											<td><b>OD</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="contact_sphereOd" id="contact_sphereOd"></td>
+												value="<?= $refractionHistory->refContact->sphereOd ?>" name="contact_sphereOd" id="contact_sphereOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="contact_cylinderOd" id="contact_cylinderOd"></td>
+												value="<?= $refractionHistory->refContact->cylinderOd ?>" name="contact_cylinderOd" id="contact_cylinderOd"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="contact_axisOd" id="contact_axisOd"></td>
+												value="<?= $refractionHistory->refContact->axisOd ?>" name="contact_axisOd" id="contact_axisOd"></td>
 
 										</tr>
 										<tr>
 											<td><b>OS</b></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="contact_sphereOs" id="contact_sphereOs"></td>
+												value="<?= $refractionHistory->refContact->sphereOs ?>" name="contact_sphereOs" id="contact_sphereOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="contact_cylinderOs" id="contact_cylinderOs"></td>
+												value="<?= $refractionHistory->refContact->cylinderOs ?>" name="contact_cylinderOs" id="contact_cylinderOs"></td>
 											<td><input type="text" class="form-control input-small"
-												value="" name="contact_axisOs" id="contact_axisOs"></td>
+												value="<?= $refractionHistory->refContact->axisOs ?>" name="contact_axisOs" id="contact_axisOs"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -765,7 +786,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="brand" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="brand" value="" placeholder="Brand">
+														id="brand" value="<?= $refractionHistory->brand ?>" placeholder="Brand">
 												</div>
 											</div>
 										</div>
@@ -779,7 +800,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 												<div class="input-icon right">
 													<input name="DK" type="text"
 														class="form-control rounded-form place-holder-color"
-														id="DK" value="" placeholder="DK">
+														id="DK" value="<?= $refractionHistory->dk ?>" placeholder="DK">
 												</div>
 											</div>
 										</div>
@@ -793,7 +814,7 @@ var isEdit = <?php echo isset($isEdit) && $isEdit?"true":"false"; ?>;
 													<textarea
 														class="form-control rounded-form place-holder-color"
 														placeholder="preffered Reason" rows="5"
-														 name="prefferedReason" id="prefferedReason"></textarea>
+														 name="prefferedReason" id="prefferedReason"><?= $refractionHistory->prefferedReason ?></textarea>
 												</div>
 											</div>
 										</div>

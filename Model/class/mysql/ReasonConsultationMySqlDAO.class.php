@@ -367,7 +367,7 @@ class ReasonConsultationMySqlDAO implements ReasonConsultationDAO{
 		$reasonConsultation->reasonConsultationId = $row['reason_consultation_id'];
 		$reasonConsultation->visitId = $row['visit_id'];
 		$reasonConsultation->dateAppearance = $row['date_appearance'];
-		$reasonConsultation->characteristicsAppearance = $row['characteristics_appearance'];
+		$reasonConsultation->characteristicsAppearance = $row['characterstics_appearance'];
 		$reasonConsultation->timeAppearance = $row['time_appearance'];
 		$reasonConsultation->frequencyTroubles = $row['frequency_troubles'];
 		$reasonConsultation->activityContext = $row['activity_context'];
@@ -376,7 +376,7 @@ class ReasonConsultationMySqlDAO implements ReasonConsultationDAO{
 		$reasonConsultation->evolution = $row['evolution'];
 		$reasonConsultation->factorsRelief = $row['factors_relief'];
 		$reasonConsultation->compensationWormType = $row['compensation_worm_type'];
-
+        
 		return $reasonConsultation;
 	}
 	

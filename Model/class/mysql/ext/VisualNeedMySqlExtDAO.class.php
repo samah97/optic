@@ -7,6 +7,11 @@
  */
 class VisualNeedMySqlExtDAO extends VisualNeedMySqlDAO{
 
-	
+    public function getByVisit($pdo,$visitId){
+        $query = "SELECT * FROM visual_need HWERE visit_id = $visitId ";
+        $array = $pdo->select($query);
+        return $this->readRow($array[0]);
+    }
+    
 }
 ?>
