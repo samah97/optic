@@ -8,7 +8,7 @@
 class RefractionHistoryMySqlExtDAO extends RefractionHistoryMySqlDAO{
 
 	public function getByVisit($pdo,$visitId){
-	    $query = "SELECT * FROM refraction_history HWERE visit_id = $visitId ";
+	    $query = "SELECT * FROM refraction_history WHERE visit_id = $visitId ";
 	    $array = $pdo->select($query);
 	    return $this->readRow($array[0]);
 	}

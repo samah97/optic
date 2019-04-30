@@ -12,6 +12,7 @@ class RefractionHistoryEXT extends RefractionHistoryMySqlDAO{
         
         $Obj = new RefractionHistoryMySqlExtDAO(); 
         $data = $Obj->getByVisit($pdo, $visitId);
+        
         $id = $data->refractionHistoryId;
         //$data = $this->loadPDO($pdo, $id);
         
