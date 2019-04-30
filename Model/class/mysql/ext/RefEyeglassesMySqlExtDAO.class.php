@@ -11,6 +11,7 @@ class RefEyeglassesMySqlExtDAO extends RefEyeglassesMySqlDAO{
 	    try{
 	    $query = "SELECT * FROM ref_eyeglasses WHERE $strWhere";
 	    $array = $pdo->select($query,$data);
+	    return $this->readRow($array[0]);
 	    }catch (PDOException $e){
 	        return null;
 	    }
