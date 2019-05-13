@@ -1,14 +1,14 @@
  <?php
 //FOR SAMAH
-define('MAIN_URL','http://localhost/projects/optic/');
-define('BASE_URL','http://localhost/projects/optic/');
+/*define('MAIN_URL','http://localhost/projects/optic/');
+define('BASE_URL','http://localhost/projects/optic/');*/
 
 
 error_reporting(0);
 
 //FOR EHAB
-/*   define('MAIN_URL','http://localhost/optic/');
-define('BASE_URL','http://localhost/optic/'); */ 
+define('MAIN_URL','http://localhost/optic/');
+define('BASE_URL','http://localhost/optic/');
 
 define ( 'PATH', dirname ( __FILE__ ) );
 define ( 'BASE_PATH', PATH . '/' );

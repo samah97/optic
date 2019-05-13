@@ -31,13 +31,10 @@ else{
     <ul class="nav navbar-nav">
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Client </a>
         <ul class="dropdown-menu">
-          <li><a href="pages/NewClient.php">New</a></li>
-          <li><a href="pages/editClient.php">New V2</a></li>
-          <li><a href="pages/OldClient.php">Old</a></li>
+          <li><a href="pages/editClient.php">New</a></li>
         </ul>
       </li>
-      <li><a href="pages/rxnPrescription.php" class="active">RXN Prescription</a></li>
-      <li><a href="pages/questionary.php">Questionary</a></li>
+      <li><a href="pages/brands.php">Brands</a></li>
 	  <li class="topnav-right "><a href="action/logoutProcess.php">Logout <span class="glyphicon glyphicon-off"></span></a>
     </ul>
   </div>
