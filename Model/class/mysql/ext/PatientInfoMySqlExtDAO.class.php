@@ -11,6 +11,7 @@ class PatientInfoMySqlExtDAO extends PatientInfoMySqlDAO{
 	    $query = "SELECT $columns FROM
                 patient_info a
                 LEFT OUTER JOIN gender b ON a.genderId = b.gender_id
+                LEFT OUTER JOIN visit v  ON v.patient_info_id = a.patient_info_id
                 WHERE $strWhere ORDER BY $order LIMIT $limit OFFSET $offset";
                 
 	    $array = $pdo->select($query,$data);
