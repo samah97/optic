@@ -59,6 +59,8 @@ if($_REQUEST['lenseType'] == 1){
 <th>Firstname</th>
 <th>Date of birth</th>
 <th>Address</th>
+<th>Lens Type</th>
+<th>Deduction</th>
 <th>Phone</th>
 <th>Gender</th>
 <th>Actions</th>
@@ -70,8 +72,9 @@ if($_REQUEST['lenseType'] == 1){
 //$row = Common::cryptoo($_REQUEST['filterQuery'], 'd');
 $data = getClientData();
 $patientInfoObj = new PatientInfoEXT();
-$columns = " a.patient_info_id, a.name, a.dob, a.phone,a.address, a.genderId";
-$response = $patientInfoObj->getAllRecords($columns);
+$columns = " a.patient_info_id, a.name, a.dob, a.phone,a.address, a.genderId , v.deduction";
+$response = $patientInfoObj->getAllRecords($columns,array(),"a.patient_info_id=v.patient_info_id");
+
 
 
 if($_REQUEST['filterQuery'] == null || $_REQUEST['filterQuery'] == ""){
@@ -95,8 +98,10 @@ for($i = 0;$i<count($response);$i++){
 <td><?php echo $row->name;?></td>
 <td><?php echo $row->dob;?></td>
 <td><?php echo $row->address;?></td>
+<td><?php echo $row->address;?></td>
+<td><?php echo $row->deduction;?></td>
 <td><?php echo $row->phone;?></td>
-<td><?php echo $row->genderId;?></td>
+<td><?php echo $row->genderId == 1?"Male":"Female";?></td>
 <td ><a href="pages/visits.php?patient=<?php echo $row->patientInfoId; ?>">Visits</a></td>
 
 

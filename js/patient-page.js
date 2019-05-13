@@ -258,9 +258,13 @@ function submitForm(form) {
 		type: 'POST',
 		url : MAINURL + 'v2/insertClient.php',
 		data: formData,
+		dataType:"json",
 		contentType: 'application/json',
 		success: function(response){
 			console.log(response);
+			if (response.result){
+				window.location.href="pages/report.php"
+			}
 		},
 		error: function(e){
 			console.log(e);
