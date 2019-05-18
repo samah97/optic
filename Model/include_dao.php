@@ -184,4 +184,9 @@
 	require_once('class/Functions/Validation.php');
 	require_once('class/gump/gump.class.php');
 	
+	require_once('class/dao/BrandDAO.class.php');
+	require_once('class/dto/Brand.class.php');
+	require_once('class/mysql/BrandMySqlDAO.class.php');
+	require_once('class/mysql/ext/BrandMySqlExtDAO.class.php');
+	require_once('class/Functions/BrandEXT.class.php');
 ?>
