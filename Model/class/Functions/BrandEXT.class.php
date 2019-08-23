@@ -15,7 +15,9 @@ class BrandEXT extends BrandMySqlDAO{
 	
 	public function editBrands()
 	{
-	    $post = file_get_contents('php://input');
+
+        $post = file_get_contents('php://input');
+        print_r($post);die();
 	    $post = json_decode($post);
 	    
 	    
