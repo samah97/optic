@@ -103,11 +103,13 @@ $('.btn-submit').click(function(){
 });
 
 function submit(brands){
+    console.log(JSON.stringify(brands));
 	$.ajax({
 		url:'<?= MAIN_URL."v2/editBrand.php" ?>',
 		type:'POST',	
 		data:{data:JSON.stringify(brands)},
-		dataType:'json',
+        dataType: 'json',
+        contentType: 'application/json',
 		success:function(response){
 			console.log(response);
 		},
