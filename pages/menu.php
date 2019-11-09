@@ -29,7 +29,7 @@ else{
       <a class="navbar-brand" href="pages/report.php">OPTIC</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Client </a>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">Client </a>
         <ul class="dropdown-menu">
           <li><a href="pages/editClient.php">New</a></li>
         </ul>
