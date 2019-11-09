@@ -17,31 +17,35 @@ class BrandEXT extends BrandMySqlDAO{
 	{
 
         $post = file_get_contents('php://input');
-        print_r($post);die();
+
 	    $post = json_decode($post);
-	    
-	    
+
 	    $formData = $post->data;
-	    
+
 	    $pdo = Database::getConnection();
 	    $pdo->beginTransaction();
-	    $result = true;
-        print_r($formData);die();
+	    $result = false;
+
 	    $brandObj = new BrandMySqlExtDAO();
 	    foreach($formData as $dataRow){
 	        $brandsDuplicateArray = [];
+
 	        if(!empty($dataRow->name)){
 	            if(!in_array($dataRow->name, $brandsDuplicateArray)){
 	                if($dataRow->flag == 1){ //INSERT
 	                    $brand = new Brand();
 	                    $brand->name = $dataRow->name;
+	                    
 	                    $updatedId = $brandObj->insertPDO($pdo, $brand);
 	                    if(!$updatedId){
 	                        $result = false;
 	                        $error = 'Something went wrong';
-	                    }
+	                    }else{
+                            $result = true;
+                        }
 	                }elseif($dataRow->flag == 2 || $dataRow->flag == 3){ //UPDATE & DELETE
-                        $existBrand = $brandObj->loadPDO($pdo, $dataRow->brandId);
+	                    $brandId = $dataRow->ref;
+                        $existBrand = $brandObj->loadPDO($pdo, $brandId);
                         if($existBrand->brandId > 0){
                             $existBrand->name = name;
                             if($dataRow->flag == 2){ //UPDATE
@@ -49,12 +53,16 @@ class BrandEXT extends BrandMySqlDAO{
                                 if(!$updatedId){
                                     $result = false;
                                     $error = 'Something went wrong';
+                                }else{
+                                    $result = true;
                                 }
                             }elseif($dataRow->flag == 3){ //DELETE
                                 $deletedId = $brandObj->deletePDO($pdo, "brand_id = ".$existBrand->brandId);
                                 if(!$deletedId){
                                     $result = false;
                                     $error = 'Something went wrong';
+                                }else{
+                                    $result = true;
                                 }
                             }
                         }else{
@@ -71,7 +79,7 @@ class BrandEXT extends BrandMySqlDAO{
 	            $error = 'Invalid Brand Name';
 	        }
 	    }
-	    
+
 	    if($result){
 	        $pdo->commit();
 	        $response = array(
@@ -82,7 +90,7 @@ class BrandEXT extends BrandMySqlDAO{
 	        $pdo->rollBack();
 	        $response = array(
 	            "result"=>false,
-	            "errors" => $errors
+	            "error" => $error
 	        );
 	    }
 	    
